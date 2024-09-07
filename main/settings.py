@@ -71,7 +71,7 @@ MIDDLEWARE = [
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
-CRSIPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 ROOT_URLCONF = 'main.urls'
 
@@ -80,7 +80,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'templates', 'allauth'),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -92,7 +93,7 @@ TEMPLATES = [
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
-                'crispy_forms.templatetags.crispy_forms_field'
+                'crispy_forms.templatetags.crispy_forms_field',
             ]
         },
     },
