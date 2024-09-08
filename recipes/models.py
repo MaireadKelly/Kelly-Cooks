@@ -32,8 +32,10 @@ class Recipe(models.Model):
     image_alt = models.CharField(max_length=100, null=False, blank=False)
     my_recipes = models.CharField(max_length=50, choices=MY_RECIPES)
     saved_recipes = models.CharField(max_length=50, null=False, blank=False)
-    create_recipe = RichTextField(max_length=10000, null=False, blank=False)
+    
+    #create_recipe = RichTextField(max_length=10000, null=False, blank=False)
     posted_date = models.DateTimeField(auto_now=True)
+    
 
     class Meta:
         ordering = ['-posted_date']
