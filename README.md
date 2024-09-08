@@ -1,6 +1,6 @@
 # Recipe Sharing & Meal Planner
 
-This tutorial creates a recipe sharing and meal planner application. It is aimed at beginners so the videos at times may be longer tha normally neccessary due to trying my best to explain the concepts and 'why' of what I am doing.
+This site is for likeminded foodies to share their favourite reecipes.
 
 ## Technologies
 

@@ -40,15 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    'djrichtextfield',  # since you're using RichTextField
+    'django_resized',    # since you're using ResizedImageField
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
+    
    
-    
-    
     #APPS
     'home',
+    'recipes',
 
     #OTHER 
     'crispy_forms',
