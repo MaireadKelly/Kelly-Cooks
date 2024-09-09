@@ -25,19 +25,25 @@
             {% if request.user.is_authenticated %}
             <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}"
               href="/accounts/logout">Logout</a>
+        </ul>
+        <ul class="dropdown-menu">
+          <li>
+            <h6 class="dropdown-header">My Recipes</h6>
           </li>
-            {% else %}
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}"
-              href="/accounts/signup">Register</a>
+          <li><a class="dropdown-item" href="#">Create New</a></li>
+          <li><a class="dropdown-item" href="#">Edit</a></li>
           </li>
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login">Login</a>
-          </li>
-            {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="#">My Recipe Book</a>
-          </li>
+        </ul>
+
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}"
+            href="/accounts/signup">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login">Login</a>
+        </li>
+        {% endif %}
         </ul>
         <!-- FORM FOR SEARCH BAR-->
         <form class="d-flex" role="search">

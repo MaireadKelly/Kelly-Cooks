@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_resized',
     'allauth',
     'allauth.account',
+    'ckeditor',
     
    
     #APPS
