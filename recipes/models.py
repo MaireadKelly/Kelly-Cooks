@@ -1,16 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
+from ckeditor.fields import RichTextField
 
 
 # CHOICE FIELDS
-MY_RECIPES = (
-    ('my_recipes', 'My Recipes'),
-    ('saved_recipes', 'My Saved Recipes'),
-    ('create_recipe', 'Create New Recipe',)
+MEAL_TYPES = (
+    ("breakfast", "Breakfast"), 
+    ("lunch", "Lunch"), 
+    ("dinner", "Dinner"))
+
+CUISINE_TYPES = (
+    ("african", "African"),
+    ("american", "American"),
+    ("caribbean", "Caribbean"),
+    ("asian", "Asian"),
+    ("middle_eastern", "Middle Eastern"),
+    ("chinese", "Chinese"),
+    ("indian", "Indian"),
+    ("pakistani", "Pakistani"),
+    ("indonesian", "Indonesian"),
+    ("european", "European"),
+    ("oceanic", "Oceanic"),
 )
+   
 
 class Recipe(models.Model):
     """
@@ -30,13 +44,11 @@ class Recipe(models.Model):
         null=False
     )
     image_alt = models.CharField(max_length=100, null=False, blank=False)
-    my_recipes = models.CharField(max_length=50, choices=MY_RECIPES)
-    saved_recipes = models.CharField(max_length=50, null=False, blank=False)
-    
-    #create_recipe = RichTextField(max_length=10000, null=False, blank=False)
+    meal_type = models.CharField(max_length=50, choices=MEAL_TYPES, default='breakfast')
+    cuisine_types = models.CharField(max_length=50, choices=CUISINE_TYPES, default='african')
+    calories = models.IntegerField()
     posted_date = models.DateTimeField(auto_now=True)
     
-
     class Meta:
         ordering = ['-posted_date']
 

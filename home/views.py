@@ -1,4 +1,5 @@
-from django.views.generic import TemplateView
+from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class index(TemplateView):

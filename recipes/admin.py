@@ -6,11 +6,11 @@ from .models import Recipe
 class  RecipeAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-        'description',
-        'my_recipes',
+        'meal_type',
+        'calories',
         'ingredients',
         'instructions',
         'image'
     )
     
-    list_filter = ('my_recipes',)
+    list_filter = ('meal_type',)

@@ -15,6 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
 from django.urls import path, include
 
 urlpatterns = [
@@ -22,6 +23,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('djrichtextfield/', include('djrichtextfield.urls')),
     path('', include('home.urls')),
+    path('recipes/', include('recipes.urls'))
 
 
 ]
