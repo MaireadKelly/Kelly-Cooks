@@ -1,25 +1,73 @@
-###views.py###
+DELETES FROM HEADER.HTML
+<!--          <li class="nav-item">
 
-from django.views.generic import CreateView
+            <a class="nav-link {% if url_name == 'profile' %}active{% endif %}"
+              href="{% url 'profile' request.user.id %}">Profile</a>
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+          </li>
+-->
+
+<!-- 
+        RECIPES/VIEWSPY
+        /* ADD RECIPE VIDEO */
+
+
+        RECIPES/URLS.py
+
+        """
+URL configuration for main project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+    path('djrichtextfield/', include('djrichtextfield.urls')),
+    path('', include('home.urls')),
+    path('recipes/', include('recipes.urls'))
+
+
+]
+
+
+
+RECIPES/VIEWS.py
+
+from django.views.generic import (
+    CreateView, ListView,
+    DetailView, DeleteView,
+    UpdateView
+)
+
+from django.contrib.auth.mixins import (
+    UserPassesTestMixin, LoginRequiredMixin
+)
+
+from django.db.models import Q
 
 from .models import Recipe
 from .forms import RecipeForm
 
+
 class Recipes(ListView):
-    """VIEW ALL RECIPES"""
-
-    template_name = 'recipes/add_recipe.html'
-    model = Recipe
-    context_object_name = recipes
-
-    def get_queryset(self, **kwargs):
-        query = self.request.GET.get('q'):
-        if query: class Recipes(ListView):
     """View all recipes"""
 
-    template_name = "recipes/add_recipes.html"
+    template_name = "recipes/recipes.html"
     model = Recipe
     context_object_name = "recipes"
 
@@ -36,12 +84,43 @@ class Recipes(ListView):
             recipes = self.model.objects.all()
         return recipes
 
-            recipes = self.model.objects.filter(
-                Q(title__icontains=query) |
-                Q(description__icontains=query) |
-                Q(instructions__icontains=query) |
-                Q(cuisine_types__icontains=query)
-            )
-        else:
-            recipes = self.model.objects.all()
-        return recipes
+
+class RecipeDetail(DetailView):
+    """View a single recipe"""
+
+    template_name = "recipes/recipe_detail.html"
+    model = Recipe
+    context_object_name = "recipe"
+
+
+class AddRecipe(LoginRequiredMixin, CreateView):
+    """Add recipe view"""
+
+    template_name = "recipes/add_recipe.html"
+    model = Recipe
+    form_class = RecipeForm
+    success_url = "/recipes/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddRecipe, self).form_valid(form)
+
+
+class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """Edit a recipe"""
+    template_name = 'recipes/edit_recipe.html'
+    model = Recipe
+    form_class = RecipeForm
+    success_url = '/recipes/'
+    
+    def test_func(self):
+        return self.request.user == self.get_object().user
+
+
+class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Delete a recipe"""
+    model = Recipe
+    success_url = '/recipes/'
+
+    def test_func(self):
+        return self.request.user == self.get_object().user

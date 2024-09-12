@@ -82,3 +82,19 @@ img.logo {
     box-shadow: var(--smal-box-shadow);
     border-radius: 5px;
 }
+
+/* RECIPES  */
+
+.card {
+    height: 90%;
+    margin-top: 1rem;
+}
+
+.recipes {
+    text-decoration: none;
+    color: var(--black);
+}
+
+.recipes:hover {
+    cursor: pointer;
+}

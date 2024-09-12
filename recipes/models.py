@@ -10,7 +10,7 @@ MEAL_TYPES = (
     ("breakfast", "Breakfast"), 
     ("lunch", "Lunch"), 
     ("dinner", "Dinner"))
-
+ 
 CUISINE_TYPES = (
     ("african", "African"),
     ("american", "American"),
@@ -38,7 +38,7 @@ class Recipe(models.Model):
     image = ResizedImageField(
         size=[400, None], 
         quality=75, 
-        upload_to='recipes/', 
+        upload_to='recipes/',
         force_format='WEBP',
         blank=False, 
         null=False
@@ -46,7 +46,7 @@ class Recipe(models.Model):
     image_alt = models.CharField(max_length=100, null=False, blank=False)
     meal_type = models.CharField(max_length=50, choices=MEAL_TYPES, default='breakfast')
     cuisine_types = models.CharField(max_length=50, choices=CUISINE_TYPES, default='african')
-    calories = models.IntegerField()
+    calories = models.IntegerField('')
     posted_date = models.DateTimeField(auto_now=True)
     
     class Meta:

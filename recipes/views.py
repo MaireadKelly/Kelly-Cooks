@@ -8,12 +8,21 @@ from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin
 )
 
-from django.db.models import Q
-
-from django.contrib.auth.mixins import LoginRequiredMixin
-
 from .models import Recipe
 from .forms import RecipeForm
+
+
+class AddRecipe(LoginRequiredMixin, CreateView):
+    """Add recipe view"""
+
+    template_name = "recipes/add_recipe.html"
+    model = Recipe
+    form_class = RecipeForm
+    success_url = '/recipes/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddRecipe, self).form_valid(form)
 
 
 class Recipes(ListView):
@@ -21,7 +30,7 @@ class Recipes(ListView):
 
     template_name = "recipes/recipes.html"
     model = Recipe
-    context_object_name = "recipes"
+    context_object_name = 'recipes'
 
     def get_queryset(self, **kwargs):
         query = self.request.GET.get('q')
@@ -43,19 +52,6 @@ class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
     context_object_name = "recipe"
-
-
-class AddRecipe(LoginRequiredMixin, CreateView):
-    """Add recipe view"""
-
-    template_name = "recipes/add_recipe.html"
-    model = Recipe
-    form_class = RecipeForm
-    success_url = "/recipes/"
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(AddRecipe, self).form_valid(form)
 
 
 class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
