@@ -7,42 +7,66 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recipes', '0002_remove_recipe_create_recipe'),
+        ("recipes", "0002_remove_recipe_create_recipe"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='recipe',
-            name='my_recipes',
+            model_name="recipe",
+            name="my_recipes",
         ),
         migrations.RemoveField(
-            model_name='recipe',
-            name='saved_recipes',
+            model_name="recipe",
+            name="saved_recipes",
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='calories',
-            field=models.IntegerField(default=0, verbose_name=''),
+            model_name="recipe",
+            name="calories",
+            field=models.IntegerField(default=0, verbose_name=""),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='cuisine_types',
-            field=models.CharField(choices=[('african', 'African'), ('american', 'American'), ('caribbean', 'Caribbean'), ('asian', 'Asian'), ('middle_eastern', 'Middle Eastern'), ('chinese', 'Chinese'), ('indian', 'Indian'), ('pakistani', 'Pakistani'), ('indonesian', 'Indonesian'), ('european', 'European'), ('oceanic', 'Oceanic')], default='african', max_length=50),
+            model_name="recipe",
+            name="cuisine_types",
+            field=models.CharField(
+                choices=[
+                    ("african", "African"),
+                    ("american", "American"),
+                    ("caribbean", "Caribbean"),
+                    ("asian", "Asian"),
+                    ("middle_eastern", "Middle Eastern"),
+                    ("chinese", "Chinese"),
+                    ("indian", "Indian"),
+                    ("pakistani", "Pakistani"),
+                    ("indonesian", "Indonesian"),
+                    ("european", "European"),
+                    ("oceanic", "Oceanic"),
+                ],
+                default="african",
+                max_length=50,
+            ),
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='meal_type',
-            field=models.CharField(choices=[('breakfast', 'Breakfast'), ('lunch', 'Lunch'), ('dinner', 'Dinner')], default='breakfast', max_length=50),
+            model_name="recipe",
+            name="meal_type",
+            field=models.CharField(
+                choices=[
+                    ("breakfast", "Breakfast"),
+                    ("lunch", "Lunch"),
+                    ("dinner", "Dinner"),
+                ],
+                default="breakfast",
+                max_length=50,
+            ),
         ),
         migrations.AlterField(
-            model_name='recipe',
-            name='ingredients',
+            model_name="recipe",
+            name="ingredients",
             field=ckeditor.fields.RichTextField(max_length=10000),
         ),
         migrations.AlterField(
-            model_name='recipe',
-            name='instructions',
+            model_name="recipe",
+            name="instructions",
             field=ckeditor.fields.RichTextField(max_length=10000),
         ),
     ]

@@ -14,6 +14,8 @@ This site is for likeminded foodies to share their favourite reecipes.
 
 ## Resource Links used in the video
 
+https://britishchefstable.com/
+
 * https://cdnjs.com/libraries/bootstrap - CDN for bootstrap links
 * https://getbootstrap.com/docs/5.2/getting-started/introduction - Bootstrap documentation
 * https://uxwing.com/ - UX Wing icons
