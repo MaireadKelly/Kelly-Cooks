@@ -40,7 +40,19 @@ main {
 /* FOOTER */
 footer {
     flex-shrink: 0;
+    background-color: var(--off-white);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-top: var(--border);
 }
+
+.social-icon {
+    height: 2rem;
+    margin: 1rem;
+}
+
 /* HEADER */
 
 .navbar {
@@ -54,4 +66,20 @@ a.nav-link {
 
 img.logo {
     width: 18.75rem;
+}
+
+/* RECIPES */
+
+.card {
+    height: 90%;
+    margin-top: 1rem;
+}
+
+.recipes {
+    text-decoration: none;
+    color: var(--black);
+}
+
+.recipes:hover {
+    cursor: pointer;
 }

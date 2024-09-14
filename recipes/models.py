@@ -22,8 +22,8 @@ class Recipe(models.Model):
     )
     image_alt = models.CharField(max_length=100, null=False, blank=False)
 
-    #class Meta:
-    #    ordering = ['-created_at']
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.title

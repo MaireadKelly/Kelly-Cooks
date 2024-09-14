@@ -3,5 +3,5 @@ from .views import AddRecipe, Recipes  # Import the views correctly
 
 urlpatterns = [
     path("add/", AddRecipe.as_view(), name="add_recipe"),
-    path("", Recipes.as_view(), name="recipes"),
+    path("recipes/", Recipes.as_view(), name="recipes"),
 ]
