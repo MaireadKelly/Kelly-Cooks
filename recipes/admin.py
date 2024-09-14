@@ -16,4 +16,4 @@ class RecipeAdmin(admin.ModelAdmin):
         "image",
     )
 
-    #list_filter = ("title",)
+    # list_filter = ("title",)
