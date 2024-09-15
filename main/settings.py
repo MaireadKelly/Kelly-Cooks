@@ -9,13 +9,15 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 import os
 from pathlib import Path
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
-import cloudinary_storage
+# import cloudinary_storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['8000-maireadkelly-kellycooks-24rjd1u5k3y.ws.codeinstitute-ide.net', '.herokuapp.com']
 
@@ -53,13 +55,12 @@ INSTALLED_APPS = [
     'recipes',
 
     #OTHER 
-    'crispy_forms',
+   'crispy_forms',
     'crispy_bootstrap5',
     'cloudinary',
     'cloudinary_storage',
-    'djrichtextfield',
-    
-    
+    'djrichtextfield', 
+        
 ]
 
 SITE_ID = 1
@@ -195,13 +196,29 @@ LOGIN_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# For production, also ensure you collect static files
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # CLOUDINARY SETTINGS
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dpltaloln',
+    'API_KEY': '712716123639784',
+    'API_SECRET': 'xdBnfsDwd8laF2ss-p7Ba4MyEvY'
+}
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 
 # Default primary key field type
