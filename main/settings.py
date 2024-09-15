@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'recipes',
 
     #OTHER 
-   'crispy_forms',
+    'crispy_forms',
     'crispy_bootstrap5',
     'cloudinary',
     'cloudinary_storage',

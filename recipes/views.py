@@ -6,19 +6,19 @@ from .forms import RecipeForm  # Ensure your RecipeForm matches the simplified m
 from django.http import HttpResponse
 from cloudinary.uploader import upload
 
+
 def test_image_upload(request):
     # Path to a local image or one you have in your project folder
-    image_path = 'path_to_image_on_your_system.jpg'
-    
+    image_path = "path_to_image_on_your_system.jpg"
+
     # Upload the image to Cloudinary
     result = upload(image_path)
-    
+
     # Get the Cloudinary URL for the uploaded image
-    uploaded_image_url = result.get('url')
-    
+    uploaded_image_url = result.get("url")
+
     # Return the image URL in an HTTP response
     return HttpResponse(f"Uploaded image URL: {uploaded_image_url}")
-
 
 
 class AddRecipe(LoginRequiredMixin, CreateView):
