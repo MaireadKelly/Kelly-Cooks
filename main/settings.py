@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['8000-maireadkelly-kellycooks-24rjd1u5k3y.ws.codeinstitute-ide.net', 'kellycookspp4-63d6db43ef5f.herokuapp.com']
+ALLOWED_HOSTS = ['8000-maireadkelly-kellycooks-24rjd1u5k3y.ws.codeinstitute-ide.net', '.herokuapp.com']
 
 
 # Application definition
@@ -128,7 +128,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-WSGI_APPLICATION = 'main.wsgi.application'
+WSGI_APPLICATION = 'Kelly-Cooks.wsgi.application'
 
 
 # Database
