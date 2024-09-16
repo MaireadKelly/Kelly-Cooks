@@ -128,7 +128,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-WSGI_APPLICATION = 'Kelly-Cooks.wsgi.application'
+WSGI_APPLICATION = 'main.wsgi.application'
 
 
 # Database
