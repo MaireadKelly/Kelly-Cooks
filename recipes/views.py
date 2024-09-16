@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, DetailView, DeleteView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView, LogoutView
 from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin)
 from .models import Recipe
@@ -50,6 +50,24 @@ class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
     context_object_name = "recipe"
+    
+class AddRecipe(LoginRequiredMixin, CreateView):
+    template_name = "recipes/add_recipe.html"
+    model = Recipe
+    form_class = RecipeForm
+    success_url = "/recipes/"
+        
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(AddRecipe, self).form_valid(form)
+    
+    
+class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """ EDIT A RECIPE """
+    template_name = 'recipes/edit_recipe.html'
+    model = Recipe
+    form_class = RecipeForm
+    success_url = '/recipes/'
     
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """ DELETE A RECIPE """

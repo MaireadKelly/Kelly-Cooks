@@ -9,7 +9,7 @@
     --background: #3f006a0f;
     --blue: #0d6efd;
     --black: #000;
-    --off-white: #f6f6f6;
+    --off-white: #fff8e1;
     --white: #fff;
     --orange: #ffbf50;
 
@@ -46,11 +46,12 @@ footer {
     justify-content: center;
     align-items: center;
     border-top: var(--border);
-}
 
+}
 .social-icon {
     height: 2rem;
     margin: 1rem;
+
 }
 
 /* HEADER */
@@ -82,7 +83,7 @@ img.logo {
     border-radius: 5px;
 }
 
-/* RECIPES */
+/* RECIPES  */
 
 .card {
     height: 90%;
@@ -125,11 +126,15 @@ img.logo {
 }
 
 @media screen and (min-width: 62.5em) {
+    .recipe-info {
+        flex-direction: row;
+        border: 1px solid var(--black);
+    }
     .recipe-img {
         width: 40%;
         margin: 0 auto;
     }
-
+    
     .recipe-detail {
         width: 60%;
         padding: 2rem;
@@ -139,11 +144,6 @@ img.logo {
         flex-direction: row;
     }
 
-    .recipe-info {
-        flex-direction: row;
-        border: 1px solid var(--black);
-    }
-
     .ingredients {
         width: 33.33%;
     }
@@ -151,6 +151,4 @@ img.logo {
     .instructions {
         width: 66.66%;
     }
-
-
 }

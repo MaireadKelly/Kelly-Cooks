@@ -47,8 +47,7 @@ INSTALLED_APPS = [
     'django_resized',
     'allauth',
     'allauth.account',
-
-   
+       
     #APPS
     'home',
     'recipes',
@@ -65,7 +64,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 DJRICHTEXTFIELD_CONFIG = {
-    'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
+     'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
     'init_template': 'djrichtextfield/init/ckeditor.js',
     'settings': {
         'toolbar': [
@@ -76,6 +75,8 @@ DJRICHTEXTFIELD_CONFIG = {
         'format_tags': 'p;h1;h2;h3'
     }
 }
+
+
 
 
 MIDDLEWARE = [
@@ -207,17 +208,15 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # CLOUDINARY SETTINGS
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dpltaloln',
-    'API_KEY': '712716123639784',
-    'API_SECRET': 'xdBnfsDwd8laF2ss-p7Ba4MyEvY'
-}
+# CLOUDINARY_STORAGE = {
+#    CLOUDINARY_URL = 'cloudinary://712716123639784:xdBnfsDwd8laF2ss-p7Ba4MyEvY@dpltaloln'
+# }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 
 # Default primary key field type
