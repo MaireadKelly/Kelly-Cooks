@@ -1,1 +1,1 @@
-web: gunicorn kellycooks.wsgi
+web: gunicorn Kelly-Cooks.wsgi
