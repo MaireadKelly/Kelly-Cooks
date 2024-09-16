@@ -1,5 +1,6 @@
-from django.views.generic import CreateView, ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, ListView, DetailView, DeleteView
+from django.contrib.auth.mixins import (
+    UserPassesTestMixin, LoginRequiredMixin)
 from .models import Recipe
 from .forms import RecipeForm  # Ensure your RecipeForm matches the simplified model
 
@@ -49,3 +50,12 @@ class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
     context_object_name = "recipe"
+    
+class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """ DELETE A RECIPE """
+    model = Recipe
+    success_url = '/recipes/'
+    
+    def test_func(self):
+        return self.request.user == self.get_object().user
+        
