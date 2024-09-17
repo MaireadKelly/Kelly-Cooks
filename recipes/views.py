@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView, LogoutView
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin)
 from .models import Recipe
