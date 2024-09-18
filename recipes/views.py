@@ -8,6 +8,8 @@ from .forms import RecipeForm  # Ensure your RecipeForm matches the simplified m
 from django.http import HttpResponse
 from cloudinary.uploader import upload
 
+from django.db.models import Q
+
 
 def test_image_upload(request):
     # Path to a local image or one you have in your project folder
@@ -44,6 +46,18 @@ class Recipes(ListView):
     context_object_name = "recipes"
     paginate_by = 10
 
+    def get_queryset(self, **kwargs):
+        query = self.request.GET.get('q')
+        if query:
+            recipes = self.model.objects.filter(
+                Q(title__icontains=query) |
+                Q(description__icontains=query) |
+                Q(instructions__icontains=query) |
+                Q(ingredients__icontains=query)
+            )
+        else:
+            recipes = self.model.objects.all()
+        return recipes
 
 class RecipeDetail(DetailView):
     """VIEW A SINGLE RECIPE"""
