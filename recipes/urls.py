@@ -14,6 +14,3 @@ urlpatterns = [
     path("delete/<slug:pk>/", DeleteRecipe.as_view(), name="delete_recipe"),
     path("edit/<slug:pk>/", EditRecipe.as_view(), name="edit_recipe",)
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

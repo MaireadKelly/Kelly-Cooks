@@ -23,7 +23,7 @@ class Recipe(models.Model):
         max_length=10000, null=False, blank=False
     )  # TextField for rich text support
     created_at = models.DateTimeField(
-        auto_now_add=False
+        auto_now_add=True
     )  # Automatically set the timestamp on creation
     updated_at = models.DateTimeField(
         auto_now=True
