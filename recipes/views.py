@@ -60,6 +60,9 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = RecipeForm
     success_url = '/recipes/'
     
+    def test_func(self):
+        return self.request.user == self.get_object().user
+    
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """ DELETE A RECIPE """
     model = Recipe

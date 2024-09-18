@@ -12,5 +12,5 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path("djrichtextfield/", include("djrichtextfield.urls")),
     path("delete/<slug:pk>/", DeleteRecipe.as_view(), name="delete_recipe"),
-    path("edit/<slug:pk>/", EditRecipe.as_view(), name="edit_recipe",)
+    path("edit/<slug:pk>/", EditRecipe.as_view(), name="edit_recipe"),
 ]
