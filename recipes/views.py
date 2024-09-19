@@ -44,7 +44,7 @@ class Recipes(ListView):
     template_name = "recipes/recipes.html"
     model = Recipe
     context_object_name = "recipes"
-    paginate_by = 10
+    paginate_by = 3
 
     def get_queryset(self, **kwargs):
         query = self.request.GET.get('q')

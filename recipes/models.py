@@ -1,4 +1,5 @@
 from cloudinary.models import CloudinaryField
+from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -28,6 +29,8 @@ class Recipe(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )  # Automatically update timestamp on modification
+    image = CloudinaryField('image', blank=False, null=False
+    )
     image = CloudinaryField('image')
     
     
