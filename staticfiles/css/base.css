@@ -173,7 +173,7 @@ a.img-container:hover {
         flex-direction: row;
         width: 29%;
     }
-    
+   
 }
 
 
@@ -181,7 +181,7 @@ a.img-container:hover {
     .main-title {
         width: 50%;
     }
-    
+
     .recipe-info {
         flex-direction: row;
         border: 1px solid var(--black);
