@@ -14,7 +14,7 @@ class Recipe(models.Model):
     user = models.ForeignKey(
         User, related_name="recipe_owner", on_delete=models.CASCADE
     )
-    title = models.CharField(max_length=300, null=False, blank=False)
+    title = models.CharField(max_length=255, null=False, blank=False)
     description = models.TextField(null=False, blank=False)  # Simplified this field
     ingredients = models.TextField(
         null=False, blank=False
@@ -28,14 +28,17 @@ class Recipe(models.Model):
     updated_at = models.DateTimeField(
         auto_now=True
     )  # Automatically update timestamp on modification
-    image = ResizedImageField(
-        size=[400, None],
-        quality=75,
-        upload_to="recipes/",
-        force_format="WEBP",
-        blank=False,
-        null=False,
-    )
+    image = CloudinaryField('image')
+    
+    
+    #image = ResizedImageField(
+    #    size=[400, None],
+    #    quality=75,
+    #    upload_to="recipes/",
+    #    force_format="WEBP",
+    #    blank=False,
+    #    null=False,
+    #)
     image_alt = models.CharField(max_length=100, null=False, blank=False)
 
     class Meta:
