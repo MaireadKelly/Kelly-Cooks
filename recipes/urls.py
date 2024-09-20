@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from .views import AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, test_image_upload, follow_user, favorite_recipe, add_review
+from .views import AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, test_image_upload, favorite_recipe, add_review
 
 
 urlpatterns = [

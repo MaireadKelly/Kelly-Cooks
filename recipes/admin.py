@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipe
+from .models import Recipe, Review
 
 
 # Register your models here.

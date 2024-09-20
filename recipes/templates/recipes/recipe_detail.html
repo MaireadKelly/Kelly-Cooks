@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+from django.contrib import messages
 
 {% block title %}Recipe Detail - {{recipe.title}}{% endblock %}
 
@@ -35,21 +36,13 @@
 </div>
 
 
-<!-- FAVORITE BUTTON -->
+<!-- FAVORITE BUTTON --><!--
  <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
     {% csrf_token %}
     <button type="submit">Mark as Favorite</button>
  </form>
-
- <!-- FOLLOW BUTTON -->
- #<form action="{% url 'follow_user' user_id %}" method="POST">
- #  {% csrf_token %}
- #  <button type="submit">Follow {{ recipe.user.username }}</button>
- #</form>
-
-
  <hr>
-
+-->
 <h3>Reviews</h3>
 
 <!-- SHOW EXISTING REVIEWS -->
@@ -65,6 +58,6 @@
     <p>No reviews yet. Be the first to review this recipe!</p>
 {% endfor %}
 
-<!-- Add review button -->
+<!-- ADD REVIEW BUTTON -->
 <a href="{% url 'add_review' recipe.id %}">Add Review</a>
 {% endblock %}

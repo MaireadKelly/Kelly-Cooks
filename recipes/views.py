@@ -7,8 +7,9 @@ from .forms import (RecipeForm, ReviewForm)
 from django.http import HttpResponse
 from cloudinary.uploader import upload
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def test_image_upload(request):
     # Path to a local image or one you have in your project folder
@@ -110,17 +111,20 @@ def favorite_recipe(request, recipe_id):
 
 @login_required
 def add_review(request, recipe_id):
-    recipe = Recipe.objects.get(id=recipe_id)
-    if request.method == "POST":
-        form = ReviewForm(request.POST)
+    recipe = get_object_or_404(Recipe, id=recipe_id)  # Ensure the recipe exists
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)  # Initialize the form with POST data
         if form.is_valid():
-            review = form.save(commit=False)
-            review.user = request.user
-            review.recipe = recipe
-            review.save()
-            return redirect('recipe_detail', pk=recipe_id)
+            review = form.save(commit=False)  # Don't save yet
+            review.recipe = recipe  # Associate with the recipe
+            review.user = request.user  # Associate with the logged-in user
+            review.save()  # Now save it
+            messages.success(request, 'Your review has been added successfully')
+            return redirect('recipe_detail', pk=recipe.id)  # Redirect after success
     else:
-        form = ReviewForm()
-    return render(request, 'reviews/add_review.html', {'form': form, 'recipe': recipe})
+        form = ReviewForm()  # Initialize the form for GET request
+
+        return render(request, 'recipes/add_review.html', {'form': form, 'recipe': recipe})
     
         
