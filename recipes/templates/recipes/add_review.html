@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Review{% endblock %}
+
+{% block content %}
+<h2>Add Review for {{ recipe.title }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Review</button>
+</form>
+
+<a href="{% url 'recipe_detail' pk=recipe.id %}">Back to Recipe</a>
+{% endblock %}

@@ -2,16 +2,13 @@ from datetime import timedelta
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin)
-from .models import Recipe
-from .forms import RecipeForm
+from .models import (Recipe, Favorite, Review)
+from .forms import (RecipeForm, ReviewForm)
 from django.http import HttpResponse
 from cloudinary.uploader import upload
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from .models import Follow
-
-
 
 def test_image_upload(request):
     # Path to a local image or one you have in your project folder
@@ -88,13 +85,42 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def test_func(self):
         return self.request.user == self.get_object().user
     
+# @login_required
+# def follow_user(request, user_id):
+ #   followed_user = User.objects.get(id=user_id)
+#    follow, created = Follow.objects.get_or_create(follower=request.user, followed=followed_user)
+#    
+#    if created:
+#        return redirect('profile', user_id=user_id)
+#    else:
+#        return redirect('profile', user_id=user_id)
+    
 @login_required
-def follow_user(request, user_id):
-    followed_user = User.objects.get(id=user_id)
-    follow, created = Follow.objects.get_or_create(follower=request.user, followed=followed_user)
+def favorite_recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, recipe=recipe)
     
     if created:
-        return redirect('profile', user_id=user_id)
+        # SUCCESSFULLY FAVORITED
+        return redirect('recipe_detail', pk=recipe_id)
     else:
-        return redirect('profile', user_id=user_id)
+        # ALREADY FAVORITED
+        return redirect('recipe_detail', pk=recipe_id)
+    
+
+@login_required
+def add_review(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.recipe = recipe
+            review.save()
+            return redirect('recipe_detail', pk=recipe_id)
+    else:
+        form = ReviewForm()
+    return render(request, 'reviews/add_review.html', {'form': form, 'recipe': recipe})
+    
         

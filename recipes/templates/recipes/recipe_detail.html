@@ -34,4 +34,37 @@
     </div>
 </div>
 
+
+<!-- FAVORITE BUTTON -->
+ <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Mark as Favorite</button>
+ </form>
+
+ <!-- FOLLOW BUTTON -->
+ #<form action="{% url 'follow_user' user_id %}" method="POST">
+ #  {% csrf_token %}
+ #  <button type="submit">Follow {{ recipe.user.username }}</button>
+ #</form>
+
+
+ <hr>
+
+<h3>Reviews</h3>
+
+<!-- SHOW EXISTING REVIEWS -->
+{% for review in recipe.review_set.all %}
+    <div>
+        <strong>{{ review.user.username }}:</strong>
+        <p>Rating: {{ review.rating }}</p>
+        <p>{{ review.comment }}</p>
+        <p>Reviewed on: {{ review.created_at }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p>No reviews yet. Be the first to review this recipe!</p>
+{% endfor %}
+
+<!-- Add review button -->
+<a href="{% url 'add_review' recipe.id %}">Add Review</a>
 {% endblock %}

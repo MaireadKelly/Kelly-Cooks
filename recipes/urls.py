@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from .views import AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, test_image_upload, follow_user
+from .views import AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, test_image_upload, follow_user, favorite_recipe, add_review
 
 
 urlpatterns = [
@@ -14,7 +14,9 @@ urlpatterns = [
     path("djrichtextfield/", include("djrichtextfield.urls")),
     path("delete/<slug:pk>/", DeleteRecipe.as_view(), name="delete_recipe"),
     path("edit/<slug:pk>/", EditRecipe.as_view(), name="edit_recipe"),
-    path('follow/<int:user_id>/', follow_user, name='follow_user'),
+#    path('follow/<int:user_id>/', follow_user, name='follow_user'),
+    path('favorite/<int:recipe_id>/', favorite_recipe, name='favorite_recipe'),
+    path('recipe/<int:recipe_id>/review/', add_review, name='add_review'),
     # Add more URLs for features like Review, Follow, and Favorite here
 ]
 

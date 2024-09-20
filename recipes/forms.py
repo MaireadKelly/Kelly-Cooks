@@ -2,7 +2,7 @@ from django.db import models
 from datetime import timedelta
 from django import forms
 from djrichtextfield.widgets import RichTextWidget
-from .models import Recipe
+from .models import Recipe, Review
 
 class TimestampsWithAuto(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -36,3 +36,8 @@ class RecipeForm(forms.ModelForm):
             "image_alt": "Describe Image",
             "created_on": "Date posted",
         }
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']

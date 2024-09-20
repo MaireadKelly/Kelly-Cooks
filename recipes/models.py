@@ -56,3 +56,25 @@ class Follow(models.Model):
         
     def __str__(self):
         return f"{self.follower} follows {self.follwed}"
+    
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe,on_delete=models.CASCADE)
+    added_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ("user", "recipe")
+        
+        def __str__(self):
+            return f"{self.user} favorited {self.recipe}"
+        
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __set__(self):
+        return f"Review by {self.user} on {self.recipe}"
+    
