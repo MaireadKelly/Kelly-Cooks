@@ -3,12 +3,14 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 from django.contrib.auth.mixins import (
     UserPassesTestMixin, LoginRequiredMixin)
 from .models import Recipe
-from .forms import RecipeForm  # Ensure your RecipeForm matches the simplified model
-
+from .forms import RecipeForm
 from django.http import HttpResponse
 from cloudinary.uploader import upload
-
 from django.db.models import Q
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from .models import Follow
+
 
 
 def test_image_upload(request):
@@ -79,9 +81,20 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """ DELETE A RECIPE """
+    template_name = 'recipes/'
     model = Recipe
     success_url = '/recipes/'
     
     def test_func(self):
         return self.request.user == self.get_object().user
+    
+@login_required
+def follow_user(request, user_id):
+    followed_user = User.objects.get(id=user_id)
+    follow, created = Follow.objects.get_or_create(follower=request.user, followed=followed_user)
+    
+    if created:
+        return redirect('profile', user_id=user_id)
+    else:
+        return redirect('profile', user_id=user_id)
         
