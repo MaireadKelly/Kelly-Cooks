@@ -7,7 +7,9 @@ from django.contrib import messages
 <div class="container">
     <div class="recipe-info mt-3 p-1">
         <div class="recipe-img">
-            <img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-pic">
+            <img src="{{ recipe.image.url | cloudinary_url:width=300,height=200,crop='fill' }}" alt="Recipe Image" class="recipe-image">
+
+            <!--<img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-pic">-->
         </div>
         <div class="recipe-detail">
             <h1 class="text-center">{{ recipe.title }}</h1>
@@ -43,7 +45,46 @@ from django.contrib import messages
  </form>
  <hr>
 -->
-<h3>Reviews</h3>
+<section id="comments"></section>
+    <div class="container-xl mt-3 px-5">
+        <div class="my-3">
+            {% with comments.count as total_comments %}
+            {% if total_comments == 1 %}
+            <h3>{{ total_comments }} Comment</h3>
+            {% else %}
+            <h3>{{ total_comments }} Comments</h3>
+            {% endif %}
+            {% endwith %}
+            {% if commented %}
+            <div class="alert alert-success" role="alert">
+                Your comment is awaiting approval
+            </div>
+            {% else %}
+            {% if user.is_authenticated %}
+            <p>Posting as: {{ user.username }}</p>
+            <form method="post">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary mt-1">Submit</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="comment-container overflow-auto">
+            {% for comment in comments %}
+            <div class="comments">
+                <p class="fw-bold my-auto">
+                    {{ comment.name }}
+                    <span class="text-muted fw-light">
+                        {{ comment.created_on }}
+                    </span>
+                </p>
+                {{ comment.body | linebreaks }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 <!-- SHOW EXISTING REVIEWS -->
 {% for review in recipe.review_set.all %}
@@ -55,9 +96,6 @@ from django.contrib import messages
     </div>
     <hr>
 {% empty %}
-    <p>No reviews yet. Be the first to review this recipe!</p>
 {% endfor %}
 
-<!-- ADD REVIEW BUTTON -->
-<a href="{% url 'add_review' recipe.id %}">Add Review</a>
 {% endblock %}
