@@ -7,9 +7,7 @@ from django.contrib import messages
 <div class="container">
     <div class="recipe-info mt-3 p-1">
         <div class="recipe-img">
-            <img src="{{ recipe.image.url | cloudinary_url:width=300,height=200,crop='fill' }}" alt="Recipe Image" class="recipe-image">
-
-            <!--<img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-pic">-->
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-img">
         </div>
         <div class="recipe-detail">
             <h1 class="text-center">{{ recipe.title }}</h1>

@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+</style>
 
 :root {
     /** FONTS */
@@ -7,7 +10,7 @@
 
     /* COLOURS */
     --background: #3f006a0f;
-    --blue: #0d6efd;
+    --blue: #cd9fcc;
     --black: #000;
     --off-white: #fff8e1;
     --white: #fff;
@@ -114,6 +117,7 @@ img.logo {
     width: 100%;
 }
 
+
 .recipe-img {
     display: flex;
     justify-content: center;
@@ -121,9 +125,13 @@ img.logo {
 }
 
 .recipe-pic {
-    width: 100%;
-    height: auto;
-}
+    width: 300px;  /* Set the desired width */
+    height: 200px;  /* Set the desired height */
+    object-fit: cover;  /* Ensures images scale proportionally and maintain their aspect ratio */
+    }
+    
+    /* width: 100%;
+    height: auto; */
 
 @media screen and (min-width: 62.5em) {
     .recipe-info {
