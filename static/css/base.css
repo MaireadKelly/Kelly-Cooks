@@ -18,7 +18,8 @@
     --border: 1px solid #00000030;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -28,7 +29,12 @@ body {
     font-family: var(--main-font);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--title);
 }
 
@@ -48,6 +54,7 @@ footer {
     border-top: var(--border);
 
 }
+
 .social-icon {
     height: 2rem;
     margin: 1rem;
@@ -72,6 +79,42 @@ img.logo {
 .active {
     border-bottom: 2px solid var(--blue);
     font-weight: 500;
+}
+
+/* LANDING PAGE */
+
+.homepage-container {
+    width: 100%;
+}
+
+.hero-section {
+    position: relative;
+    height: 50vh;
+    /* Adjust height as needed */
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.btn-lg {
+    font-size: 1.5rem;
+    /* Large button */
+}
+
+/* Recipe section styling */
+.recipe-section {
+    padding: 20px;
 }
 
 /* FORM */
@@ -110,7 +153,9 @@ img.logo {
     flex-direction: column;
 }
 
-.ingredients, .instructions, .recipe-detail {
+.ingredients,
+.instructions,
+.recipe-detail {
     width: 100%;
 }
 
@@ -130,11 +175,12 @@ img.logo {
         flex-direction: row;
         border: 1px solid var(--black);
     }
+
     .recipe-img {
         width: 40%;
         margin: 0 auto;
     }
-    
+
     .recipe-detail {
         width: 60%;
         padding: 2rem;

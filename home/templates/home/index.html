@@ -1,36 +1,27 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Scrumdiddlyumptious{% endblock %}
 
 {% block content %}
+<div class="homepage-container">
+    <!-- Top Section: Full-width image with a large sign-up button -->
+    <section class="hero-section">
+        <div class="hero-image-container">
+            <img src="{% static 'images/hero-image.jpg' %}" class="hero-image" alt="Hero Image">
+            <div class="hero-overlay">
+                <a href="{% url 'account_signup' %}" class="btn btn-lg btn-primary">Sign Up</a>
 
-<div class="container flex-column pt-3">
-    <section class="text-center">
-        <h1 class="main-title mx-auto">
-            The Only Cooking App You Will Ever Need!!
-        </h1>
-        <p class="pt-4">
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-            +++++++++++INTRODUCTION TO THE SITE AND ITS FEATURES++++++++++++
-        </p>
+            </div>
+        </div>
     </section>
-    <section>
-        <div class="recipe-cont">
-            {% for recipe in recipes %}
-            <a href="{% url 'recipe_detail' recipe.id %}" class="img-container">
-                <img src="{{recipe.image.url}}" alt="{{recipe.image_alt}}" style="width: 100%">
-                <div class="centered">
-                </div>
-            </a>
 
-            {% endfor %}
+    <!-- Bottom Section: Carousel of Random Recipes -->
+    <section class="recipe-section">
+        <div class="container">
+            <h2 class="text-center">Discover Random Recipes</h2>
+            <!-- Add carousel here -->
         </div>
     </section>
 </div>
-
 {% endblock %}
