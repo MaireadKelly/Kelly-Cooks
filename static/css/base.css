@@ -90,7 +90,6 @@ img.logo {
 .hero-section {
     position: relative;
     height: 50vh;
-    /* Adjust height as needed */
     overflow: hidden;
 }
 
@@ -116,6 +115,7 @@ img.logo {
 .recipe-section {
     padding: 20px;
 }
+
 
 /* FORM */
 

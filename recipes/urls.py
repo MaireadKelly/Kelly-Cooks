@@ -16,6 +16,7 @@ from .views import (
 
 
 urlpatterns = [
+    path('accounts/', include('allauth.urls')),
     path("test-upload/", test_image_upload, name="test_image_upload"),
     path("add/", AddRecipe.as_view(), name="add_recipe"),
     path("", Recipes.as_view(), name="recipes"),

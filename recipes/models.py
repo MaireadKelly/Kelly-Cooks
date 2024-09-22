@@ -20,7 +20,7 @@ class Recipe(models.Model):
     instructions = RichTextField(max_length=10000, null=False, blank=False)  # TextField for rich text support
     created_at = models.DateTimeField(auto_now_add=True)  # Automatically set the timestamp on creation
     updated_at = models.DateTimeField(auto_now=True)  # Automatically update timestamp on modification
-    image = CloudinaryField("image", blank=False, null=False)
+    image = CloudinaryField("image", blank=True, null=True)
 
     # image = ResizedImageField(
     #    size=[400, None],
