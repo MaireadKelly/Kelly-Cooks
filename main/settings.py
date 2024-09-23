@@ -215,12 +215,6 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
-# CLOUDINARY SETTINGS
-# CLOUDINARY_STORAGE = {
-#    CLOUDINARY_URL = 'cloudinary://712716123639784:xdBnfsDwd8laF2ss-p7Ba4MyEvY@dpltaloln'
-# }
-
-
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 MEDIA_URL = "/media/"

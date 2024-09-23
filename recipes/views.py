@@ -15,6 +15,7 @@ from django.db.models import Q
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 def test_image_upload(request):
@@ -68,6 +69,15 @@ class Recipes(ListView):
         else:
             recipes = self.model.objects.all()
         return recipes
+    
+def recipe_list(request):
+    recipe_list = Recipe.objects.all()  # Get all recipes
+    paginator = Paginator(recipe_list, 8)  # Show 8 recipes per page
+
+    page_number = request.GET.get('page')  # Get the page number from the URL
+    recipes = paginator.get_page(page_number)  # Get the recipes for that page
+
+    return render(request, 'recipes/recipe_list.html', {'recipes': recipes})
 
 
 class RecipeDetail(DetailView):

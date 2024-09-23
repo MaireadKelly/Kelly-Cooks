@@ -12,10 +12,12 @@ from .views import (
     test_image_upload,
     favorite_recipe,
     add_review,
+    recipe_list,
 )
 
 
 urlpatterns = [
+    path('', recipe_list, name='recipe_list'),
     path("accounts/", include("allauth.urls")),
     path("test-upload/", test_image_upload, name="test_image_upload"),
     path("add/", AddRecipe.as_view(), name="add_recipe"),
