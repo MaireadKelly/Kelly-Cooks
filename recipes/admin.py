@@ -16,4 +16,19 @@ class RecipeAdmin(admin.ModelAdmin):
         "image",
     )
 
-    # list_filter = ("title",)
+    from django.contrib import admin
+
+
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("user", "recipe", "rating", "created_at")  # Adjust fields as needed
+    search_fields = (
+        "user__username",
+        "recipe__title",
+        "rating",
+    )  # Make fields searchable
+
+
+admin.site.register(Review, ReviewAdmin)
+
+
+# list_filter = ("title",)

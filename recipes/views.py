@@ -145,3 +145,9 @@ def add_review(request, recipe_id):
             "recipes/add_review.html",
             {"form": form, "recipe": recipe},
         )
+        
+        
+# ERRORS 
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
+

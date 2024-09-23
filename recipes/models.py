@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
 from django_resized import ResizedImageField
+from django.shortcuts import render
 
 
 class Recipe(models.Model):
@@ -37,8 +38,7 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
-
-
+  
 # class Follow(models.Model):
 #    follower = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
 #    followed = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
@@ -65,6 +65,18 @@ class Favorite(models.Model):
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey('Recipe', on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user} on {self.recipe}"
+
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     rating = models.IntegerField()
     comment = models.TextField()
@@ -72,3 +84,7 @@ class Review(models.Model):
 
     def __set__(self):
         return f"Review by {self.user} on {self.recipe}"
+    
+    # CUSTOM 404 VIEW
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)

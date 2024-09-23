@@ -2,6 +2,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import UserCreationForm
 from .views import (
     AddRecipe,
     Recipes,
@@ -11,12 +12,11 @@ from .views import (
     test_image_upload,
     favorite_recipe,
     add_review,
-
 )
 
 
 urlpatterns = [
-    path('accounts/', include('allauth.urls')),
+    path("accounts/", include("allauth.urls")),
     path("test-upload/", test_image_upload, name="test_image_upload"),
     path("add/", AddRecipe.as_view(), name="add_recipe"),
     path("", Recipes.as_view(), name="recipes"),
@@ -32,6 +32,17 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(
-        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-    )
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+def signup(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(
+                "login"
+            )  # Redirect to login or another page after successful signup
+    else:
+        form = UserCreationForm()
+    return render(request, "registration/signup.html", {"form": form})
