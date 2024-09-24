@@ -52,7 +52,6 @@ footer {
     justify-content: center;
     align-items: center;
     border-top: var(--border);
-
 }
 
 .social-icon {
@@ -66,6 +65,12 @@ footer {
 .navbar {
     background-color: var(--off-white);
     box-shadow: var(--smal-box-shadow);
+}
+
+.navbar-brand {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
 }
 
 a.nav-link {
@@ -111,9 +116,10 @@ img.logo {
     /* Large button */
 }
 
-/* Recipe section styling */
+/* RECIPE SECTION STYLING */
 .recipe-section {
-    padding: 20px;
+    padding: 40px 20px;
+    margin-top: 20px;
 }
 
 
