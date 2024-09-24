@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Scrumdiddlyumptious{% endblock %}
 
 {% block content %}
 <div class="homepage-container">
@@ -16,12 +15,33 @@
         </div>
     </section>
 
-    <!-- Bottom Section: Carousel of Random Recipes -->
-    <section class="recipe-section">
-        <div class="container">
-            <h2 class="text-center">Discover Recipes</h2>
-            <!-- Add carousel here -->
-            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <!-- Carousel of Recipes -->
+    <!-- Carousel of Recipes -->
+<section class="recipe-section">
+    <div class="container">
+        <h2 class="text-center">Discover Recipes</h2>
+        <div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for image_url in image_urls %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ image_url }}" class="d-block w-100" alt="Recipe Image">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#recipeCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#recipeCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+
+    <!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img src="..." class="d-block w-100" alt="...">
@@ -38,16 +58,16 @@
                 <div class="carousel-inner">
                     {% for image_url in image_urls %}
                     <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="https://res.cloudinary.com/mkswdev/image/upload/v1727083024/szandmalmeejyhqgohje.jpg"
-                            class="d-block w-100" alt="Recipe Image"> -->
-                        </src>
+                        <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.image_alt }}">
+                        /*    class="d-block w-100" alt="Recipe Image"> */ -->
+    <!-- 
 
                     </div>
                     {% endfor %}
                 </div>
-            </div>
+            </div> -->
 
-        </div>
-    </section>
+    <!-- </div>
+    </section> -->
 </div>
 {% endblock %}

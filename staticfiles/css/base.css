@@ -74,6 +74,17 @@ img.logo {
     font-weight: 500;
 }
 
+.header-title {
+    font-size: 20rem;
+    text-align: center;
+    /* Center the text */
+    font-size: 5rem;
+    /* Adjust size as needed */
+    margin: 0;
+    /* Remove default margins */
+}
+
+
 /* FORM */
 
 .form {
