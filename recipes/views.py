@@ -16,6 +16,8 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+import cloudinary
+import cloudinary.api
 
 
 def test_image_upload(request):
@@ -69,15 +71,16 @@ class Recipes(ListView):
         else:
             recipes = self.model.objects.all()
         return recipes
-    
+
+
 def recipe_list(request):
     recipe_list = Recipe.objects.all()  # Get all recipes
     paginator = Paginator(recipe_list, 8)  # Show 8 recipes per page
 
-    page_number = request.GET.get('page')  # Get the page number from the URL
+    page_number = request.GET.get("page")  # Get the page number from the URL
     recipes = paginator.get_page(page_number)  # Get the recipes for that page
 
-    return render(request, 'recipes/recipe_list.html', {'recipes': recipes})
+    return render(request, "recipes/recipe_list.html", {"recipes": recipes})
 
 
 class RecipeDetail(DetailView):
@@ -114,9 +117,7 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 @login_required
 def favorite_recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
-    favorite, created = Favorite.objects.get_or_create(
-        user=request.user, recipe=recipe
-    )
+    favorite, created = Favorite.objects.get_or_create(user=request.user, recipe=recipe)
 
     if created:
         # SUCCESSFULLY FAVORITED
@@ -128,11 +129,20 @@ def favorite_recipe(request, recipe_id):
         return redirect("recipe_detail", pk=recipe_id)
 
 
+import cloudinary
+import cloudinary.api
+
+
+def carousel_view(request):
+    folder = "recipe_carousel"
+    response = cloudinary.api.resources(type="upload", prefix=folder)
+    image_urls = [resource["secure_url"] for resource in response["resources"]]
+    return render(request, "carousel_template.html", {"image_urls": image_urls})
+
+
 @login_required
 def add_review(request, recipe_id):
-    recipe = get_object_or_404(
-        Recipe, id=recipe_id
-    )  # Ensure the recipe exists
+    recipe = get_object_or_404(Recipe, id=recipe_id)  # Ensure the recipe exists
 
     if request.method == "POST":
         form = ReviewForm(request.POST)  # Initialize the form with POST data
@@ -141,12 +151,8 @@ def add_review(request, recipe_id):
             review.recipe = recipe  # Associate with the recipe
             review.user = request.user  # Associate with the logged-in user
             review.save()  # Now save it
-            messages.success(
-                request, "Your review has been added successfully"
-            )
-            return redirect(
-                "recipe_detail", pk=recipe.id
-            )  # Redirect after success
+            messages.success(request, "Your review has been added successfully")
+            return redirect("recipe_detail", pk=recipe.id)  # Redirect after success
     else:
         form = ReviewForm()  # Initialize the form for GET request
 
@@ -155,9 +161,8 @@ def add_review(request, recipe_id):
             "recipes/add_review.html",
             {"form": form, "recipe": recipe},
         )
-        
-        
-# ERRORS 
-def custom_404(request, exception):
-    return render(request, '404.html', status=404)
 
+
+# ERRORS
+def custom_404(request, exception):
+    return render(request, "404.html", status=404)
