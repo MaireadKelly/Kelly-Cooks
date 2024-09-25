@@ -253,18 +253,26 @@ a.img-container:hover {
 /*CAROUSEL */
 /* Carousel image styling */
 .carousel-inner img {
-    width: 100%; /* Make images responsive */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 400px; /* Set a maximum height */
-    object-fit: cover; /* Cover the area without distortion */
-    border: 5px solid #ccc; /* Add a border */
-    border-radius: 5px; /* Rounded corners */
+    width: 100%;
+    /* Make images responsive */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-height: 400px;
+    /* Set a maximum height */
+    object-fit: cover;
+    /* Cover the area without distortion */
+    border: 5px solid #ccc;
+    /* Add a border */
+    border-radius: 5px;
+    /* Rounded corners */
 }
 
 /* Carousel container styling */
 .carousel {
-    padding: 20px; /* Add padding around carousel */
-    margin-top: 20px; /* Space above carousel */
+    padding: 20px;
+    /* Add padding around carousel */
+    margin-top: 20px;
+    /* Space above carousel */
 }
 
 
@@ -325,6 +333,35 @@ a.img-container:hover {
 
     }
 
+}
 
 
+/* Body styling */
+body {
+    background-color: #f4f4f4;
+    /* Light gray background */
+    color: #333;
+    /* Dark text for contrast */
+}
+
+/* Button styles */
+.btn {
+    background-color: #ffcad4;
+    color: #9d8189;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #ffe5d9;
+    /* Lighter shade on hover */
+}
+
+/* Typography styling */
+body {
+    font-family: 'Arial', sans-serif;
+    /* Example font */
+    line-height: 1.6;
+    /* Improved readability */
 }

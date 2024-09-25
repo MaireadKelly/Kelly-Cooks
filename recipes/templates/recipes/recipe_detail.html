@@ -1,28 +1,21 @@
 {% extends "base.html" %}
 
 {% load static %}
-
 {% load cloudinary %}
 
-from django.contrib import messages
-
-
-{% block title %}Recipe Detail - {{recipe.title}}{% endblock %}
+{% block title %}Recipe Detail - {{ recipe.title }}{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="recipe-info mt-3 p-1">
         <div class="recipe-img">
             <img src="{{ recipe.image.url }}" alt="Recipe Image" class="recipe-image">
-
-
-            <!--<img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-pic">-->
         </div>
         <div class="recipe-detail">
             <h1 class="text-center">{{ recipe.title }}</h1>
-            <p class="text-center">Posted by {{recipe.user}} on {{recipe.created_on}}</p>
+            <p class="text-center">Posted by {{ recipe.user }} on {{ recipe.created_on }}</p>
             <hr>
-            <p>{{recipe.description}}</p>
+            <p>{{ recipe.description }}</p>
 
             {% if request.user == recipe.user %}
             <div class="text-center">
@@ -44,65 +37,74 @@ from django.contrib import messages
     </div>
 </div>
 
-
-<!-- FAVORITE BUTTON --><!--
- <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
+<!-- FAVORITE BUTTON -->
+<!-- <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
     {% csrf_token %}
     <button type="submit">Mark as Favorite</button>
- </form>
- <hr>
--->
-<section id="comments"></section>
+</form>
+<hr> -->
+<!--******************************************************
+<section id="reviews" class="mt-5">
     <div class="container-xl mt-3 px-5">
+        <h3>Reviews</h3>
         <div class="my-3">
-            {% with comments.count as total_comments %}
-            {% if total_comments == 1 %}
-            <h3>{{ total_comments }} Comment</h3>
-            {% else %}
-            <h3>{{ total_comments }} Comments</h3>
-            {% endif %}
-            {% endwith %}
-            {% if commented %}
-            <div class="alert alert-success" role="alert">
-                Your comment is awaiting approval
-            </div>
-            {% else %}
             {% if user.is_authenticated %}
-            <p>Posting as: {{ user.username }}</p>
+            <h4>Leave a Review:</h4>
             <form method="post">
-                {{ comment_form | crispy }}
                 {% csrf_token %}
-                <button type="submit" class="btn btn-secondary mt-1">Submit</button>
+                {{ review_form|crispy }}  <!-- Use the crispy form for styling -->
+                <!-- <button type="submit" class="btn btn-secondary mt-1">Submit</button>
             </form>
-            {% endif %}
+            {% else %}
+            <p>Please log in to leave a review.</p>
             {% endif %}
         </div>
-        <div class="comment-container overflow-auto">
-            {% for comment in comments %}
-            <div class="comments">
-                <p class="fw-bold my-auto">
-                    {{ comment.name }}
-                    <span class="text-muted fw-light">
-                        {{ comment.created_on }}
-                    </span>
-                </p>
-                {{ comment.body | linebreaks }}
+        <div class="review-container">
+            {% for review in reviews %}
+            <div>
+                <strong>{{ review.user.username }}:</strong>
+                <p>Rating: {{ review.rating }}</p>
+                <p>{{ review.comment }}</p>
+                <p>Reviewed on: {{ review.created_at }}</p>
+                <hr>
             </div>
+            {% empty %}
+            <p>No reviews yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section> ****************************************************************************-->
+
+<section id="reviews" class="mt-5">
+    <div class="container-xl mt-3 px-5">
+        <h3>Reviews</h3>
+        <div class="my-3">
+            {% if user.is_authenticated %}
+            <h4>Leave a Review:</h4>
+            <form method="post">
+                {% csrf_token %}
+                {{ review_form|crispy }}  <!-- Use the crispy form for styling -->
+                <button type="submit" class="btn btn-secondary mt-1">Submit</button>
+            </form>
+            {% else %}
+            <p>Please log in to leave a review.</p>
+            {% endif %}
+        </div>
+        <div class="review-container">
+            {% for review in reviews %}
+            <div>
+                <strong>{{ review.user.username }}:</strong>
+                <p>Rating: {{ review.rating }}</p>
+                <p>{{ review.comment }}</p>
+                <p>Reviewed on: {{ review.created_at }}</p>
+                <hr>
+            </div>
+            {% empty %}
+            <p>No reviews yet.</p>
             {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- SHOW EXISTING REVIEWS -->
-{% for review in recipe.review_set.all %}
-    <div>
-        <strong>{{ review.user.username }}:</strong>
-        <p>Rating: {{ review.rating }}</p>
-        <p>{{ review.comment }}</p>
-        <p>Reviewed on: {{ review.created_at }}</p>
-    </div>
-    <hr>
-{% empty %}
-{% endfor %}
 
 {% endblock %}

@@ -84,46 +84,12 @@ def recipe_list(request):
     return render(request, "recipes/recipe_list.html", {"recipes": recipes})
 
 
-# class RecipeDetail(DetailView):
-#     """VIEW A SINGLE RECIPE"""
-
-#     template_name = "recipes/recipe_detail.html"
-#     model = Recipe
-#     context_object_name = "recipe"
-
 class RecipeDetail(DetailView):
-    """View a single recipe with reviews and handle review submission"""
+    """VIEW A SINGLE RECIPE"""
 
     template_name = "recipes/recipe_detail.html"
     model = Recipe
     context_object_name = "recipe"
-
-    def get_context_data(self, **kwargs):
-        # Get the default context from the superclass
-        context = super().get_context_data(**kwargs)
-        
-        # Add the review form and the list of reviews to the context
-        context['review_form'] = ReviewForm()
-        context['reviews'] = self.object.review_set.all()  # Assuming a ForeignKey relationship
-        
-        return context
-
-    def post(self, request, *args, **kwargs):
-        # Handle the form submission
-        self.object = self.get_object()  # Get the current recipe object
-        form = ReviewForm(request.POST)
-        
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.recipe = self.object  # Link the review to the current recipe
-            review.user = request.user   # Link the review to the logged-in user
-            review.save()
-
-            messages.success(request, "Your review has been submitted.")
-            return redirect('recipe_detail', pk=self.object.pk)
-
-        # If the form is not valid, re-render the page with the form errors
-        return self.render_to_response(self.get_context_data(review_form=form))
 
 
 class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -193,8 +159,8 @@ def add_review(request, recipe_id):
 
         return render(
             request,
-            "recipes/recipe_detail.html",
-            {"form": form, "recipe": recipe}
+            "recipes/add_review.html",
+            {"form": form, "recipe": recipe},
         )
 
 
