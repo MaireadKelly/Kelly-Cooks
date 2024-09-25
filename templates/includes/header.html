@@ -4,26 +4,16 @@
   {% with request.resolver_match.url_name as url_name %}
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-
+      
       <!-- LOGO (centered) -->
       <div class="navbar-brand mx-auto text-center">
         <a href="{% url 'home' %}">
           <img src="{% static 'images/logo.png' %}" alt="Chef Hat Knife and Spoon Logo" class="logo">
         </a>
       </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
 
       <!-- NAVIGATION LINKS (left) -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-      </ul>
-    </div>
-      <div class="collapse navbar-collapse ml-2">
+      <div class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">Home</a>
@@ -49,17 +39,14 @@
               <span class="nav-link">You are logged in as {{ request.user.username }}</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}"
-                href="/accounts/logout/">Logout</a>
+              <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}"
-                href="/accounts/signup/">Register</a>
+              <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}" href="/accounts/signup/">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}"
-                href="/accounts/login/">Login</a>
+              <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login/">Login</a>
             </li>
             {% endif %}
           </ul>

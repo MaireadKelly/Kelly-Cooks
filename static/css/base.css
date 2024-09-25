@@ -72,29 +72,11 @@ a.nav-link {
     color: var(--black);
 }
 
-.nav-link {
-    color: var(--black);
-}
-
 img.logo {
     width: 5rem;
-    
-}
+    flex-direction: row;
+    position: center fixed;
 
-.navbar-toggler {
-    border-color: var(--blue);
-}
-
-.navbar-toggler-icon {
-    background-image: url('data:image/svg+xml;base64,...');
-    /* default Bootstrap icon */
-}
-
-/* Logo Centering */
-.navbar-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .active {
@@ -136,7 +118,7 @@ img.logo {
 .header-title {
     text-align: center;
     /* Center the text */
-    font-size: 1.25rem;
+    font-size: 100%;
     /* Adjust size as needed */
     margin: 0;
     /* Remove default margins */
@@ -213,7 +195,7 @@ img.logo {
 
 }
 
-a.img-container {
+# a.img-container {
 
     position: relative;
 
@@ -274,21 +256,7 @@ a.img-container:hover {
     object-fit: cover;
 }
 
-@media (max-width: 767.98px) {
-    .navbar-nav {
-        text-align: center;
-    }
 
-    .navbar-brand {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    img.logo {
-        width: 4rem;
-        /* Smaller logo on small screens */
-    }
-}
 
 @media screen and (min-width: 62.5em) {
     .recipe-info {
@@ -319,6 +287,7 @@ a.img-container:hover {
     }
 }
 
+
 @media screen and (min-width:40em) {
 
     .form {
@@ -327,16 +296,24 @@ a.img-container:hover {
 
     }
 
+
+
     .recipe-cont {
 
         flex-direction: row;
+
     }
+
+
 
     .img-container {
 
         flex-direction: row;
 
         width: 29%;
+
     }
+
+
 
 }
