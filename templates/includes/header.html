@@ -4,7 +4,7 @@
   {% with request.resolver_match.url_name as url_name %}
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      
+
       <!-- LOGO (centered) -->
       <div class="navbar-brand mx-auto text-center">
         <a href="{% url 'home' %}">
@@ -28,10 +28,15 @@
 
         <!-- SEARCH BAR & AUTH LINKS (right) -->
         <div class="d-flex align-items-center ms-auto">
-          <form class="d-flex me-3" role="search" method="GET" action="{% url 'recipes' %}">
+          <!-- <form class="d-flex me-3" role="search" method="GET" action="{% url 'recipes' %}">
             <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form> -->
+          <form method="GET" action="{% url 'recipes' %}">
+            <input type="text" name="q" placeholder="Search for recipes..." value="{{ request.GET.q }}">
+            <button type="submit">Search</button>
           </form>
+
 
           <ul class="navbar-nav mb-2 mb-lg-0">
             {% if request.user.is_authenticated %}
@@ -39,14 +44,17 @@
               <span class="nav-link">You are logged in as {{ request.user.username }}</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/">Logout</a>
+              <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}"
+                href="/accounts/logout/">Logout</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}" href="/accounts/signup/">Register</a>
+              <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}"
+                href="/accounts/signup/">Register</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login/">Login</a>
+              <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}"
+                href="/accounts/login/">Login</a>
             </li>
             {% endif %}
           </ul>

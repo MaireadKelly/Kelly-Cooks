@@ -21,7 +21,7 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     path("test-upload/", test_image_upload, name="test_image_upload"),
     path("add/", AddRecipe.as_view(), name="add_recipe"),
-    path("", Recipes.as_view(), name="recipes"),
+    path("recipes/", Recipes.as_view(), name="recipes"),
     path("<slug:pk>/", RecipeDetail.as_view(), name="recipe_detail"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("djrichtextfield/", include("djrichtextfield.urls")),
