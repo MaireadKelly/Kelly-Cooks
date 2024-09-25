@@ -106,9 +106,9 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """DELETE A RECIPE"""
 
-    template_name = "recipes/"
+    template_name = "recipes/recipe_confirm_delete.html"
     model = Recipe
-    success_url = "/recipes/"
+    success_url = "recipes/"
 
     def test_func(self):
         return self.request.user == self.get_object().user

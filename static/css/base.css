@@ -251,9 +251,20 @@ a.img-container:hover {
 }
 
 /*CAROUSEL */
-.carousel-item img {
-    height: 500px;
-    object-fit: cover;
+/* Carousel image styling */
+.carousel-inner img {
+    width: 100%; /* Make images responsive */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 400px; /* Set a maximum height */
+    object-fit: cover; /* Cover the area without distortion */
+    border: 5px solid #ccc; /* Add a border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Carousel container styling */
+.carousel {
+    padding: 20px; /* Add padding around carousel */
+    margin-top: 20px; /* Space above carousel */
 }
 
 
