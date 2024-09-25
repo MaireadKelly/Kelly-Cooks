@@ -66,9 +66,7 @@ footer {
     background-color: var(--off-white);
     box-shadow: var(--smal-box-shadow);
 }
-.ms-auto {
-    margin-left: auto;
-}
+
 
 a.nav-link {
     color: var(--black);
@@ -76,24 +74,15 @@ a.nav-link {
 
 img.logo {
     width: 5rem;
+    flex-direction: row;
+    position: center fixed;
+
 }
 
 .active {
     border-bottom: 2px solid var(--blue);
     font-weight: 500;
 }
-
-/* CENTER LOGO */
-.navbar-brand {
-    position:absolute;
-    left: 50%;    
-    transform: translateX(-50%);
-
-    /* margin: 0 auto;
-    text-align: center;
-    display: block; */
-}
-
 
 /* LANDING PAGE */
 
@@ -164,7 +153,7 @@ img.logo {
 }
 
 .recipes:hover {
-    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
 
 .recipe-info {
