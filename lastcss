@@ -72,10 +72,6 @@ a.nav-link {
     color: var(--black);
 }
 
-.nav-link {
-    color: var(--black);
-}
-
 img.logo {
     width: 5rem;
     
@@ -90,11 +86,10 @@ img.logo {
     /* default Bootstrap icon */
 }
 
-/* Logo Centering */
+
 .navbar-brand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .active {
