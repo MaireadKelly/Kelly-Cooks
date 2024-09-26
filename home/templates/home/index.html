@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% load static %}
 
+{% load static %}
 
 {% block content %}
 <div class="homepage-container">
@@ -10,14 +10,11 @@
             <img src="{% static 'images/hero-image.jpg' %}" class="hero-image" alt="Hero Image">
             <div class="hero-overlay">
                 <a href="{% url 'account_signup' %}" class="btn btn-lg btn-primary">Sign Up</a>
-
             </div>
         </div>
     </section>
-
 </div>
-  
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+ <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
         {% for image_url in image_urls %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -79,7 +76,6 @@
           <p>Some representative placeholder content for the sixth slide.</p>
         </div>
       </div>
-
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

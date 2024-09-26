@@ -30,7 +30,6 @@ Recipe Book is an online app designed to build a community of 'foodies' and home
 #### Epic: Recipe CRUD
 
 - As a Site User I can create recipes so that I can share them on the site.
-- As a Site User I can publish and unpublish my recipes so that I can choose whether to share the recipe or not.
 - As a Site User I can update/edit my recipes so that I can revise the recipe.
 - As a Site User I can delete my created recipe so that I can remove the recipe from the site.
 - As a Site Admin I can unpublish recipes so that manage content on the site.
@@ -54,7 +53,7 @@ This project was developed using Agile methodology which allowed me to iterative
 
 GitHub Issues and Projects were used to manage the development process. Each part of the app is divided into Epics_ which are broken down into User Stories with Tasks. An Epic represents a large body of work, such as a feature. The board view of the Project feature was used to display and manage my progress in the form of a 'kanban board'. The user stories were added to the 'Todo' column to be prioritised for development, moved to the 'In Progress' column to indicate development of the feature had begun and finally moved to the 'Done' column when the feature had been implemented and the acceptance criteria had been met.
 
-![Kanban Board](docs/images/kanban.png)
+![Kanban Board](static/readme/agile.png)
 
 User stories were prioritised using the MoSCoW prioritisation technique. Each user story was given one of the following labels:
 

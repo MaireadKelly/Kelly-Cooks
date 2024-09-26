@@ -22,19 +22,18 @@ import cloudinary.api
 
 
 def test_image_upload(request):
-    # Path to a local image or one you have in your project folder
+    # PATH TO LOCAL IMAGE
 
     image_path = "path_to_image_on_your_system.jpg"
 
-    # Upload the image to Cloudinary
-
+    # UPLOAD IMAGE TO CLOUDINARY
     result = upload(image_path)
 
-    # Get the Cloudinary URL for the uploaded image
+    # GET THE CLOUDINARY URL FOR THE UPLOAD IMAGE
 
     uploaded_image_url = result.get("url")
 
-    # Return the image URL in an HTTP response
+    # RETURN THE IMAGE URL IN AN HTTP RESPONSE
 
     return HttpResponse(f"Uploaded image URL: {uploaded_image_url}")
 
@@ -58,7 +57,7 @@ class Recipes(ListView):
     template_name = "recipes/recipes.html"
     model = Recipe
     context_object_name = "recipes"
-    paginate_by = 3
+    paginate_by = 8
 
     def get_queryset(self, **kwargs):
         query = self.request.GET.get("q")
@@ -75,21 +74,14 @@ class Recipes(ListView):
 
 
 def recipe_list(request):
-    recipe_list = Recipe.objects.all()  # Get all recipes
-    paginator = Paginator(recipe_list, 8)  # Show 8 recipes per page
+    recipe_list = Recipe.objects.all()  # GET ALL RECIPES
+    paginator = Paginator(recipe_list, 8)  # SHOW 8 RECIPIES PER PAGE
 
-    page_number = request.GET.get("page")  # Get the page number from the URL
-    recipes = paginator.get_page(page_number)  # Get the recipes for that page
+    page_number = request.GET.get("page")  # GET THE PAGE NUMBER FROM THE URL
+    recipes = paginator.get_page(page_number)  # GET THE RECIPIES FROM THAT PAGE
 
     return render(request, "recipes/recipe_list.html", {"recipes": recipes})
 
-
-# class RecipeDetail(DetailView):
-#     """VIEW A SINGLE RECIPE"""
-
-#     template_name = "recipes/recipe_detail.html"
-#     model = Recipe
-#     context_object_name = "recipe"
 
 class RecipeDetail(DetailView):
     """View a single recipe with reviews and handle review submission"""
@@ -162,10 +154,6 @@ def favorite_recipe(request, recipe_id):
         # ALREADY FAVORITED
 
         return redirect("recipe_detail", pk=recipe_id)
-
-
-import cloudinary
-import cloudinary.api
 
 
 def carousel_view(request):

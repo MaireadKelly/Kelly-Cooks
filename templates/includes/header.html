@@ -15,8 +15,7 @@
 
       <!-- HAMBURGER ICON (Toggle Button) -->
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
 
         <span class="navbar-toggler-icon"></span>
 
@@ -38,10 +37,6 @@
 
         <!-- SEARCH BAR & AUTH LINKS (right) -->
         <div class="d-flex align-items-center ms-auto">
-          <!-- <form class="d-flex me-3" role="search" method="GET" action="{% url 'recipes' %}">
-            <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-          </form> -->
           <form method="GET" action="{% url 'recipes' %}">
             <input type="text" name="q" placeholder="Search for recipes..." value="{{ request.GET.q }}">
             <button type="submit">Search</button>
