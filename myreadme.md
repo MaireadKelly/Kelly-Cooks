@@ -4,7 +4,7 @@
 
 Recipe Book is an online app designed to build a community of 'foodies' and home cooks who share recipes and join in conversations. All users have access to browse and view published recipes but users must be registered to interact with content, join conversations and submit their own recipes. Registered users can easily submit their recipes to the site via a recipe submission form and can return to edit their recipes or delete them from the site. Each recipe is displayed on the site for other users to access after the author has requested publishing and it has been accepted by admin. Recipes can also be saved to the 'My Recipe Book' section where registered users can access saved recipes more easily and also access recipes they have written.
 
-[The deployed website can be found here](https://vjp-recipe-book-821f4ac9817f.herokuapp.com/)
+[The deployed website can be found here](https://kellycookspp4-63d6db43ef5f.herokuapp.com/recipes/recipes/)
 
 ## Contents
 
@@ -620,7 +620,7 @@ The coverage report was generated using the [Coverage](https://coverage.readthed
 - The admin panel 404 error was fixed using [Stack Overflow](https://stackoverflow.com/questions/9463173/append-slash-not-working).
 
 ### Content
-
+https://wholesomemadeeasy.com/
 The recipes featured on the app were sourced from [BBC Good Food](https://www.bbcgoodfood.com/).
 
 ### Media

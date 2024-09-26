@@ -1,19 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Edit{% endblock %}
+{% load i18n %}
+
+{% block title %}{% trans "Edit Recipe" %}{% endblock %}
 
 {% block content %}
-
 <div class="container">
-    <form class="p-2 form" method="POST" enctype="multipart/form-data">
-        <h1 class="text-center">Edit Recipe</h1>
+    <h1>{% trans "Edit Recipe" %}</h1>
+
+    <form method="post" action="{% url 'edit_recipe' recipe.id %}">
+        <!-- Adjust URL as necessary -->
         {% csrf_token %}
-        {{ form.media }}
-        {{ form|crispy }}
-        <div class="text-center">
-            <button class="btn btn-primary mt-2" type="submit">Edit Recipe</button>
-        </div>
+
+        <!-- Your form fields for editing the recipe go here -->
+
+        <button type="submit" class="btn btn-primary w-25">{% trans 'Save Changes' %}</button>
+
+        <!-- Cancel Button -->
+        <button type="button" class="btn btn-secondary w-25" id="cancelEdit">{% trans 'Cancel' %}</button>
     </form>
 </div>
+
+<script>
+    // JavaScript for handling cancel action
+    document.getElementById('cancelEdit').addEventListener('click', function () {
+        // Redirect to the recipe details page or another appropriate page
+        window.location.href =
+        "{% url 'recipe_detail' recipe.id %}"; // Change 'recipe_detail' to your desired URL name
+    });
+</script>
 
 {% endblock %}

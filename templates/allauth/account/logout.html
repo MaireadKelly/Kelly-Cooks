@@ -13,11 +13,26 @@
   <form method="post" action="{% url 'account_logout' %}">
     {% csrf_token %}
     {% if redirect_field_value %}
-    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
     {% endif %}
     <button type="submit" class="btn btn-primary w-25">{% trans 'Sign Out' %}</button>
+
+    <!-- Cancel Button -->
+
+    <button type="button" class="btn btn-secondary w-25" id="cancelSignOut">{% trans 'Cancel' %}</button>
   </form>
-  
+
 </div>
 
+<script>
+  // JavaScript for handling cancel action
+
+  document.getElementById('cancelSignOut').addEventListener('click', function () {
+
+    // Redirect to home page or any other page
+
+    window.location.href = "{% url 'home' %}"; // Change 'home' to your desired URL name
+
+  });
+</script>
 {% endblock %}
