@@ -38,7 +38,7 @@
         <!-- SEARCH BAR & AUTH LINKS (right) -->
         <div class="d-flex align-items-center ms-auto">
           <form method="GET" action="{% url 'recipes' %}">
-            <input type="text" name="q" placeholder="Search for recipes..." value="{{ request.GET.q }}">
+            <input type="text" name="q" placeholder="Search for recipes..." aria-label="Search for recipes" value="{{ request.GET.q }}">
             <button type="submit">Search</button>
           </form>
 

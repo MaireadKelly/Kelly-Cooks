@@ -4,7 +4,7 @@
     /** FONTS */
     --title: 'EB Garamond', serif;
     --main-font: 'Roboto', serif;
-header
+    header
     /* COLOURS */
     --background: #9d8189;
     --blue: #b9cbc0;
@@ -43,22 +43,54 @@ main {
     background-color: var(--white);
 }
 
-/* FOOTER */
+/* Footer styling adjustments */
 footer {
     flex-shrink: 0;
     background-color: var(--off-white);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    /* Stack items vertically */
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    /* Add some padding */
     border-top: var(--border);
+    text-align: center;
+    /* Ensure everything is centered */
+    width: 100%;
+    /* Prevent overflow beyond the page */
+}
+
+.footer-icons {
+    margin-bottom: 10px;
+    /* Space between icons and copyright */
 }
 
 .social-icon {
     height: 2rem;
-    margin: 1rem;
-
+    margin: 0.5rem;
+    /* Space between social icons */
 }
+
+.footer-copyright {
+    font-size: 14px;
+    color: var(--black);
+    margin-top: 10px;
+}
+
+/* Adjust footer responsiveness */
+@media screen and (max-width: 768px) {
+    .social-icon {
+        height: 1.5rem;
+        /* Smaller icons on smaller screens */
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+        /* Smaller text on smaller screens */
+    }
+}
+
 
 /* HEADER */
 
