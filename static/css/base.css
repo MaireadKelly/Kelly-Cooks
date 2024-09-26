@@ -6,11 +6,11 @@
     --main-font: 'Roboto', serif;
 
     /* COLOURS */
-    --background: #3f006a0f;
-    --blue: #0d6efd;
+    --background: #9d8189;
+    --blue: #b9cbc0;
     --black: #000;
-    --off-white: #fff8e1;
-    --white: #fff;
+    --off-white: #ffcad4;
+    --white: #f4acb7;
     --orange: #ffbf50;
 
     /* UTILS */
@@ -195,7 +195,7 @@ img.logo {
 
 }
 
-# a.img-container {
+a.img-container {
 
     position: relative;
 
