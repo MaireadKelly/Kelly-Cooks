@@ -79,8 +79,12 @@ def recipe_list(request):
 
     page_number = request.GET.get("page")  # GET THE PAGE NUMBER FROM THE URL
     recipes = paginator.get_page(page_number)  # GET THE RECIPIES FROM THAT PAGE
+    
+    context = {
+        'page_obj': recipes,  # Corrected
+    }
 
-    return render(request, "recipes/recipe_list.html", {"recipes": recipes})
+    return render(request, "recipes/recipe_list.html", context)
 
 
 class RecipeDetail(DetailView):
@@ -170,10 +174,10 @@ def add_review(request, recipe_id):
     if request.method == "POST":
         form = ReviewForm(request.POST)  # Initialize the form with POST data
         if form.is_valid():
-            review = form.save(commit=False)  # Don't save yet
-            review.recipe = recipe  # Associate with the recipe
-            review.user = request.user  # Associate with the logged-in user
-            review.save()  # Now save it
+            review = form.save(commit=False)
+            review.recipe = recipe
+            review.user = request.user
+            review.save() 
             messages.success(request, "Your review has been added successfully")
             return redirect("recipe_detail", pk=recipe.id)  # Redirect after success
     else:

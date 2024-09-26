@@ -25,14 +25,9 @@ if os.path.isfile("env.py"):
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: DON'T RUN WITH DEBUG TURNED ON IN PRODUCTION!
 
 DEBUG = True
 
@@ -40,9 +35,6 @@ ALLOWED_HOSTS = [
     "8000-maireadkelly-kellycooks-24rjd1u5k3y.ws.codeinstitute-ide.net",
     ".herokuapp.com",
 ]
-
-
-# Application definition
 
 
 INSTALLED_APPS = [
@@ -56,9 +48,11 @@ INSTALLED_APPS = [
     "django_resized",
     "allauth",
     "allauth.account",
+    
     # APPS
     "home",
     "recipes",
+    
     # OTHER
     "crispy_forms",
     "crispy_bootstrap5",
@@ -70,8 +64,6 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 DJRICHTEXTFIELD_CONFIG = {
-    # 'js': ['//cdn.ckeditor.com/4.14.0/standard/ckeditor.js'],
-    # 'init_template': 'djrichtextfield/init/ckeditor.js',
     "settings": {
         "toolbar": [
             ["Format", "Bold", "Italic", "Underline"],
@@ -135,18 +127,6 @@ AUTHENTICATION_BACKENDS = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#   }
-# }
-
-
 DATABASES = {"default": dj_database_url.parse(os.environ.get("DATABASE_URL"))}
 
 CSRF_TRUSTED_ORIGINS = [
@@ -161,22 +141,30 @@ CSRF_TRUSTED_ORIGINS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "UserAttributeSimilarityValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "MinimumLengthValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "CommonPasswordValidator"
+        ),
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "NumericPasswordValidator"
+        ),
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 
 LANGUAGE_CODE = "en-us"
@@ -191,27 +179,17 @@ USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-#ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-#ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = 'None'
-
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-# STATIC_URL = 'static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
+#STATIC FILES
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-# For production, also ensure you collect static files
+# FOR PRODUCTION ENSURE COLLECT STATIC FILES
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
@@ -221,10 +199,5 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
