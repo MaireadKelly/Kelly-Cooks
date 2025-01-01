@@ -47,7 +47,7 @@
         </div>
         <div class="mx-auto">
             {% if user.is_authenticated %}
-            <a class="btn btn-secondary btn-lg" href="{% url 'browse' %}" role="button">Browse Recipes</a>
+            <a class="btn btn-secondary btn-lg" href="{% url 'recipes' %}" role="button">Browse Recipes</a>
             {% else %}
             <a class="btn btn-secondary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
             {% endif %}
