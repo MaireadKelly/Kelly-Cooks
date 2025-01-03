@@ -17,18 +17,10 @@ class Recipe(models.Model):
     )
     title = models.CharField(max_length=255, null=False, blank=False)
     description = models.TextField(null=False, blank=False)  # Simplified this field
-    ingredients = models.TextField(
-        null=False, blank=False
-    )  # TextField for rich text support
-    instructions = RichTextField(
-        max_length=10000, null=False, blank=False
-    )  # TextField for rich text support
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )  # Automatically set the timestamp on creation
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )  # Automatically update timestamp on modification
+    ingredients = models.TextField(null=False, blank=False)  # TextField for rich text support
+    instructions = RichTextField(max_length=10000, null=False, blank=False)  # TextField for rich text support
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set the timestamp on creation
+    updated_at = models.DateTimeField(auto_now=True)  # Automatically update timestamp on modification
     image = CloudinaryField("image", blank=False, null=False)
 
     image_alt = models.CharField(max_length=100, null=False, blank=False)

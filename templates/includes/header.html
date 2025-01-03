@@ -5,10 +5,10 @@
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
       <!-- LOGO -->
-      <a class="navbar-brand" href="{% url 'home' %}">
+      <a class="navbar-brand fw-bold text-primary" href="{% url 'home' %}" style="font-family: 'Oswald', sans-serif;">
         <img src="{% static 'images/logo.png' %}" alt="Chef Hat Knife and Spoon Logo" class="logo">
       </a>
-      
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,36 +18,44 @@
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link {% if url_name == 'home' %}active{% endif %}" aria-current="page" href="{% url 'home' %}"
+              style="font-family: 'Lato', sans-serif;">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'recipes' %}active{% endif %}" href="{% url 'recipes' %}">Recipes</a>
+            <a class="nav-link {% if url_name == 'recipes' %}active{% endif %}" href="{% url 'recipes' %}"
+              style="font-family: 'Lato', sans-serif;">Recipes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if url_name == 'add_recipe' %}active{% endif %}" href="{% url 'add_recipe' %}">New</a>
+            <a class="nav-link {% if url_name == 'add_recipe' %}active{% endif %}" href="{% url 'add_recipe' %}"
+              style="font-family: 'Lato', sans-serif;">New</a>
           </li>
         </ul>
+
         <!-- SEARCH BAR -->
         <form class="d-flex mb-2 mb-lg-0 me-lg-2" role="search" method="GET" action="{% url 'recipes' %}">
           <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Search</button>
+          <button class="btn btn-outline-primary" type="submit" style="font-family: 'Lato', sans-serif;">Search</button>
         </form>
 
         <ul class="navbar-nav mb-2 mb-lg-0">
           {% if request.user.is_authenticated %}
-            <li class="nav-item">
-              <span class="nav-link">You are logged in as {{ request.user.username }}</span>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/">Logout</a>
-            </li>
+          <li class="nav-item">
+            <span class="nav-link" style="font-family: 'Lato', sans-serif;">You are logged in as
+              {{ request.user.username }}</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/"
+              style="font-family: 'Lato', sans-serif;">Logout</a>
+          </li>
           {% else %}
-            <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}" href="/accounts/signup/">Register</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login/">Login</a>
-            </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'accounts_signup' %}active{% endif %}" href="/accounts/signup/"
+              style="font-family: 'Lato', sans-serif;">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url_name == 'accounts_login' %}active{% endif %}" href="/accounts/login/"
+              style="font-family: 'Lato', sans-serif;">Login</a>
+          </li>
           {% endif %}
         </ul>
       </div>
