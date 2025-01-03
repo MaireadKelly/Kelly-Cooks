@@ -12,18 +12,18 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 
 
-def test_image_upload(request):
-    """Test image upload functionality with Cloudinary"""
-    image_path = "path_to_image_on_your_system.jpg"
+# def test_image_upload(request):
+#     """Test image upload functionality with Cloudinary"""
+#     image_path = "path_to_image_on_your_system.jpg"
 
-    # Upload the image to Cloudinary
-    result = upload(image_path)
+#     # Upload the image to Cloudinary
+#     result = upload(image_path)
 
-    # Get the Cloudinary URL for the uploaded image
-    uploaded_image_url = result.get("url")
+#     # Get the Cloudinary URL for the uploaded image
+#     uploaded_image_url = result.get("url")
 
-    # Return the image URL in an HTTP response
-    return HttpResponse(f"Uploaded image URL: {uploaded_image_url}")
+#     # Return the image URL in an HTTP response
+#     return HttpResponse(f"Uploaded image URL: {uploaded_image_url}")
 
 
 class AddRecipe(LoginRequiredMixin, CreateView):
@@ -106,6 +106,14 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 #        return redirect('profile', user_id=user_id)
 #    else:
 #        return redirect('profile', user_id=user_id)
+
+class FavouritesView(ListView):
+    model = Favorite
+    template_name = 'recipes/favourites.html'
+    context_object_name = 'favourites'
+    
+    def get_queryset(self):
+        return Favorite.objects.filter(user=self.request.user)
 
 
 @login_required

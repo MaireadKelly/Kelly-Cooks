@@ -44,6 +44,10 @@
               {{ request.user.username }}</span>
           </li>
           <li class="nav-item">
+            <a class="nav-link {% if url_name == 'favourites' %}active{% endif %}" href="{% url 'favourites' %}"
+              style="font-family: 'Lato', sans-serif;">My Favourites</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/"
               style="font-family: 'Lato', sans-serif;">Logout</a>
           </li>

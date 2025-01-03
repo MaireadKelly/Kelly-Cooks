@@ -3,66 +3,48 @@
 {% load static %}
 {% block content %}
 
-<div class="container flex-column pt-3">
-    <section class="text-center">
-        <h1 class="main-title mx-auto">
-            The Only Cooking App You Will Ever Need!!
-        </h1>
-        <p class="pt-4">
-            Welcome to Kelly Cooks!
-            Discover a world of culinary inspiration at your fingertips. [Your Site Name] is a community-driven platform
-            where food enthusiasts share their favorite recipes, explore creative dishes, and connect with like-minded
-            cooks. Whether you're a seasoned chef or a kitchen novice, our site offers a diverse range of recipes to
-            suit every taste and occasion. Join us to save your favorites, leave reviews, and contribute your own
-            delicious creations to our growing collection. Let's cook, share, and savor together!
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-content">
+        <h1 class="main-title">The Only Cooking App You Will Ever Need!!</h1>
+        <p>
+            Welcome to Kelly Cooks! Discover a world of culinary inspiration at your fingertips. 
+            [Your Site Name] is a community-driven platform where food enthusiasts share their 
+            favorite recipes, explore creative dishes, and connect with like-minded cooks. Whether 
+            you're a seasoned chef or a kitchen novice, our site offers a diverse range of recipes 
+            to suit every taste and occasion. Join us to save your favorites, leave reviews, and 
+            contribute your own delicious creations to our growing collection. Let's cook, share, 
+            and savor together!
         </p>
-    </section>
-    <section>
-        <div class="recipe-cont">
-            {% for recipe in recipes %}
-            <a href="{% url 'recipe_detail' recipe.id %}" class="img-container">
-                <img src="{{recipe.image.url}}" alt="{{recipe.image_alt}}" style="width: 100%">
-                <div class="centered">
-                </div>
-            </a>
-            {% endfor %}
-            <!-- Hero image and text -->
-            <!-- <section id="hero" class="row mb-3 py-3 border rounded">
-                <div class="col-md-6 d-flex flex-column justify-content-evenly order-1 order-md-0">
-                    <div class="py-4 py-md-0 w-100">
-                        <h1 class="pb-0 pb-lg-1 text-center">Recipe Book</h1>
-                        <p class="lead text-center">A recipe sharing site where food lovers can share the recipes
-                            they're most proud of, discover new favourite recipes or get inspiration for what to cook
-                            for tonight's dinner.</p>
-                    </div>
-            </section> -->
-        </div>
-        <div class="py-4 py-md-0 w-100">
-            <p class="lead text-center">
-                {% if user.is_authenticated %}
-                Find new recipes now!
-                {% else %}
-                Create a free account now!
-                {% endif %}
-            </p>
-        </div>
-        <div class="mx-auto">
-            {% if user.is_authenticated %}
-            <a class="btn btn-secondary btn-lg" href="{% url 'recipes' %}" role="button">Browse Recipes</a>
-            {% else %}
-            <a class="btn btn-secondary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
-            {% endif %}
-        </div>
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{% url 'recipes' %}" role="button">Browse Recipes</a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
+        {% endif %}
+    </div>
 </div>
-<div class="col-md-6 my-auto order-0 order-md-1">
-    <img class="img-fluid px-md-auto" src="{% static 'images/cooking-time.webp' %}"
-        alt="Cooking time apron and oven glove.">
-</div>
+
+<!-- Latest Recipes Section -->
+<section class="latest-recipes container my-5">
+    <h2 class="section-title">Latest Recipes</h2>
+    <div class="recipes-container row">
+        {% for recipe in recipes|slice:":3" %}
+        <div class="col-md-4">
+            <div class="recipe-card">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-image">
+                <h3 class="recipe-title">{{ recipe.title }}</h3>
+                <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-secondary">View Recipe</a>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No recipes available yet. Start by <a href="{% url 'add_recipe' %}">adding one</a>.</p>
+        {% endfor %}
+    </div>
 </section>
 
-<!-- Top 3 most liked recipes -->
-<section id="most-liked">
-    <h2>Most Liked Recipes</h2>
+<!-- Most Liked Recipes Section -->
+<section id="most-liked" class="container my-5">
+    <h2 class="section-title">Most Liked Recipes</h2>
     <div class="row g-3">
         {% for recipe in recipe_list %}
         <div class="col-md-4">
