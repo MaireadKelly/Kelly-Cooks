@@ -1,14 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-<style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-</style>
 
 :root {
-    /** FONTS */
+    /* FONTS */
     --title: 'EB Garamond', serif;
     --main-font: 'Roboto', serif;
 
-    /* COLOURS */
+    /* COLORS */
     --background: #3f006a0f;
     --blue: #cd9fcc;
     --black: #000;
@@ -17,10 +15,11 @@
     --orange: #ffbf50;
 
     /* UTILS */
-    --smal-box-shadow: 1px -1px 7px 0 #00000061;
+    --small-box-shadow: 1px -1px 7px 0 #00000061;
     --border: 1px solid #00000030;
 }
 
+/* GLOBAL STYLES */
 html, body {
     height: 100%;
 }
@@ -29,6 +28,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: var(--main-font);
+    background-color: var(--background);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -49,19 +49,45 @@ footer {
     justify-content: center;
     align-items: center;
     border-top: var(--border);
-
+    padding: 10px 20px;
 }
-.social-icon {
-    height: 2rem;
-    margin: 1rem;
 
+footer p {
+    margin: 10px 0;
+    font-size: 14px;
+    color: var(--black);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 8px;
+    vertical-align: middle;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+}
+
+.social-icon:focus {
+    outline: 2px solid var(--blue); /* Accessibility for focus */
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        text-align: center;
+    }
+    .social-icon {
+        margin: 5px; /* Adjust spacing for smaller screens */
+    }
 }
 
 /* HEADER */
-
 .navbar {
     background-color: var(--off-white);
-    box-shadow: var(--smal-box-shadow);
+    box-shadow: var(--small-box-shadow);
 }
 
 a.nav-link {
@@ -78,16 +104,14 @@ img.logo {
 }
 
 /* FORM */
-
 .form {
     width: 100%;
     margin: 3% auto;
-    box-shadow: var(--smal-box-shadow);
+    box-shadow: var(--small-box-shadow);
     border-radius: 5px;
 }
 
-/* RECIPES  */
-
+/* RECIPES */
 .card {
     height: 90%;
     margin-top: 1rem;
@@ -117,7 +141,6 @@ img.logo {
     width: 100%;
 }
 
-
 .recipe-img {
     display: flex;
     justify-content: center;
@@ -126,7 +149,7 @@ img.logo {
 
 .recipe-pic {
     width: 100%;
-    height: auto; */
+    height: auto;
 }
 
 @media screen and (min-width: 62.5em) {
