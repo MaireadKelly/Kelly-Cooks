@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django_resized',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     # APPS
     'home',
     'recipes',

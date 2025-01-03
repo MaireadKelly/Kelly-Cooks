@@ -19,7 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),  # Allauth URLs
+    path('accounts/', include('allauth.urls')),  # Allauth URLs
     path('djrichtextfield/', include('djrichtextfield.urls')),  # Rich Textfield URLs
     path('', include('home.urls')),  # Home app
     path('recipes/', include('recipes.urls')),  # Recipes app
