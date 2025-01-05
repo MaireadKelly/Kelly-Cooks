@@ -219,7 +219,7 @@ Ingredients - a JSONField. The ingredient input values are converted into a JSON
 
 Method - a JSONField. The method input values are converted into a JSON string when the form is submitted.
 
-Created_on - a DateTimeField that autopopulates with the current date and time when a recipe is created.
+created_at - a DateTimeField that autopopulates with the current date and time when a recipe is created.
 
 Updated_on - a DateTimeField that autopopulates and updates with the current date and time when a recipe is updates.
 
@@ -239,7 +239,7 @@ Name - a CharField with a maximum of 150 characters. This field is populated wit
 
 Body - a TextField to store the comment submitted.
 
-Created_on - a DateTimeField that autopopulates with the current date and time when a comment is submitted.
+created_at - a DateTimeField that autopopulates with the current date and time when a comment is submitted.
 
 Approved - a BooleanField that defaults to false and is updated to true by admin when the comment is approved.
 

@@ -21,7 +21,7 @@ class RecipeForm(forms.ModelForm):
         
         ingredients = forms.CharField(widget=RichTextWidget())
         instructions = forms.CharField(widget=RichTextWidget())
-        created_on = models.DateTimeField(auto_now=True)
+        created_at = models.DateTimeField(auto_now=True)
         image = ResizedImageField(
             size=[400, None],
             quality=75,
@@ -43,7 +43,7 @@ class RecipeForm(forms.ModelForm):
             "instructions": "Recipe Instructions",
             "image": "Recipe Image",
             "image_alt": "Describe Image",
-            "created_on": "Date posted",
+            "created_at": "Date posted",
         }
 
 class ReviewForm(forms.ModelForm):

@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Root variables for fonts, colors, and utilities */
 :root {
     /* FONTS */
-    --title: 'EB Garamond', serif;
+    --title: 'EB+Garamond', serif;
     --main-font: 'Roboto', serif;
 
     /* COLORS */
@@ -14,11 +15,11 @@
     --accent: #D7C9BD; /* Soft Taupe */
 
     /* UTILS */
-    --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1);
-    --border: 1px solid rgba(0, 0, 0, 0.15);
+    --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1); /* Light shadow for elements */
+    --border: 1px solid rgba(0, 0, 0, 0.15); /* Subtle border for cards */
 }
 
-/* GLOBAL STYLES */
+/* Global styles for consistent page layout */
 html,
 body {
     height: 100%;
@@ -35,27 +36,26 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--title);
     color: var(--primary);
-    font-weight: bold; /* Bold for headings */
+    font-weight: bold; /* Emphasize headings */
 }
 
 main {
-    flex: 1 0 auto;
+    flex: 1 0 auto; /* Allow the main content to take up available space */
     background-color: var(--background);
 }
 
 p, a, li {
     color: var(--text-primary);
-    font-weight: bold; /* Ensure bold text */
+    font-weight: bold; /* Ensure strong text visibility */
 }
 
-/* FOOTER */
+/* Footer styling */
 footer {
     flex-shrink: 0;
     background-color: var(--secondary);
     color: var(--text-primary);
     display: flex;
     flex-direction: column;
-    /* Stack items vertically */
     justify-content: center;
     align-items: center;
     border-top: var(--border);
@@ -73,19 +73,18 @@ footer p {
     height: 32px;
     margin: 0 12px;
     vertical-align: middle;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease; /* Animation for hover effect */
 }
 
 .social-icon:hover {
-    transform: scale(1.2);
-    /* Slight zoom effect */
+    transform: scale(1.2); /* Slight zoom effect */
 }
 
 .social-icon:focus {
-    outline: 2px solid var(--accent);
-    /* Accessibility for focus */
+    outline: 2px solid var(--accent); /* Accessibility focus outline */
 }
 
+/* Responsive adjustments for footer */
 @media (max-width: 768px) {
     footer {
         flex-direction: column;
@@ -98,7 +97,7 @@ footer p {
     }
 }
 
-/* HEADER */
+/* Header and navigation styles */
 .navbar {
     background-color: var(--secondary);
     box-shadow: var(--small-box-shadow);
@@ -118,10 +117,10 @@ img.logo {
 
 .active {
     border-bottom: 2px solid var(--primary);
-    font-weight: 500;
+    font-weight: 500; /* Highlight active links */
 }
 
-/* FORM */
+/* Form styling */
 .form {
     width: 100%;
     margin: 3% auto;
@@ -129,7 +128,7 @@ img.logo {
     border-radius: 5px;
 }
 
-/* BUTTONS */
+/* Buttons with hover effects */
 button,
 .btn {
     background-color: var(--primary);
@@ -145,72 +144,44 @@ button:hover,
     color: var(--primary);
 }
 
-/* RECIPES */
-.recipes-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows wrapping to the next row */
-    gap: 20px;  /* Adds consistent spacing between recipe cards */
-    justify-content: center; 
-    margin: 20px 0; /* Adds margin spacing for the section */
-}
-
+/* Recipe cards styling */
 .card {
-    width: calc(25% - 20px); /* Four cards per row with consistent spacing */
+    height: 400px; /* Fixed height for uniform cards */
     background-color: var(--background);
     box-shadow: var(--small-box-shadow);
     border: var(--border);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
-    margin: 0; /* Remove unnecessary margin that might cause spacing issues */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Space out content vertically */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card img {
     width: 100%;
-    height: auto; /* Maintain image aspect ratio */
-    object-fit: cover; /* Ensure images fill their space */
+    height: 40%; /* Adjust image height to fit card layout */
+    object-fit: cover; /* Ensure images are properly scaled */
 }
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Slight zoom effect */
-}
-
-.recipe-title {
-    text-align: center;
-    margin: 10px 0;
+.card-title {
     font-size: 1rem;
-    font-weight: bold;
-    color: var(--primary);
-}
-
-.btn {
-    display: block;
-    width: 80%;
-    margin: 10px auto;
-    background-color: var(--primary);
-    color: var(--background);
     text-align: center;
-    border: none;
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0.5rem 0;
 }
 
-.btn:hover {
-    background-color: var(--accent);
-    color: var(--primary);
+.card-body a {
+    text-align: center;
 }
 
-/* Responsive Adjustments */
+/* Responsive adjustments for recipe cards */
 @media screen and (max-width: 768px) {
     .card {
-        width: calc(50% - 20px); /* Two cards per row on medium screens */
+        flex: 0 1 calc(50% - 20px); /* 2 cards per row on medium screens */
     }
 }
 
 @media screen and (max-width: 480px) {
     .card {
-        width: calc(100% - 20px); /* One card per row on small screens */
+        flex: 0 1 calc(100% - 20px); /* 1 card per row on small screens */
     }
 }

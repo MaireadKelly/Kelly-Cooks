@@ -1,61 +1,55 @@
 {% extends 'base.html' %}
-{% block title %}Home
-{% endblock %}
+{% block title %}Home{% endblock %}
 {% load static %}
 {% block content %}
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="hero-content text-center">
-            <h1 class="main-title">The Only Cooking App You Will Ever Need!!</h1>
-            <p>
-                Welcome to Kelly Cooks! Discover a world of culinary inspiration at your fingertips. 
-                            [Your Site Name] is a community-driven platform where food enthusiasts share their 
-                            favorite recipes, explore creative dishes, and connect with like-minded cooks. Whether 
-                            you're a seasoned chef or a kitchen novice, our site offers a diverse range of recipes 
-                            to suit every taste and occasion. Join us to save your favorites, leave reviews, and 
-                            contribute your own delicious creations to our growing collection. Let's cook, share, 
-                            and savor together!
-            </p>
-            {% if user.is_authenticated %}
-                <a class="btn btn-primary btn-lg" href="{% url 'recipes' %}" role="button">Browse Recipes</a>
-            {% else %}
-                <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
-            {% endif %}
-        </div>
+<!-- Hero Section -->
+<div class="hero">
+    <div class="hero-content text-center">
+        <!-- Main Heading -->
+        <h1 class="main-title">The Only Cooking App You Will Ever Need!!</h1>
+        <p>
+            Welcome to Kelly Cooks! Discover a world of culinary inspiration at your fingertips. 
+            [Your Site Name] is a community-driven platform where food enthusiasts share their 
+            favorite recipes, explore creative dishes, and connect with like-minded cooks. Whether 
+            you're a seasoned chef or a kitchen novice, our site offers a diverse range of recipes 
+            to suit every taste and occasion. Join us to save your favorites, leave reviews, and 
+            contribute your own delicious creations to our growing collection. Let's cook, share, 
+            and savor together!
+        </p>
+        <!-- Conditional Button: Show Browse Recipes if logged in, otherwise Sign Up -->
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-lg" href="{% url 'recipes' %}" role="button">Browse Recipes</a>
+        {% else %}
+        <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
+        {% endif %}
     </div>
+</div>
 
-    <!-- Random Recipes Section -->
-    <section class="random-recipes container my-5">
-        <h2 class="section-title text-center">Some of Our Favourite Recipes</h2>
-        <div class="row">
-            {% for recipe in random_recipes %}
-                <div class="col-md-6 col-lg-3 mb-4">
-                    <div class="card recipe-card">
-                        <img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="card-img-top recipe-image">
-                            <div class="card-body text-center">
-                                <h5 class="card-title recipe-title">{{ recipe.title }}</h5>
-                                <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-secondary mt-2">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <p class="text-center">No recipes available yet. Start by
-                        <a href="{% url 'add_recipe' %}">adding one</a>.</p>
-                {% endfor %}
+<!-- Random Recipes Section -->
+<section class="random-recipes container my-5">
+    <h2 class="section-title text-center">Some of Our Favourite Recipes</h2>
+    <!-- Bootstrap Row for Recipe Cards -->
+    <div class="row">
+        {% for recipe in random_recipes %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <!-- Recipe Card -->
+            <div class="card h-100">
+                <!-- Recipe Image -->
+                <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.image_alt }}">
+                <div class="card-body d-flex flex-column">
+                    <!-- Recipe Title -->
+                    <h5 class="card-title text-center">{{ recipe.title }}</h5>
+                    <!-- View Recipe Button -->
+                    <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-primary mt-auto">View Recipe</a>
+                </div>
             </div>
-        </section>
+        </div>
+        {% empty %}
+        <!-- Message if no recipes are available -->
+        <p class="text-center">No recipes available yet. Start by <a href="{% url 'add_recipe' %}">adding one</a>.</p>
+        {% endfor %}
+    </div>
+</section>
 
-        <!-- Most Liked Recipes Section -->
-        <section id="most-liked" class="container my-5">
-            <h2 class="section-title text-center">Most Liked Recipes</h2>
-            <div class="row g-3">
-                {% for recipe in recipe_list %}
-                    <div class="col-md-6 col-lg-4">
-                        {% include 'recipe_card.html' %}
-                    </div>
-                {% endfor %}
-            </div>
-        </section>
-
-    {% endblock %}
+{% endblock %}
