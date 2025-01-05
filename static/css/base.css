@@ -146,94 +146,71 @@ button:hover,
 }
 
 /* RECIPES */
+.recipes-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next row */
+    gap: 20px;  /* Adds consistent spacing between recipe cards */
+    justify-content: center; 
+    margin: 20px 0; /* Adds margin spacing for the section */
+}
+
 .card {
-    height: 90%;
-    margin-top: 1rem;
+    width: calc(25% - 20px); /* Four cards per row with consistent spacing */
     background-color: var(--background);
     box-shadow: var(--small-box-shadow);
     border: var(--border);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Smooth transition for hover effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    margin: 0; /* Remove unnecessary margin that might cause spacing issues */
+}
+
+.card img {
+    width: 100%;
+    height: auto; /* Maintain image aspect ratio */
+    object-fit: cover; /* Ensure images fill their space */
 }
 
 .card:hover {
     transform: scale(1.05);
-    /* Slight zoom effect*/
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2); /* Slight zoom effect */
 }
 
-.recipes {
-    text-decoration: none;
+.recipe-title {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1rem;
+    font-weight: bold;
     color: var(--primary);
 }
 
-.recipes:hover {
+.btn {
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    background-color: var(--primary);
+    color: var(--background);
+    text-align: center;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
     cursor: pointer;
-    color: var(--accent);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.recipe-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: var(--text-primary);
+.btn:hover {
+    background-color: var(--accent);
+    color: var(--primary);
 }
 
-.recipe-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.ingredients,
-.instructions,
-.recipe-detail {
-    width: 100%;
-}
-
-.recipe-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.recipe-pic {
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-}
-
-.card:hover .recipe-pic {
-    transform: scale(1.1);
-    /* Zoom image on hover */
-}
-
-@media screen and (min-width: 62.5em) {
-    .recipe-info {
-        flex-direction: row;
-        border: 1px solid var(--accent);
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .card {
+        width: calc(50% - 20px); /* Two cards per row on medium screens */
     }
+}
 
-    .recipe-img {
-        width: 40%;
-        margin: 0 auto;
-    }
-
-    .recipe-detail {
-        width: 60%;
-        padding: 2rem;
-    }
-
-    .recipe-container {
-        flex-direction: row;
-    }
-
-    .ingredients {
-        width: 33.33%;
-    }
-
-    .instructions {
-        width: 66.66%;
+@media screen and (max-width: 480px) {
+    .card {
+        width: calc(100% - 20px); /* One card per row on small screens */
     }
 }
