@@ -5,7 +5,7 @@
 
 <!-- Hero Section -->
 <div class="hero">
-    <div class="hero-content">
+    <div class="hero-content text-center">
         <h1 class="main-title">The Only Cooking App You Will Ever Need!!</h1>
         <p>
             Welcome to Kelly Cooks! Discover a world of culinary inspiration at your fingertips. 
@@ -24,16 +24,16 @@
     </div>
 </div>
 
-<!-- Latest Recipes Section -->
-<section class="latest-recipes container my-5">
-    <h2 class="section-title">Latest Recipes</h2>
+<!-- Random Recipes Section -->
+<section class="random-recipes container my-5">
+    <h2 class="section-title text-center">Some of Our Favourite Recipes</h2>
     <div class="recipes-container row">
-        {% for recipe in recipes|slice:":3" %}
-        <div class="col-md-4">
+        {% for recipe in random_recipes %}
+        <div class="col-md-3">
             <div class="recipe-card">
                 <img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-image">
                 <h3 class="recipe-title">{{ recipe.title }}</h3>
-                <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-secondary">View Recipe</a>
+                <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-secondary mt-2">View Recipe</a>
             </div>
         </div>
         {% empty %}
@@ -42,9 +42,10 @@
     </div>
 </section>
 
+
 <!-- Most Liked Recipes Section -->
 <section id="most-liked" class="container my-5">
-    <h2 class="section-title">Most Liked Recipes</h2>
+    <h2 class="section-title text-center">Most Liked Recipes</h2>
     <div class="row g-3">
         {% for recipe in recipe_list %}
         <div class="col-md-4">

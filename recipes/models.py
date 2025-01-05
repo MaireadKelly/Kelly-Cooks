@@ -1,9 +1,7 @@
 from cloudinary.models import CloudinaryField
-from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
-from django_resized import ResizedImageField
 from django.urls import reverse
 
 
@@ -11,19 +9,18 @@ class Recipe(models.Model):
     """
     A model to create and manage basic recipes
     """
-
     user = models.ForeignKey(
         User, related_name="recipe_owner", on_delete=models.CASCADE
     )
     title = models.CharField(max_length=255, null=False, blank=False)
-    description = models.TextField(null=False, blank=False)  # Simplified this field
-    ingredients = models.TextField(null=False, blank=False)  # TextField for rich text support
-    instructions = RichTextField(max_length=10000, null=False, blank=False)  # TextField for rich text support
-    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set the timestamp on creation
-    updated_at = models.DateTimeField(auto_now=True)  # Automatically update timestamp on modification
+    description = models.TextField(null=False, blank=False)
+    ingredients = models.TextField(null=False, blank=False)
+    instructions = RichTextField(max_length=10000, null=False, blank=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     image = CloudinaryField("image", blank=False, null=False)
-
     image_alt = models.CharField(max_length=100, null=False, blank=False)
+    likes = models.ManyToManyField(User, related_name="liked_recipes", blank=True)  # New likes field
 
     class Meta:
         ordering = ["-created_at"]
@@ -32,22 +29,7 @@ class Recipe(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        """
-        Returns the URL for the detail view of a recipe instance.
-        """
         return reverse("recipe_detail", kwargs={"pk": self.pk})
-
-
-# class Follow(models.Model):
-#    follower = models.ForeignKey(User, related_name="following", on_delete=models.CASCADE)
-#    followed = models.ForeignKey(User, related_name="followers", on_delete=models.CASCADE)
-#    followed_at = models.DateTimeField(auto_now_add=True)
-#
-#    class Meta:
-#        unique_together = ('follower', 'followed')
-#
-#    def __str__(self):
-#        return f"{self.follower} follows {self.follwed}"
 
 
 class Favorite(models.Model):
@@ -56,13 +38,12 @@ class Favorite(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-
         constraints = [
             models.UniqueConstraint(fields=["user", "recipe"], name="unique_user_recipe")
         ]
 
-        def __str__(self):
-            return f"{self.user} favorited {self.recipe}"
+    def __str__(self):
+        return f"{self.user} favorited {self.recipe}"
 
 
 class Review(models.Model):
