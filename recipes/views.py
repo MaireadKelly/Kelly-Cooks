@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.db.models import Q, Count
 from .models import Recipe, Favorite, Review
 from .forms import RecipeForm, ReviewForm
-from random import sample
+from django.http import JsonResponse
 
 """
 View for users to add a new recipe
@@ -55,6 +55,7 @@ class RecipeDetail(DetailView):
         context['is_liked'] = recipe.likes.filter(id=self.request.user.id).exists()
         context['total_likes'] = recipe.total_likes()
         context['average_rating'] = recipe.average_rating
+        context['reviews'] = recipe.review_set.all()
         return context
 
 """
@@ -110,6 +111,29 @@ def toggle_like_recipe(request, recipe_id):
         recipe.likes.add(request.user)
         messages.success(request, "You liked this recipe.")
     return redirect("recipe_detail", pk=recipe_id)
+
+
+"""
+Function to add a star rating
+"""
+@login_required
+def rate_recipe(request, recipe_id):
+    if request.method == "POST":
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        rating_value = int(request.POST.get("rating", 0))
+        if 1 <= rating_value <= 5:
+            # Add or update review for this user and recipe
+            review, created = Review.objects.update_or_create(
+                user=request.user,
+                recipe=recipe,
+                defaults={"rating": rating_value},
+            )
+            recipe.update_average_rating()
+            return JsonResponse({"succcess": True, "average_rating": recipe.average_rating}, status=200)
+        return JsonResponse({"succcess": False, "message": "Invalid rating value."}, status=400)
+    return JsonResponse({"succcess": False, "message": "Invalid request."}, status=405)
+        
+    
 
 """
 Function to add a recipe to the user's favourites

@@ -1,52 +1,54 @@
-from django.db import models
-from datetime import timedelta
 from django import forms
 from djrichtextfield.widgets import RichTextWidget
 from .models import Recipe, Review
 from django_resized import ResizedImageField
 
-class TimestampsWithAuto(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        abstract = True
 
 class RecipeForm(forms.ModelForm):
-    """ FORM TO CREATE A RECIPE """
-    
+    """
+    Form to create or edit a recipe.
+    This form includes fields for the recipe title, description, ingredients,
+    instructions, image, and image_alt.
+    """
     class Meta:
         model = Recipe
         fields = ["title", "description", "ingredients", "instructions", "image", "image_alt"]
-        
-        ingredients = forms.CharField(widget=RichTextWidget())
-        instructions = forms.CharField(widget=RichTextWidget())
-        created_at = models.DateTimeField(auto_now=True)
-        image = ResizedImageField(
-            size=[400, None],
-            quality=75,
-            upload_to="recipes/",
-            force_format="WEBP",
-            blank=False,
-            null=False,
-    )
 
-        
-        widget = {
-           "description": forms.Textarea(attrs={"rows": 8}),
+        # Custom widgets and field settings for better user input
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 8, "placeholder": "Enter a brief description of the recipe"}),
+            "ingredients": RichTextWidget(attrs={"placeholder": "List the ingredients with quantities"}),
+            "instructions": RichTextWidget(attrs={"placeholder": "Provide step-by-step instructions"}),
         }
-        
+
+        # Custom labels for the form fields
         labels = {
             "title": "Recipe Title",
             "description": "Description",
-            "ingredients": "Recipe Ingredients",
-            "instructions": "Recipe Instructions",
+            "ingredients": "Ingredients",
+            "instructions": "Instructions",
             "image": "Recipe Image",
-            "image_alt": "Describe Image",
-            "created_at": "Date posted",
+            "image_alt": "Image Alt Text",
         }
 
+
 class ReviewForm(forms.ModelForm):
+    """
+    Form to add a review for a recipe.
+    This form allows users to provide a rating (1-5 stars) and a comment.
+    """
     class Meta:
         model = Review
-        fields = ['rating', 'comment']
+        fields = ["rating", "comment"]
+
+        # Custom widgets for better review submission experience
+        widgets = {
+            "rating": forms.NumberInput(attrs={"min": 1, "max": 5, "placeholder": "Rate 1-5"}),
+            "comment": forms.Textarea(attrs={"rows": 4, "placeholder": "Write your review here"}),
+        }
+
+        # Custom labels for review form fields
+        labels = {
+            "rating": "Rating (1-5)",
+            "comment": "Review Comment",
+        }

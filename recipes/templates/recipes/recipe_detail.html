@@ -13,7 +13,7 @@
         <!-- Recipe Details -->
         <div class="recipe-detail">
             <h1 class="text-center">{{ recipe.title }}</h1>
-            <p class="text-center">Posted by {{ recipe.user }} on {{ recipe.created_at }}</p>
+            <p class="text-center">Posted by {{ recipe.user }} on {{ recipe.created_at|date:"F j, Y" }}</p>
             <hr>
             <p>{{ recipe.description }}</p>
 
@@ -40,12 +40,51 @@
     </div>
 </div>
 
+<!-- Star Rating Section -->
+<div id="star-rating" class="text-center my-3">
+    {% if user.is_authenticated %}
+        <p>Rate this recipe:</p>
+        <div class="stars" data-recipe-id="{{ recipe.id }}">
+            <span class="star" data-value="1">&#9733;</span>
+            <span class="star" data-value="2">&#9733;</span>
+            <span class="star" data-value="3">&#9733;</span>
+            <span class="star" data-value="4">&#9733;</span>
+            <span class="star" data-value="5">&#9733;</span>
+        </div>
+        <p id="rating-feedback" class="text-muted mt-2"></p>
+    {% else %}
+        <p><a href="{% url 'account_login' %}">Log in</a> to leave a rating.</p>
+    {% endif %}
+</div>
+
+
 <!-- Favorite Button -->
 <div class="text-center my-3">
     <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-warning">Mark as Favorite</button>
+        <button type="submit" class="btn btn-warning">
+            {% if recipe.favorite_set.filter(user=request.user).exists %}
+            Remove from Favourites
+            {% else %}
+            Mark as Favourite
+            {% endif %}
+        </button>
     </form>
+</div>
+
+<!-- Like Button -->
+ <div class="text-center my-3">
+    <form action="{% url 'toggle_like_recipe' recipe.id %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">
+        {% if is_liked %}
+        Unlike
+        {% else %}
+        Like
+        {% endif %}
+    </button>
+    </form>
+    <p>{{ total_likes }} {{ total_likes|pluralize:"like,likes" }}</p>
 </div>
 <hr>
 
@@ -53,12 +92,16 @@
 <section id="reviews" class="mt-4">
     <h2>Reviews</h2>
     <div>
-        {% for review in recipe.review_set.all %}
+        {% for review in reviews %}
         <div>
             <strong>{{ review.user.username }}:</strong>
-            <p>Rating: {{ review.rating }}</p>
+            <p>Rating: 
+                {% for i in "12345" %}
+                <i class="fa {% if review.rating|int >= forloop.counter %}fa-star{% else %}fa-star-o{% endif %}"></i>
+                {% endfor %}
+            </p>
             <p>{{ review.comment }}</p>
-            <p>Reviewed on: {{ review.created_at }}</p>
+            <p>Reviewed on: {{ review.created_at|date:"F j, Y, g:i a" }}</p>
             {% if request.user == review.user %}
             <div>
                 <a href="{% url 'edit_review' review.id %}" class="btn btn-sm btn-primary">Edit</a>

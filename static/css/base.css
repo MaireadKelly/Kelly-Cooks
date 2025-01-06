@@ -144,6 +144,28 @@ button:hover,
     color: var(--primary);
 }
 
+/* Star Rating Styling */
+.stars {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 2rem;
+    color: #ccc;
+    transition: color 0.3s ease;
+}
+
+.star:hover,
+.star.selected {
+    color: var(--primary); /* Highlight selected stars */
+}
+
+.star:hover ~ .star {
+    color: #ccc; /* Reset stars after hovered star */
+}
+
+
 /* Recipe cards styling */
 .card {
     height: 400px; /* Fixed height for uniform cards */

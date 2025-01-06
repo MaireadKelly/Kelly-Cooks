@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, FavouritesView,
-    toggle_like_recipe, favorite_recipe, add_review
+    toggle_like_recipe, favorite_recipe, add_review, rate_recipe
 )
 
 urlpatterns = [
@@ -14,4 +14,5 @@ urlpatterns = [
     path('<int:recipe_id>/favorite/', favorite_recipe, name='favorite_recipe'),
     path('<int:recipe_id>/review/', add_review, name='add_review'),
     path('favourites/', FavouritesView.as_view(), name='favourites'),
+    path('<int:recipe_id>/rate/', rate_recipe, name='rate_recipe'),
 ]
