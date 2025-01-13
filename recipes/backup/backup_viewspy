@@ -1,0 +1,60 @@
+"""
+View to display the logged-in user's favorite recipes
+"""
+class FavoritesView(ListView):
+    model = Favorite
+    template_name = 'recipes/favourites.html'
+    context_object_name = 'favourites'
+
+    def get_queryset(self): # Fetch the logged in user's favourite recipes
+        return Favorite.objects.filter(user=self.request.user)
+
+"""
+Function to like or unlike a recipe
+"""
+@login_required
+def toggle_like_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    if recipe.likes.filter(id=request.user.id).exists():
+        recipe.likes.remove(request.user)
+        messages.info(request, "You unliked this recipe.")
+    else:
+        recipe.likes.add(request.user)
+        messages.success(request, "You liked this recipe.")
+    return redirect("recipe_detail", pk=recipe_id)
+
+
+"""
+Function to add a star rating
+"""
+@login_required
+def rate_recipe(request, recipe_id):
+    if request.method == "POST":
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        rating_value = int(request.POST.get("rating", 0))
+        if 1 <= rating_value <= 5:
+            # Add or update review for this user and recipe
+            review, created = Review.objects.update_or_create(
+                user=request.user,
+                recipe=recipe,
+                defaults={"rating": rating_value},
+            )
+            recipe.update_average_rating()
+            return JsonResponse({"succcess": True, "average_rating": recipe.average_rating}, status=200)
+        return JsonResponse({"succcess": False, "message": "Invalid rating value."}, status=400)
+    return JsonResponse({"succcess": False, "message": "Invalid request."}, status=405)
+        
+    
+
+"""
+Function to add a recipe to the user's favourites
+"""
+@login_required
+def favorite_recipe(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, recipe=recipe)
+    if created:
+        messages.success(request, "Recipe added to favourites!")
+    else:
+        messages.info(request, "Recipe is already in your favourites!")
+    return redirect("recipe_detail", pk=recipe_id)

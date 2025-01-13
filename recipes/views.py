@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q, Count
-from .models import Recipe, Favorite, Review
+from .models import Recipe, Review
 from .forms import RecipeForm, ReviewForm
 from django.http import JsonResponse
 
@@ -52,9 +52,6 @@ class RecipeDetail(DetailView):
     def get_context_data(self, **kwargs): # Add context data for likes and average rating
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
-        context['is_liked'] = recipe.likes.filter(id=self.request.user.id).exists()
-        context['total_likes'] = recipe.total_likes()
-        context['average_rating'] = recipe.average_rating
         context['reviews'] = recipe.review_set.all()
         return context
 
@@ -87,66 +84,6 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         messages.success(request, "The recipe has been deleted successfully!")
         return super().delete(request, *args, **kwargs)
 
-"""
-View to display the logged-in user's favorite recipes
-"""
-class FavouritesView(ListView):
-    model = Favorite
-    template_name = 'recipes/favourites.html'
-    context_object_name = 'favourites'
-
-    def get_queryset(self): # Fetch the logged in user's favourite recipes
-        return Favorite.objects.filter(user=self.request.user)
-
-"""
-Function to like or unlike a recipe
-"""
-@login_required
-def toggle_like_recipe(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
-    if recipe.likes.filter(id=request.user.id).exists():
-        recipe.likes.remove(request.user)
-        messages.info(request, "You unliked this recipe.")
-    else:
-        recipe.likes.add(request.user)
-        messages.success(request, "You liked this recipe.")
-    return redirect("recipe_detail", pk=recipe_id)
-
-
-"""
-Function to add a star rating
-"""
-@login_required
-def rate_recipe(request, recipe_id):
-    if request.method == "POST":
-        recipe = get_object_or_404(Recipe, id=recipe_id)
-        rating_value = int(request.POST.get("rating", 0))
-        if 1 <= rating_value <= 5:
-            # Add or update review for this user and recipe
-            review, created = Review.objects.update_or_create(
-                user=request.user,
-                recipe=recipe,
-                defaults={"rating": rating_value},
-            )
-            recipe.update_average_rating()
-            return JsonResponse({"succcess": True, "average_rating": recipe.average_rating}, status=200)
-        return JsonResponse({"succcess": False, "message": "Invalid rating value."}, status=400)
-    return JsonResponse({"succcess": False, "message": "Invalid request."}, status=405)
-        
-    
-
-"""
-Function to add a recipe to the user's favourites
-"""
-@login_required
-def favorite_recipe(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
-    favorite, created = Favorite.objects.get_or_create(user=request.user, recipe=recipe)
-    if created:
-        messages.success(request, "Recipe added to favourites!")
-    else:
-        messages.info(request, "Recipe is already in your favourites!")
-    return redirect("recipe_detail", pk=recipe_id)
 
 """
 Function to add a review to a recipe

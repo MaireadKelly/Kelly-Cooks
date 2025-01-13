@@ -41,7 +41,7 @@
 </div>
 
 <!-- Star Rating Section -->
-<div id="star-rating" class="text-center my-3">
+<!-- <div id="star-rating" class="text-center my-3">
     {% if user.is_authenticated %}
         <p>Rate this recipe:</p>
         <div class="stars" data-recipe-id="{{ recipe.id }}">
@@ -55,11 +55,11 @@
     {% else %}
         <p><a href="{% url 'account_login' %}">Log in</a> to leave a rating.</p>
     {% endif %}
-</div>
+</div> -->
 
 
 <!-- Favorite Button -->
-<div class="text-center my-3">
+<!-- <div class="text-center my-3">
     <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-warning">
@@ -73,7 +73,7 @@
 </div>
 
 <!-- Like Button -->
- <div class="text-center my-3">
+ <!-- <div class="text-center my-3">
     <form action="{% url 'toggle_like_recipe' recipe.id %}" method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">
@@ -85,7 +85,7 @@
     </button>
     </form>
     <p>{{ total_likes }} {{ total_likes|pluralize:"like,likes" }}</p>
-</div>
+</div> -->
 <hr>
 
 <!-- Reviews Section -->

@@ -9,10 +9,10 @@
         <img src="{% static 'images/logo.png' %}" alt="Chef Hat Knife and Spoon Logo" class="logo">
       </a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
         aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> -->
 
       <!-- NAVIGATION ITEMS, SEARCH, AND AUTH LINKS -->
       <div class="collapse navbar-collapse" id="navbarContent">
@@ -42,10 +42,6 @@
           <li class="nav-item">
             <span class="nav-link" style="font-family: 'Lato', sans-serif;">You are logged in as
               {{ request.user.username }}</span>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {% if url_name == 'favourites' %}active{% endif %}" href="{% url 'favourites' %}"
-              style="font-family: 'Lato', sans-serif;">My Favourites</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {% if url_name == 'accounts_logout' %}active{% endif %}" href="/accounts/logout/"
