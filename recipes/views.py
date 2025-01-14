@@ -3,10 +3,9 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db.models import Q, Count
+from django.db.models import Q
 from .models import Recipe, Review
 from .forms import RecipeForm, ReviewForm
-from django.http import JsonResponse
 
 """
 View for users to add a new recipe
@@ -49,10 +48,10 @@ class RecipeDetail(DetailView):
     model = Recipe
     context_object_name = "recipe"
     
-    def get_context_data(self, **kwargs): # Add context data for likes and average rating
+    def get_context_data(self, **kwargs):  # Add context data for reviews
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
-        context['reviews'] = recipe.review_set.all()
+        context['reviews'] = recipe.reviews.all()  # Use the related_name set in the model
         return context
 
 """
@@ -63,10 +62,10 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Recipe
     form_class = RecipeForm
 
-    def get_success_url(self): # redirect to the updated recipe's detail view
+    def get_success_url(self):  # Redirect to the updated recipe's detail view
         return self.object.get_absolute_url()
 
-    def test_func(self): # Ensure that only the recipe owner can edit the recipe
+    def test_func(self):  # Ensure that only the recipe owner can edit the recipe
         return self.request.user == self.get_object().user
 
 """
@@ -77,16 +76,15 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Recipe
     success_url = "/recipes/"
 
-    def test_func(self): # Ensure that only the recipe owner can delete the recipe
+    def test_func(self):  # Ensure that only the recipe owner can delete the recipe
         return self.request.user == self.get_object().user
 
     def delete(self, request, *args, **kwargs):
         messages.success(request, "The recipe has been deleted successfully!")
         return super().delete(request, *args, **kwargs)
 
-
 """
-Function to add a review to a recipe
+Function to add a review (comment) to a recipe
 """
 @login_required
 def add_review(request, recipe_id):
@@ -100,6 +98,8 @@ def add_review(request, recipe_id):
             review.save()
             messages.success(request, "Your review has been added successfully!")
             return redirect("recipe_detail", pk=recipe.id)
+        else:
+            messages.error(request, "There was an error in your submission. Please try again.")
     else:
         form = ReviewForm()
     return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})

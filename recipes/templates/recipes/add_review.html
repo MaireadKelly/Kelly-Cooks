@@ -3,13 +3,16 @@
 {% block title %}Add Review{% endblock %}
 
 {% block content %}
-<h2>Add Review for {{ recipe.title }}</h2>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit Review</button>
-</form>
-
-<a href="{% url 'recipe_detail' pk=recipe.id %}">Back to Recipe</a>
+<div class="container">
+    <h2 class="text-center">Add Review for {{ recipe.title }}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}  <!-- Render the form using Crispy Forms -->
+        <div class="text-center mt-3">
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+        <a href="{% url 'recipe_detail' pk=recipe.id %}">Back to Recipe</a>
+        </div>
+    </form>
+</div>
 {% endblock %}
