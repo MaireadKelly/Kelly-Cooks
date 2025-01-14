@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, add_review, edit_review
+    AddRecipe, Recipes, RecipeDetail, DeleteRecipe, EditRecipe, add_review, edit_review, delete_review,
 )
 
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('delete/<int:pk>/', DeleteRecipe.as_view(), name='delete_recipe'),
     path('<int:recipe_id>/review/', add_review, name='add_review'),
     path('review/<int:review_id>/edit/', edit_review, name='edit_review'),  
+    path('review/<int:review_id>/delete/', delete_review, name='delete_review'),
 ]
 
