@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from django.urls import reverse
-from .models import Recipe, Review
+from .models import Recipe, Review, Favourite
 from .forms import RecipeForm, ReviewForm
 
 """
@@ -88,11 +88,12 @@ View to see logged in Users Favourites
 """
 class MyFavourites(LoginRequiredMixin, ListView):
     template_name = "recipes/favourites.html"
-    model = Recipe
+    model = Favourite
     context_object_name = "favourites"
     
     def get_queryset(self):
-        return Recipe.objects.filter(user=self.request.user)
+        # Ensure this filters only valid favourites tied to the user
+        return Recipe.objects.filter(user=self.request.user, favourite=True)
 
 
 """
@@ -187,3 +188,15 @@ def delete_review(request, review_id):
     review.delete()
     messages.success(request, "Review successfully deleted!")
     return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
+
+
+@login_required
+def toggle_favourite(request, recipe_id):
+    recipe = get_object_or_404(Recipe, id=recipe_id)
+    favourite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
+    if not created:
+        favourite.delete()
+        messages.success(request, "Recipe removed from favourites.")
+    else:
+        messages.success(request, "Recipe added to favourites.")
+    return redirect('recipe_detail', recipe_id=recipe.id)

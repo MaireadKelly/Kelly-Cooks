@@ -75,18 +75,18 @@
 </div>
 {% endcomment %}
 
-<!-- Like Button -->
+<!-- Favourite Button -->
 {% comment %}
 <div class="text-center my-3">
-    <form action="{% url 'toggle_like_recipe' recipe.id %}" method="POST">
+    <form action="{% url 'toggle_favourite' recipe.id %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-primary">
-        {% if is_liked %}
-        Unlike
-        {% else %}
-        Like
-        {% endif %}
-    </button>
+        <button type="submit" class="btn btn-warning">
+            {% if recipe.favourite_set.filter(user=request.user).exists %}
+                Remove from Favourites
+            {% else %}
+                Add to Favourites
+            {% endif %}
+        </button>
     </form>
     <p>{{ total_likes }} {{ total_likes|pluralize:"like,likes" }}</p>
 </div>

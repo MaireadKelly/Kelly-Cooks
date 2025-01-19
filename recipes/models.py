@@ -48,3 +48,9 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.user} on {self.recipe}"
+    
+    
+class Favourite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
