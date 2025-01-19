@@ -57,7 +57,6 @@ class Recipes(ListView):
 View to display a single recipe's details
 """
 
-
 class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
@@ -70,6 +69,30 @@ class RecipeDetail(DetailView):
             recipe.reviews.all()
         )  # Use the related_name set in the model
         return context
+
+
+"""
+View to see logged in Users Own recipes
+"""
+class MyRecipes(LoginRequiredMixin, ListView):
+    template_name = "recipes/my_recipes.html"
+    model = Recipe
+    context_object_name = "recipes"
+    
+    def get_queryset(self):
+        return Recipe.objects.filter(user=self.request.user)
+
+
+"""
+View to see logged in Users Favourites
+"""
+class MyFavourites(LoginRequiredMixin, ListView):
+    template_name = "recipes/favourites.html"
+    model = Recipe
+    context_object_name = "favourites"
+    
+    def get_queryset(self):
+        return Recipe.objects.filter(user=self.request.user)
 
 
 """
@@ -122,7 +145,8 @@ def add_review(request, recipe_id):
             review.recipe = recipe
             review.user = request.user
             review.save()
-            messages.success(request, "Your review has been added successfully!")
+            messages.success(
+                request, "Your review has been added successfully!")
             return redirect("recipe_detail", pk=recipe.id)
         else:
             messages.error(
@@ -140,7 +164,8 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your review has been updated successfully!")
+            messages.success(
+                request, "Your review has been updated successfully!")
             return redirect("recipe_detail", pk=review.recipe.id)
     else:
         form = ReviewForm(instance=review)
@@ -155,7 +180,8 @@ def delete_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     # Ensure the logged-in user is the author of the review
     if review.user != request.user:
-        messages.error(request, "You are not authorized to delete this review.")
+        messages.error(
+            request, "You are not authorized to delete this review.")
         return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
 
     review.delete()

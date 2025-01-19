@@ -40,11 +40,11 @@
     </div>
 </div>
 
-<!-- Star Rating Section -->
+<!-- Star Rating Section
 {% comment %}
 <div id="star-rating" class="text-center my-3">
-    {% if user.is_authenticated %}
-        <p>Rate this recipe:</p>
+    {% if user.is_authenticated %} -->
+        <!-- <p>Rate this recipe:</p>
         <div class="stars" data-recipe-id="{{ recipe.id }}">
             <span class="star" data-value="1">&#9733;</span>
             <span class="star" data-value="2">&#9733;</span>
@@ -52,12 +52,12 @@
             <span class="star" data-value="4">&#9733;</span>
             <span class="star" data-value="5">&#9733;</span>
         </div>
-        <p id="rating-feedback" class="text-muted mt-2"></p>
-    {% else %}
+        <p id="rating-feedback" class="text-muted mt-2"></p> -->
+    <!-- {% else %}
         <p><a href="{% url 'account_login' %}">Log in</a> to leave a rating.</p>
     {% endif %}
 </div>
-{% endcomment %}
+{% endcomment %} -->
 
 <!-- Favorite Button -->
 {% comment %}
@@ -101,11 +101,11 @@
         <div>
             <strong>{{ review.user.username }}:</strong>
             {% comment %}
-            <p>Rating: 
+            <!-- <p>Rating: 
                 {% for i in "12345" %}
                 <i class="fa {% if review.rating|int >= forloop.counter %}fa-star{% else %}fa-star-o{% endif %}"></i>
                 {% endfor %}
-            </p>
+            </p> -->
             {% endcomment %}
             <p>{{ review.comment }}</p>
             <p>Reviewed on: {{ review.created_at|date:"F j, Y, g:i a" }}</p>

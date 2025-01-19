@@ -9,6 +9,7 @@ class Recipe(models.Model):
     """
     A model to create and manage basic recipes.
     """
+
     user = models.ForeignKey(
         User, related_name="recipe_owner", on_delete=models.CASCADE
     )
@@ -38,8 +39,10 @@ class Review(models.Model):
     """
     A model to store reviews (comments) for recipes.
     """
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="reviews")
+    recipe = models.ForeignKey(
+        Recipe, on_delete=models.CASCADE, related_name="reviews")
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

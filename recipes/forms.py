@@ -9,14 +9,31 @@ class RecipeForm(forms.ModelForm):
     """
     Form to create or edit a recipe.
     """
+
     class Meta:
         model = Recipe
-        fields = ["title", "description", "ingredients", "instructions", "image", "image_alt"]
+        fields = [
+            "title",
+            "description",
+            "ingredients",
+            "instructions",
+            "image",
+            "image_alt",
+        ]
 
         widgets = {
-            "description": forms.Textarea(attrs={"rows": 8, "placeholder": "Enter a brief description of the recipe"}),
-            "ingredients": RichTextWidget(attrs={"placeholder": "List the ingredients with quantities"}),
-            "instructions": RichTextWidget(attrs={"placeholder": "Provide step-by-step instructions"}),
+            "description": forms.Textarea(
+                attrs={
+                    "rows": 8,
+                    "placeholder": "Enter a brief description of the recipe",
+                }
+            ),
+            "ingredients": RichTextWidget(
+                attrs={"placeholder": "List the ingredients with quantities"}
+            ),
+            "instructions": RichTextWidget(
+                attrs={"placeholder": "Provide step-by-step instructions"}
+            ),
         }
 
         labels = {
@@ -33,12 +50,15 @@ class ReviewForm(forms.ModelForm):
     """
     Form to add a review (comment) for a recipe.
     """
+
     class Meta:
         model = Review
         fields = ["comment"]
 
         widgets = {
-            "comment": forms.Textarea(attrs={"rows": 4, "placeholder": "Write your review here"}),
+            "comment": forms.Textarea(
+                attrs={"rows": 4, "placeholder": "Write your review here"}
+            ),
         }
 
         labels = {
@@ -52,5 +72,10 @@ class ReviewForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field("comment", css_class="form-control mb-3"),
             Submit("submit", "Submit Review", css_class="btn btn-primary"),
-            Button("cancel", "Back to Recipe", css_class="btn btn-secondary", onclick="window.history.back()"),
+            Button(
+                "cancel",
+                "Back to Recipe",
+                css_class="btn btn-secondary",
+                onclick="window.history.back()",
+            ),
         )
