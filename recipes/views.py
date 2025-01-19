@@ -62,12 +62,14 @@ class RecipeDetail(DetailView):
     model = Recipe
     context_object_name = "recipe"
 
-    def get_context_data(self, **kwargs):  # Add context data for reviews
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
-        context["reviews"] = (
-            recipe.reviews.all()
-        )  # Use the related_name set in the model
+        context["reviews"] = recipe.reviews.all()
+        if self.request.user.is_authenticated:
+            context["is_favourite"] = recipe.favourite_set.filter(user=self.request.user).exists()
+        else:
+            context["is_favourite"] = False
         return context
 
 
@@ -93,7 +95,7 @@ class MyFavourites(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         # Ensure this filters only valid favourites tied to the user
-        return Recipe.objects.filter(user=self.request.user, favourite=True)
+        return Favourite.objects.filter(user=self.request.user)
 
 
 """
@@ -199,4 +201,4 @@ def toggle_favourite(request, recipe_id):
         messages.success(request, "Recipe removed from favourites.")
     else:
         messages.success(request, "Recipe added to favourites.")
-    return redirect('recipe_detail', recipe_id=recipe.id)
+    return redirect('recipe_detail', pk=recipe.id)

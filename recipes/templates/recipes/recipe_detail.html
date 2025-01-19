@@ -17,6 +17,20 @@
             <hr>
             <p>{{ recipe.description }}</p>
 
+            <!-- Add/Remove from Favourites -->
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'toggle_favourite' recipe.id %}" method="POST" class="text-center my-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">
+                    {% if is_favourite %}
+                        Remove from Favourites
+                    {% else %}
+                        Add to Favourites
+                    {% endif %}
+                </button>
+            </form>
+            {% endif %}
+
             <!-- Edit and Delete Buttons -->
             {% if request.user == recipe.user %}
             <div class="text-center">
@@ -40,57 +54,6 @@
     </div>
 </div>
 
-<!-- Star Rating Section
-{% comment %}
-<div id="star-rating" class="text-center my-3">
-    {% if user.is_authenticated %} -->
-        <!-- <p>Rate this recipe:</p>
-        <div class="stars" data-recipe-id="{{ recipe.id }}">
-            <span class="star" data-value="1">&#9733;</span>
-            <span class="star" data-value="2">&#9733;</span>
-            <span class="star" data-value="3">&#9733;</span>
-            <span class="star" data-value="4">&#9733;</span>
-            <span class="star" data-value="5">&#9733;</span>
-        </div>
-        <p id="rating-feedback" class="text-muted mt-2"></p> -->
-    <!-- {% else %}
-        <p><a href="{% url 'account_login' %}">Log in</a> to leave a rating.</p>
-    {% endif %}
-</div>
-{% endcomment %} -->
-
-<!-- Favorite Button -->
-{% comment %}
-<div class="text-center my-3">
-    <form action="{% url 'favorite_recipe' recipe.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-warning">
-            {% if recipe.favorite_set.filter(user=request.user).exists %}
-            Remove from Favourites
-            {% else %}
-            Mark as Favourite
-            {% endif %}
-        </button>
-    </form>
-</div>
-{% endcomment %}
-
-<!-- Favourite Button -->
-{% comment %}
-<div class="text-center my-3">
-    <form action="{% url 'toggle_favourite' recipe.id %}" method="POST">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-warning">
-            {% if recipe.favourite_set.filter(user=request.user).exists %}
-                Remove from Favourites
-            {% else %}
-                Add to Favourites
-            {% endif %}
-        </button>
-    </form>
-    <p>{{ total_likes }} {{ total_likes|pluralize:"like,likes" }}</p>
-</div>
-{% endcomment %}
 <hr>
 
 <!-- Reviews Section -->
