@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from recipes.views import custom_404_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,3 +27,8 @@ urlpatterns = [
     path("", include("home.urls")),  # Home app
     path("recipes/", include("recipes.urls")),  # Recipes app
 ]
+
+handler404 = 'recipes.views.custom_404_view'
+
+print(custom_404_view)
+
