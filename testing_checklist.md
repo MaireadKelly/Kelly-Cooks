@@ -34,13 +34,31 @@ This checklist covers manual and automated tests to ensure all functionalities o
 
 ## Features Testing
 
-| **Feature**             | **Test**                                         | **Pass/Fail** | **Comments**            |
-|--------------------------|-------------------------------------------------|---------------|-------------------------|
-| Navigation bar           | Verify links redirect to correct pages          |               |                         |
-| Footer                   | Ensure all links work as intended               |               |                         |
-| Recipe CRUD              | Test adding, editing, and deleting recipes      |               |                         |
-| Search functionality     | Verify search filters are working               |               |                         |
-| Login/Sign-up forms      | Ensure validation and submission are correct    |               |                         |
+### Navigation Bar
+1. Verify all navigation links redirect to the correct pages.
+2. Click on dropdown menus to ensure options are displayed correctly.
+3. Take screenshots of dropdowns and their functionality.
+
+### Footer
+1. Ensure social media and contact links redirect appropriately.
+2. Verify any clickable icons or text work as expected.
+3. Confirm consistency across all pages.
+
+### Recipe CRUD
+1. Add a new recipe and verify it appears in the list.
+2. Edit an existing recipe and confirm changes are reflected.
+3. Delete a recipe and ensure it is removed from the database.
+4. Take screenshots for each step.
+
+### Search Functionality
+1. Enter various keywords into the search bar.
+2. Verify results match the entered criteria.
+3. Test with no results to ensure proper messaging.
+
+### Login/Sign-Up Forms
+1. Test validation by leaving fields empty or entering invalid data.
+2. Verify error messages are displayed as expected.
+3. Confirm successful login and sign-up redirect to the correct pages.
 
 ---
 

@@ -1,0 +1,14 @@
+blinker
+greenlet
+itsdangerous
+pathspec
+sql
+pillow
+django-recaptcha
+psycopg2
+sqlparse
+django-ckeditor
+asgiref
+django-taggit
+gunicorn
+django-js-asset

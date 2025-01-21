@@ -202,3 +202,7 @@ def toggle_favourite(request, recipe_id):
     else:
         messages.success(request, "Recipe added to favourites.")
     return redirect('recipe_detail', pk=recipe.id)
+
+
+def custom_404_view(request, exception):
+    return render(request, "404.html", status=404)
