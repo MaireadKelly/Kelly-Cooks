@@ -28,7 +28,6 @@ urlpatterns = [
     path("recipes/", include("recipes.urls")),  # Recipes app
 ]
 
-handler404 = 'recipes.views.custom_404_view'
+handler404 = "recipes.views.custom_404_view"
 
 print(custom_404_view)
-

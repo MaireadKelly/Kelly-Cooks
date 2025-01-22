@@ -57,6 +57,7 @@ class Recipes(ListView):
 View to display a single recipe's details
 """
 
+
 class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
@@ -67,7 +68,9 @@ class RecipeDetail(DetailView):
         recipe = self.get_object()
         context["reviews"] = recipe.reviews.all()
         if self.request.user.is_authenticated:
-            context["is_favourite"] = recipe.favourite_set.filter(user=self.request.user).exists()
+            context["is_favourite"] = recipe.favourite_set.filter(
+                user=self.request.user
+            ).exists()
         else:
             context["is_favourite"] = False
         return context
@@ -76,11 +79,13 @@ class RecipeDetail(DetailView):
 """
 View to see logged in Users Own recipes
 """
+
+
 class MyRecipes(LoginRequiredMixin, ListView):
     template_name = "recipes/my_recipes.html"
     model = Recipe
     context_object_name = "recipes"
-    
+
     def get_queryset(self):
         return Recipe.objects.filter(user=self.request.user)
 
@@ -88,11 +93,13 @@ class MyRecipes(LoginRequiredMixin, ListView):
 """
 View to see logged in Users Favourites
 """
+
+
 class MyFavourites(LoginRequiredMixin, ListView):
     template_name = "recipes/favourites.html"
     model = Favourite
     context_object_name = "favourites"
-    
+
     def get_queryset(self):
         # Ensure this filters only valid favourites tied to the user
         return Favourite.objects.filter(user=self.request.user)
@@ -148,8 +155,7 @@ def add_review(request, recipe_id):
             review.recipe = recipe
             review.user = request.user
             review.save()
-            messages.success(
-                request, "Your review has been added successfully!")
+            messages.success(request, "Your review has been added successfully!")
             return redirect("recipe_detail", pk=recipe.id)
         else:
             messages.error(
@@ -167,8 +173,7 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            messages.success(
-                request, "Your review has been updated successfully!")
+            messages.success(request, "Your review has been updated successfully!")
             return redirect("recipe_detail", pk=review.recipe.id)
     else:
         form = ReviewForm(instance=review)
@@ -183,8 +188,7 @@ def delete_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
     # Ensure the logged-in user is the author of the review
     if review.user != request.user:
-        messages.error(
-            request, "You are not authorized to delete this review.")
+        messages.error(request, "You are not authorized to delete this review.")
         return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
 
     review.delete()
@@ -195,13 +199,15 @@ def delete_review(request, review_id):
 @login_required
 def toggle_favourite(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
-    favourite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
+    favourite, created = Favourite.objects.get_or_create(
+        user=request.user, recipe=recipe
+    )
     if not created:
         favourite.delete()
         messages.success(request, "Recipe removed from favourites.")
     else:
         messages.success(request, "Recipe added to favourites.")
-    return redirect('recipe_detail', pk=recipe.id)
+    return redirect("recipe_detail", pk=recipe.id)
 
 
 def custom_404_view(request, exception):

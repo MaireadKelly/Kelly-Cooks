@@ -72,10 +72,5 @@ class ReviewForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field("comment", css_class="form-control mb-3"),
             Submit("submit", "Submit Review", css_class="btn btn-primary"),
-            Button(
-                "cancel",
-                "Back to Recipe",
-                css_class="btn btn-secondary",
-                onclick="window.history.back()",
-            ),
+            Button("cancel", "Back to Recipe", css_class="btn btn-secondary", onclick="window.history.back()"),
         )
