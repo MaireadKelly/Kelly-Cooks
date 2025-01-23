@@ -8,11 +8,11 @@
     --main-font: 'Roboto', serif;
 
     /* COLORS */
-    --primary: #fcb61a;
+    --primary: #734060;
     --background: #EEECE9; /* Cornsilk */
-    --secondary: #734060; /* Papaya Whip */
+    --secondary: #eeece9; /* Papaya Whip */
     --text-primary: #50352F; /* Ebony Clay -  for text for contrast and readability */
-    --accent: #CB9F4D; /* Tea Green - for highlights or accent areas */
+    --accent: #fcb61a; /* Tea Green - for highlights or accent areas */
 
     /* UTILS */
     --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1); /* Light shadow for elements */
