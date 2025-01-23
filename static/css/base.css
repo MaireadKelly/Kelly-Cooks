@@ -8,11 +8,11 @@
     --main-font: 'Roboto', serif;
 
     /* COLORS */
-    --primary: #d4a373; /* Buff */
-    --background: #fefae0; /* Cornsilk */
-    --secondary: #faedcd; /* Papaya Whip */
-    --text-primary: #3a3a3a; /* Darkened Grey -  for text for contrast and readability */
-    --accent: #ccd5ae; /* Tea Green - for highlights or accent areas */
+    --primary: #fcb61a;
+    --background: #E6D1AD; /* Cornsilk */
+    --secondary: #96A7B0; /* Papaya Whip */
+    --text-primary: #1E2730; /* Ebony Clay -  for text for contrast and readability */
+    --accent: #667FB4; /* Tea Green - for highlights or accent areas */
 
     /* UTILS */
     --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1); /* Light shadow for elements */

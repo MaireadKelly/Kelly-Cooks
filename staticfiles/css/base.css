@@ -1,219 +1,84 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap');
 
-/* Root variables for fonts, colors, and utilities */
+/* ---------- Root Variables ---------- */
+/* Adding Sour Gummy font to root variables */
 :root {
-    /* FONTS */
-    --title: 'EB+Garamond', serif;
-    --main-font: 'Roboto', serif;
+    --title: 'EB+Garamond', serif; /* Font for titles and headings */
+    --main-font: 'Roboto', serif; /* Main font for body text */
+    --fun-font: 'Sour Gummy', cursive; /* Fun font for playful elements */
 
-    /* COLORS */
-    --primary: #d4a373; /* Buff */
-    --background: #fefae0; /* Cornsilk */
-    --secondary: #faedcd; /* Papaya Whip */
-    --text-primary: #3a3a3a; /* Darkened Grey -  for text for contrast and readability */
-    --accent: #ccd5ae; /* Tea Green - for highlights or accent areas */
+    --primary: #d4a373; /* Primary color: Buff */
+    --background: #fefae0; /* Background color: Cornsilk */
+    --secondary: #faedcd; /* Secondary color: Papaya Whip */
+    --text-primary: #3a3a3a; /* Main text color: Darkened Grey */
+    --accent: #ccd5ae; /* Accent color: Tea Green */
 
-    /* UTILS */
-    --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1); /* Light shadow for elements */
-    --border: 1px solid rgba(0, 0, 0, 0.15); /* Subtle border for cards */
+    --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+    --border: 1px solid rgba(0, 0, 0, 0.15); /* Light border for elements */
 }
 
-/* Global styles for consistent page layout */
-html,
-body {
-    height: 100%;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    font-family: var(--main-font);
-    background-color: var(--background);
-    color: var(--text-primary);
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--title);
+/* ---------- Headings and Titles ---------- */
+/* Use Sour Gummy for playful page titles and section headings */
+h1, h2 {
+    font-family: var(--fun-font);
     color: var(--primary);
-    font-weight: bold; /* Emphasize headings */
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-main {
-    flex: 1 0 auto; /* Allow the main content to take up available space */
-    background-color: var(--background);
+/* ---------- Recipe Titles in Cards ---------- */
+.card-title {
+    font-family: var(--fun-font);
+    font-size: 1.2rem;
+    color: var(--primary);
+    text-align: center;
+    margin: 0.5rem 0;
 }
 
-p, a, li {
-    color: var(--text-primary);
-    font-weight: bold; /* Ensure strong text visibility */
+/* ---------- Buttons and Call-to-Actions ---------- */
+button, .btn {
+    font-family: var(--fun-font); /* Use playful font for CTAs */
+    background-color: var(--primary);
+    color: var(--background);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Footer styling */
-footer {
-    flex-shrink: 0;
-    background-color: var(--secondary);
-    color: var(--text-primary);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-top: var(--border);
-    padding: 40px 20px;
-}
-
-footer p {
-    margin: 15px 0;
-    font-size: 16px;
+button:hover, .btn:hover {
+    background-color: var(--accent);
     color: var(--primary);
 }
 
-.social-icon {
-    width: 32px;
-    height: 32px;
-    margin: 0 12px;
-    vertical-align: middle;
-    transition: transform 0.3s ease; /* Animation for hover effect */
+/* ---------- Special Decorative Text ---------- */
+/* Highlight promotional or fun sections */
+.highlight {
+    font-family: var(--fun-font);
+    color: var(--accent);
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 20px 0;
 }
 
-.social-icon:hover {
-    transform: scale(1.2); /* Slight zoom effect */
-}
-
-.social-icon:focus {
-    outline: 2px solid var(--accent); /* Accessibility focus outline */
-}
-
-/* Responsive adjustments for footer */
-@media (max-width: 768px) {
-    footer {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px 10px;
-    }
-
-    .social-icon {
-        margin: 8px;
-    }
-}
-
-/* Header and navigation styles */
-.navbar {
-    background-color: var(--secondary);
-    box-shadow: var(--small-box-shadow);
-}
-
+/* ---------- Navigation Links ---------- */
 a.nav-link {
+    font-family: var(--fun-font);
     color: var(--primary);
+    text-transform: capitalize;
 }
 
 a.nav-link:hover {
     color: var(--accent);
 }
 
-img.logo {
-    width: 5rem;
-}
-
-.active {
-    border-bottom: 2px solid var(--primary);
-    font-weight: 500; /* Highlight active links */
-}
-
-/* Form styling */
-.form {
-    width: 100%;
-    margin: 3% auto;
-    box-shadow: var(--small-box-shadow);
-    border-radius: 5px;
-}
-
-/* Buttons with hover effects */
-button,
-.btn {
-    background-color: var(--primary);
-    color: var(--background);
-    border: none;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover,
-.btn:hover {
-    background-color: var(--accent);
+/* ---------- Footer ---------- */
+/* Fun font for footer highlights */
+footer p {
+    font-family: var(--fun-font);
+    margin: 15px 0;
+    font-size: 16px;
     color: var(--primary);
-}
-
-/* Star Rating Styling */
-/* .stars {
-    display: inline-block;
-    cursor: pointer;
-}
-
-.star {
-    font-size: 2rem;
-    color: #ccc;
-    transition: color 0.3s ease;
-} */
-
-/* .star:hover,
-.star.selected {
-    color: var(--primary); /* Highlight selected stars */
-/* }
-
-.star:hover ~ .star {
-    color: #ccc; /* Reset stars after hovered star */
-/* } */ */ */
-
-
-/* Recipe cards styling */
-.card {
-    height: 400px; /* Fixed height for uniform cards */
-    background-color: var(--background);
-    box-shadow: var(--small-box-shadow);
-    border: var(--border);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Space out content vertically */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card img {
-    width: 100%;
-    height: 40%; /* Adjust image height to fit card layout */
-    object-fit: cover; /* Ensure images are properly scaled */
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: scale(1.05); /* Slightly increase size on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
-}
-
-.card img:hover {
-    transform: scale(1.1); /* Zoom the image slightly on hover */
-}
-
-.card-title {
-    font-size: 1rem;
-    text-align: center;
-    margin: 0.5rem 0;
-}
-
-.card-body a {
-    text-align: center;
-}
-
-/* Responsive adjustments for recipe cards */
-@media screen and (max-width: 768px) {
-    .card {
-        flex: 0 1 calc(50% - 20px); /* 2 cards per row on medium screens */
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .card {
-        flex: 0 1 calc(100% - 20px); /* 1 card per row on small screens */
-    }
 }
