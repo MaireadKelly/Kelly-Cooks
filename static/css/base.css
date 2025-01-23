@@ -9,14 +9,21 @@
 
     /* COLORS */
     --primary: #734060;
-    --background: #EEECE9; /* Cornsilk */
-    --secondary: #eeece9; /* Papaya Whip */
-    --text-primary: #50352F; /* Ebony Clay -  for text for contrast and readability */
-    --accent: #fcb61a; /* Tea Green - for highlights or accent areas */
+    /* Cosmic */
+    --background: #EEECE9;
+    /* Cornsilk */
+    --secondary: #f8f9fa;
+    /* Papaya Whip */
+    --text-primary: #50352F;
+    /* Ebony Clay -  for text for contrast and readability */
+    --accent: #fcb61a;
+    /* Tea Green - for highlights or accent areas */
 
     /* UTILS */
-    --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1); /* Light shadow for elements */
-    --border: 1px solid rgba(0, 0, 0, 0.15); /* Subtle border for cards */
+    --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1);
+    /* Light shadow for elements */
+    --border: 1px solid rgba(0, 0, 0, 0.15);
+    /* Subtle border for cards */
 }
 
 /* Global styles for consistent page layout */
@@ -33,20 +40,30 @@ body {
     color: var(--text-primary);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--title);
     color: var(--primary);
-    font-weight: bold; /* Emphasize headings */
+    font-weight: bold;
+    /* Emphasize headings */
 }
 
 main {
-    flex: 1 0 auto; /* Allow the main content to take up available space */
+    flex: 1 0 auto;
+    /* Allow the main content to take up available space */
     background-color: var(--background);
 }
 
-p, a, li {
+p,
+a,
+li {
     color: var(--text-primary);
-    font-weight: bold; /* Ensure strong text visibility */
+    font-weight: bold;
+    /* Ensure strong text visibility */
 }
 
 /* Footer styling */
@@ -73,15 +90,18 @@ footer p {
     height: 32px;
     margin: 0 12px;
     vertical-align: middle;
-    transition: transform 0.3s ease; /* Animation for hover effect */
+    transition: transform 0.3s ease;
+    /* Animation for hover effect */
 }
 
 .social-icon:hover {
-    transform: scale(1.2); /* Slight zoom effect */
+    transform: scale(1.2);
+    /* Slight zoom effect */
 }
 
 .social-icon:focus {
-    outline: 2px solid var(--accent); /* Accessibility focus outline */
+    outline: 2px solid var(--accent);
+    /* Accessibility focus outline */
 }
 
 /* Responsive adjustments for footer */
@@ -117,7 +137,8 @@ img.logo {
 
 .active {
     border-bottom: 2px solid var(--primary);
-    font-weight: 500; /* Highlight active links */
+    font-weight: 500;
+    /* Highlight active links */
 }
 
 /* Form styling */
@@ -146,37 +167,56 @@ button:hover,
 
 /* Recipe cards styling */
 .card {
-    height: 400px; /* Fixed height for uniform cards */
+    height: 400px;
+    /* Fixed height for uniform cards */
     background-color: var(--background);
     box-shadow: var(--small-box-shadow);
     border: var(--border);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Space out content vertically */
+    justify-content: space-between;
+    /* Space out content vertically */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card img {
     width: 100%;
-    height: 40%; /* Adjust image height to fit card layout */
-    object-fit: cover; /* Ensure images are properly scaled */
+    height: 40%;
+    /* Adjust image height to fit card layout */
+    object-fit: cover;
+    /* Ensure images are properly scaled */
     transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: scale(1.05); /* Slightly increase size on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+    transform: scale(1.05);
+    /* Slightly increase size on hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Enhance shadow on hover */
 }
 
 .card img:hover {
-    transform: scale(1.1); /* Zoom the image slightly on hover */
+    transform: scale(1.1);
+    /* Zoom the image slightly on hover */
 }
 
 .card-title {
-    font-size: 1rem;
-    text-align: center;
-    margin: 0.5rem 0;
+    font-size: 1.4rem;    /* Slightly larger font for better distinction */
+    font-weight: bold;    /* Emphasize the title */
+    color: var(--primary);    /* Use primary color */
+    text-align: left;       /* Align title text with card layout */
+    margin-bottom: 0.7rem;    /* Add space below the title */
+    position: relative;    /* For separator placement */
+}
+
+.card-title::after {
+    content: '';    /* Add a separator line */
+    display: block;    /* Create a new line for the separator */
+    width: 70%;    /* Separator width */
+    height: 2px;    /* Separator thickness */
+    background-color: var(--accent);    /* Accent color for the separator */
+    margin: 0.4rem 0 0.8rem auto;    /* Add vertical spacing around the seperator */
 }
 
 .card-body a {
@@ -186,12 +226,14 @@ button:hover,
 /* Responsive adjustments for recipe cards */
 @media screen and (max-width: 768px) {
     .card {
-        flex: 0 1 calc(50% - 20px); /* 2 cards per row on medium screens */
+        flex: 0 1 calc(50% - 20px);
+        /* 2 cards per row on medium screens */
     }
 }
 
 @media screen and (max-width: 480px) {
     .card {
-        flex: 0 1 calc(100% - 20px); /* 1 card per row on small screens */
+        flex: 0 1 calc(100% - 20px);
+        /* 1 card per row on small screens */
     }
 }
