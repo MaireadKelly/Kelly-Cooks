@@ -1,0 +1,9 @@
+
+.card-title::after {
+    content: '';    /* Add a separator line */
+    display: block;    /* Create a new line for the separator */
+    width: 70%;    /* Separator width */
+    height: 2px;    /* Separator thickness */
+    background-color: var(--accent);    /* Accent color for the separator */
+    margin: 0.4rem 0 0.8rem auto;    /* Add vertical spacing around the seperator */
+}

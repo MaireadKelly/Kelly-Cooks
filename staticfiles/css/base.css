@@ -167,33 +167,27 @@ button:hover,
 
 /* Recipe cards styling */
 .card {
-    height: 400px;
-    /* Fixed height for uniform cards */
+    height: 400px;    /* Fixed height for uniform cards */
     background-color: var(--background);
     box-shadow: var(--small-box-shadow);
     border: var(--border);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    /* Space out content vertically */
+    justify-content: space-between;    /* Space out content vertically */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card img {
     width: 100%;
-    height: 40%;
-    /* Adjust image height to fit card layout */
-    object-fit: cover;
-    /* Ensure images are properly scaled */
+    height: 40%;    /* Adjust image height to fit card layout */
+    object-fit: cover;    /* Ensure images are properly scaled */
     transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: scale(1.05);
-    /* Slightly increase size on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    /* Enhance shadow on hover */
+    transform: scale(1.05);    /* Slightly increase size on hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);    /* Enhance shadow on hover */
 }
 
 .card img:hover {
@@ -205,21 +199,27 @@ button:hover,
     font-size: 1.4rem;    /* Slightly larger font for better distinction */
     font-weight: bold;    /* Emphasize the title */
     color: var(--primary);    /* Use primary color */
-    margin-bottom: 0.5rem;    /* Add space below the title */
-    position: relative;    /* For separator placement */
+    text-align: center;       /* Align title text with card layout */
+    margin-bottom: 1rem;    /* Add space below the title */
 }
 
-.card-title::after {
-    content: '';    /* Add a separator line */
-    display: block;    /* Create a new line for the separator */
-    width: 50%;    /* Separator width */
-    height: 2px;    /* Separator thickness */
-    background-color: var(--accent);    /* Accent color for the separator */
-    margin: 0.5rem auto;    /* Center it and add spacing */
+.card-text {
+    font-size: 1rem; /* Maintain a readable size for descriptions */
+    color: var(--text-primary); /* Keep the text color */
+    text-align: justify; /* Justify the description text */
+    margin: 0; /* Remove extra margins */
+    line-height: 1.6; /* Improve readability with better line spacing */
 }
 
 .card-body a {
     text-align: center;
+    text-decoration: none;  /* Remove Underline */
+    color: var(--text-primary);
+    font-weight: normal;
+}
+
+.card-body a:hover {
+    color: var(--primary);
 }
 
 /* Responsive adjustments for recipe cards */
