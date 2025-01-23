@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import Recipe, Review, Favourite
 from .forms import RecipeForm, ReviewForm
 
@@ -130,14 +130,19 @@ View for users to delete their own recipes
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "recipes/confirm_delete.html"
     model = Recipe
-    success_url = "/recipes/"
+    success_url = reverse_lazy("recipes")
 
     def test_func(self):  # Ensure that only the recipe owner can delete the recipe
         return self.request.user == self.get_object().user
 
     def delete(self, request, *args, **kwargs):
-        messages.success(request, "The recipe has been deleted successfully!")
-        return super().delete(request, *args, **kwargs)
+        try:
+            response = super().delete(request, *args, **kwargs)
+            messages.success(request, "The recipe has been deleted successfully!")
+            return response
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+            return redirect("recipes")
 
 
 """
