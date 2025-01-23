@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap');
+
 
 /* Root variables for fonts, colors, and utilities */
 :root {
     /* FONTS */
-    --title: 'EB+Garamond', serif;
-    --main-font: 'Roboto', serif;
+    --title: 'EB+Garamond', sans-serif;
+    --main-font: 'Roboto', sans-serif;
 
     /* COLORS */
     --primary: #734060;    /* Cosmic */
@@ -39,7 +41,16 @@ body {
     color: var(--text-primary);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2 {
+    font-family: 'Sour Gummy', sans-serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+h3, h4, h5, h6 {
     font-family: var(--title);
     color: var(--primary);
     font-weight: bold;    /* Emphasize headings */
@@ -191,8 +202,9 @@ button:hover,
 }
 
 .card-title {
-    font-size: 1.4rem;    /* Slightly larger font for better distinction */
-    font-weight: bold;    /* Emphasize the title */
+    font-size: 1.2rem;    /* Slightly larger font for better distinction */
+    font-weight: normal;    /* Emphasize the title */
+    font-family: 'Sour Gummy', sans-serif;
     color: var(--primary);    /* Use primary color */
     text-align: center;       /* Align title text with card layout */
     margin-bottom: 1rem;    /* Add space below the title */

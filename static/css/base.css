@@ -43,10 +43,11 @@ body {
 
 h1, h2 {
     font-family: 'Sour Gummy', sans-serif;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: bold;
     color: var(--primary);
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 h3, h4, h5, h6 {
@@ -201,8 +202,8 @@ button:hover,
 }
 
 .card-title {
-    font-size: 1.4rem;    /* Slightly larger font for better distinction */
-    font-weight: bold;    /* Emphasize the title */
+    font-size: 1.2rem;    /* Slightly larger font for better distinction */
+    font-weight: normal;    /* Emphasize the title */
     font-family: 'Sour Gummy', sans-serif;
     color: var(--primary);    /* Use primary color */
     text-align: center;       /* Align title text with card layout */
