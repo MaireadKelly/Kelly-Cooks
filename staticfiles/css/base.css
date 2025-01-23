@@ -8,8 +8,7 @@
     --main-font: 'Roboto', serif;
 
     /* COLORS */
-    --primary: #734060;
-    /* Cosmic */
+    --primary: #734060;    /* Cosmic */
     --background: #EEECE9;
     /* Cornsilk */
     --secondary: #f8f9fa;
@@ -40,16 +39,10 @@ body {
     color: var(--text-primary);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--title);
     color: var(--primary);
-    font-weight: bold;
-    /* Emphasize headings */
+    font-weight: bold;    /* Emphasize headings */
 }
 
 main {
@@ -58,12 +51,10 @@ main {
     background-color: var(--background);
 }
 
-p,
-a,
-li {
+p, a, li {
     color: var(--text-primary);
-    font-weight: bold;
-    /* Ensure strong text visibility */
+    font-weight: bold;    /* Ensure strong text visibility */
+    text-decoration: none;
 }
 
 /* Footer styling */
@@ -104,6 +95,7 @@ footer p {
     /* Accessibility focus outline */
 }
 
+
 /* Responsive adjustments for footer */
 @media (max-width: 768px) {
     footer {
@@ -116,6 +108,7 @@ footer p {
         margin: 8px;
     }
 }
+
 
 /* Header and navigation styles */
 .navbar {
@@ -141,6 +134,7 @@ img.logo {
     /* Highlight active links */
 }
 
+
 /* Form styling */
 .form {
     width: 100%;
@@ -148,6 +142,7 @@ img.logo {
     box-shadow: var(--small-box-shadow);
     border-radius: 5px;
 }
+
 
 /* Buttons with hover effects */
 button,
@@ -164,6 +159,7 @@ button:hover,
     background-color: var(--accent);
     color: var(--primary);
 }
+
 
 /* Recipe cards styling */
 .card {
@@ -191,8 +187,7 @@ button:hover,
 }
 
 .card img:hover {
-    transform: scale(1.1);
-    /* Zoom the image slightly on hover */
+    transform: scale(1.1);    /* Zoom the image slightly on hover */
 }
 
 .card-title {

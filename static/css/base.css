@@ -1,15 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap');
+
 
 /* Root variables for fonts, colors, and utilities */
 :root {
     /* FONTS */
-    --title: 'EB+Garamond', serif;
-    --main-font: 'Roboto', serif;
+    --title: 'EB+Garamond', sans-serif;
+    --main-font: 'Roboto', sans-serif;
 
     /* COLORS */
-    --primary: #734060;
-    /* Cosmic */
+    --primary: #734060;    /* Cosmic */
     --background: #EEECE9;
     /* Cornsilk */
     --secondary: #f8f9fa;
@@ -40,16 +41,18 @@ body {
     color: var(--text-primary);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2 {
+    font-family: 'Sour Gummy', sans-serif;
+    font-size: 2rem;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+h3, h4, h5, h6 {
     font-family: var(--title);
     color: var(--primary);
-    font-weight: bold;
-    /* Emphasize headings */
+    font-weight: bold;    /* Emphasize headings */
 }
 
 main {
@@ -58,12 +61,10 @@ main {
     background-color: var(--background);
 }
 
-p,
-a,
-li {
+p, a, li {
     color: var(--text-primary);
-    font-weight: bold;
-    /* Ensure strong text visibility */
+    font-weight: bold;    /* Ensure strong text visibility */
+    text-decoration: none;
 }
 
 /* Footer styling */
@@ -104,6 +105,7 @@ footer p {
     /* Accessibility focus outline */
 }
 
+
 /* Responsive adjustments for footer */
 @media (max-width: 768px) {
     footer {
@@ -116,6 +118,7 @@ footer p {
         margin: 8px;
     }
 }
+
 
 /* Header and navigation styles */
 .navbar {
@@ -141,6 +144,7 @@ img.logo {
     /* Highlight active links */
 }
 
+
 /* Form styling */
 .form {
     width: 100%;
@@ -148,6 +152,7 @@ img.logo {
     box-shadow: var(--small-box-shadow);
     border-radius: 5px;
 }
+
 
 /* Buttons with hover effects */
 button,
@@ -164,6 +169,7 @@ button:hover,
     background-color: var(--accent);
     color: var(--primary);
 }
+
 
 /* Recipe cards styling */
 .card {
@@ -191,13 +197,13 @@ button:hover,
 }
 
 .card img:hover {
-    transform: scale(1.1);
-    /* Zoom the image slightly on hover */
+    transform: scale(1.1);    /* Zoom the image slightly on hover */
 }
 
 .card-title {
     font-size: 1.4rem;    /* Slightly larger font for better distinction */
     font-weight: bold;    /* Emphasize the title */
+    font-family: 'Sour Gummy', sans-serif;
     color: var(--primary);    /* Use primary color */
     text-align: center;       /* Align title text with card layout */
     margin-bottom: 1rem;    /* Add space below the title */
