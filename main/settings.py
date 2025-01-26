@@ -141,6 +141,9 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 
+# Disable email verification for registration
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 # Static files and media
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
