@@ -229,6 +229,15 @@ button:hover,
     color: var(--primary);
 }
 
+.card-body a.btn {
+    text-decoration: none; /* Ensure no underline for buttons */
+    color: #ffffff; /* Force white text for readability */
+}
+.card-body a.btn:hover {
+    color: #50352F; /* Set hover color for text contrast */
+}
+
+
 /* Responsive adjustments for recipe cards */
 @media screen and (max-width: 768px) {
     .card {
