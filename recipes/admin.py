@@ -25,7 +25,10 @@ class RecipeAdmin(admin.ModelAdmin):
         Assumes a related_name 'reviews' on the ForeignKey in the Review model.
         """
         return obj.reviews.count()
-    get_reviews_count.short_description = "Review Count"  # Column header in the admin list view
+
+    get_reviews_count.short_description = (
+        "Review Count"  # Column header in the admin list view
+    )
 
 
 # Admin configuration for the Review model
@@ -38,4 +41,8 @@ class ReviewAdmin(admin.ModelAdmin):
         "created_at",
     )
     list_filter = ("user", "comment")  # Sidebar filters
-    search_fields = ("comment", "user__username", "recipe__title")  # Search functionality
+    search_fields = (
+        "comment",
+        "user__username",
+        "recipe__title",
+    )  # Search functionality
