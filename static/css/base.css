@@ -10,7 +10,8 @@
     --main-font: 'Roboto', sans-serif;
 
     /* COLORS */
-    --primary: #734060;    /* Cosmic */
+    --primary: #734060;
+    /* Cosmic */
     --background: #EEECE9;
     /* Cornsilk */
     --secondary: #f8f9fa;
@@ -41,7 +42,8 @@ body {
     color: var(--text-primary);
 }
 
-h1, h2 {
+h1,
+h2 {
     font-family: 'Sour Gummy', sans-serif;
     font-size: 2.5rem;
     font-weight: bold;
@@ -50,10 +52,14 @@ h1, h2 {
     margin-bottom: 1.5rem;
 }
 
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--title);
     color: var(--primary);
-    font-weight: bold;    /* Emphasize headings */
+    font-weight: bold;
+    /* Emphasize headings */
 }
 
 main {
@@ -62,9 +68,12 @@ main {
     background-color: var(--background);
 }
 
-p, a, li {
+p,
+a,
+li {
     color: var(--text-primary);
-    font-weight: bold;    /* Ensure strong text visibility */
+    font-weight: bold;
+    /* Ensure strong text visibility */
     text-decoration: none;
 }
 
@@ -171,56 +180,100 @@ button:hover,
     color: var(--primary);
 }
 
+/*   Favourites Button */
+.btn-favourite {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: var(--primary);
+    color: var(--background);
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-favourite:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+    transform: scale(1.05);
+    /* Slight zoom effect  */
+}
+
+.btn-favourite:active {
+    transform: scale(0.95);
+    /* Slight Shrink on Click  */
+}
+
 
 /* Recipe cards styling */
 .card {
-    height: 400px;    /* Fixed height for uniform cards */
+    height: 400px;
+    /* Fixed height for uniform cards */
     background-color: var(--background);
     box-shadow: var(--small-box-shadow);
     border: var(--border);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;    /* Space out content vertically */
+    justify-content: space-between;
+    /* Space out content vertically */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card img {
     width: 100%;
-    height: 40%;    /* Adjust image height to fit card layout */
-    object-fit: cover;    /* Ensure images are properly scaled */
+    height: 40%;
+    /* Adjust image height to fit card layout */
+    object-fit: cover;
+    /* Ensure images are properly scaled */
     transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: scale(1.05);    /* Slightly increase size on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);    /* Enhance shadow on hover */
+    transform: scale(1.05);
+    /* Slightly increase size on hover */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* Enhance shadow on hover */
 }
 
 .card img:hover {
-    transform: scale(1.1);    /* Zoom the image slightly on hover */
+    transform: scale(1.1);
+    /* Zoom the image slightly on hover */
 }
 
 .card-title {
-    font-size: 1.2rem;    /* Slightly larger font for better distinction */
-    font-weight: normal;    /* Emphasize the title */
+    font-size: 1.2rem;
+    /* Slightly larger font for better distinction */
+    font-weight: normal;
+    /* Emphasize the title */
     font-family: 'Sour Gummy', sans-serif;
-    color: var(--primary);    /* Use primary color */
-    text-align: center;       /* Align title text with card layout */
-    margin-bottom: 1rem;    /* Add space below the title */
+    color: var(--primary);
+    /* Use primary color */
+    text-align: center;
+    /* Align title text with card layout */
+    margin-bottom: 1rem;
+    /* Add space below the title */
 }
 
 .card-text {
-    font-size: 1rem; /* Maintain a readable size for descriptions */
-    color: var(--text-primary); /* Keep the text color */
-    text-align: justify; /* Justify the description text */
-    margin: 0; /* Remove extra margins */
-    line-height: 1.6; /* Improve readability with better line spacing */
+    font-size: 1rem;
+    /* Maintain a readable size for descriptions */
+    color: var(--text-primary);
+    /* Keep the text color */
+    text-align: justify;
+    /* Justify the description text */
+    margin: 0;
+    /* Remove extra margins */
+    line-height: 1.6;
+    /* Improve readability with better line spacing */
 }
 
 .card-body a {
     text-align: center;
-    text-decoration: none;  /* Remove Underline */
+    text-decoration: none;
+    /* Remove Underline */
     color: var(--text-primary);
     font-weight: normal;
 }
@@ -230,25 +283,30 @@ button:hover,
 }
 
 .card-body a.btn {
-    text-decoration: none; /* Ensure no underline for buttons */
-    color: #ffffff; /* Force white text for readability */
-}
-.card-body a.btn:hover {
-    color: #50352F; /* Set hover color for text contrast */
+    text-decoration: none;
+    /* Ensure no underline for buttons */
+    color: #ffffff;
+    /* Force white text for readability */
 }
 
-/* ===========================
-   Reviews Section
-   =========================== */
-   .reviews-section {
+.card-body a.btn:hover {
+    color: #50352F;
+    /* Set hover color for text contrast */
+}
+
+/*   Reviews Section */
+
+.reviews-section {
     margin-top: 40px;
-    border-top: 1px solid var(--border); /* Visual separation from the rest of the page */
+    border-top: 1px solid var(--border);
+    /* Visual separation from the rest of the page */
     padding-top: 20px;
 }
 
 .review {
     padding: 15px;
-    border-bottom: 1px solid var(--border); /* Separate individual reviews */
+    border-bottom: 1px solid var(--border);
+    /* Separate individual reviews */
     margin-bottom: 15px;
 }
 
@@ -299,10 +357,9 @@ textarea:focus {
 
 .btn-submit:hover {
     background-color: var(--accent);
-    transform: scale(1.05); /* Slight zoom effect */
+    transform: scale(1.05);
+    /* Slight zoom effect */
 }
-
-
 
 /* Responsive adjustments for recipe cards */
 @media screen and (max-width: 768px) {
