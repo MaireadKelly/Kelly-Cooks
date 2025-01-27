@@ -2,33 +2,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap');
 
-
-/* Root variables for fonts, colors, and utilities */
+/* ===========================
+   Root variables for styling
+   =========================== */
 :root {
-    /* FONTS */
+    /* Fonts */
     --title: 'EB+Garamond', sans-serif;
     --main-font: 'Roboto', sans-serif;
 
-    /* COLORS */
+    /* Colors */
     --primary: #734060;
-    /* Cosmic */
+    /* Main theme color */
     --background: #EEECE9;
-    /* Cornsilk */
+    /* Background color */
     --secondary: #f8f9fa;
-    /* Papaya Whip */
+    /* Light background for contrast */
     --text-primary: #50352F;
-    /* Ebony Clay -  for text for contrast and readability */
+    /* Primary text color for readability */
     --accent: #fcb61a;
-    /* Tea Green - for highlights or accent areas */
+    /* Accent color for highlights */
 
-    /* UTILS */
+    /* Utilities */
     --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1);
-    /* Light shadow for elements */
+    /* Light shadow */
     --border: 1px solid rgba(0, 0, 0, 0.15);
-    /* Subtle border for cards */
+    /* Subtle border */
 }
 
-/* Global styles for consistent page layout */
+/* ===========================
+   Global styles
+   =========================== */
 html,
 body {
     height: 100%;
@@ -59,12 +62,10 @@ h6 {
     font-family: var(--title);
     color: var(--primary);
     font-weight: bold;
-    /* Emphasize headings */
 }
 
 main {
     flex: 1 0 auto;
-    /* Allow the main content to take up available space */
     background-color: var(--background);
 }
 
@@ -73,11 +74,12 @@ a,
 li {
     color: var(--text-primary);
     font-weight: bold;
-    /* Ensure strong text visibility */
     text-decoration: none;
 }
 
-/* Footer styling */
+/* ===========================
+   Footer styling
+   =========================== */
 footer {
     flex-shrink: 0;
     background-color: var(--secondary);
@@ -102,21 +104,17 @@ footer p {
     margin: 0 12px;
     vertical-align: middle;
     transition: transform 0.3s ease;
-    /* Animation for hover effect */
 }
 
 .social-icon:hover {
     transform: scale(1.2);
-    /* Slight zoom effect */
 }
 
 .social-icon:focus {
     outline: 2px solid var(--accent);
-    /* Accessibility focus outline */
 }
 
-
-/* Responsive adjustments for footer */
+/* Responsive footer adjustments */
 @media (max-width: 768px) {
     footer {
         flex-direction: column;
@@ -129,8 +127,9 @@ footer p {
     }
 }
 
-
-/* Header and navigation styles */
+/* ===========================
+   Navigation styles
+   =========================== */
 .navbar {
     background-color: var(--secondary);
     box-shadow: var(--small-box-shadow);
@@ -151,184 +150,11 @@ img.logo {
 .active {
     border-bottom: 2px solid var(--primary);
     font-weight: 500;
-    /* Highlight active links */
 }
 
-
-/* Form styling */
-.form {
-    width: 100%;
-    margin: 3% auto;
-    box-shadow: var(--small-box-shadow);
-    border-radius: 5px;
-}
-
-
-/* Buttons with hover effects */
-button,
-.btn {
-    background-color: var(--primary);
-    color: var(--background);
-    border: none;
-    padding: 10px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:hover,
-.btn:hover {
-    background-color: var(--accent);
-    color: var(--primary);
-}
-
-/*   Favourites Button */
-.btn-favourite {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: var(--primary);
-    color: var(--background);
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-favourite:hover {
-    background-color: var(--accent);
-    color: var(--primary);
-    transform: scale(1.05);
-    /* Slight zoom effect  */
-}
-
-.btn-favourite:active {
-    transform: scale(0.95);
-    /* Slight Shrink on Click  */
-}
-
-
-/* Recipe cards styling */
-.card {
-    height: 400px;
-    /* Fixed height for uniform cards */
-    background-color: var(--background);
-    box-shadow: var(--small-box-shadow);
-    border: var(--border);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    /* Space out content vertically */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card img {
-    width: 100%;
-    height: 40%;
-    /* Adjust image height to fit card layout */
-    object-fit: cover;
-    /* Ensure images are properly scaled */
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: scale(1.05);
-    /* Slightly increase size on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    /* Enhance shadow on hover */
-}
-
-.card img:hover {
-    transform: scale(1.1);
-    /* Zoom the image slightly on hover */
-}
-
-.card-title {
-    font-size: 1.2rem;
-    /* Slightly larger font for better distinction */
-    font-weight: normal;
-    /* Emphasize the title */
-    font-family: 'Sour Gummy', sans-serif;
-    color: var(--primary);
-    /* Use primary color */
-    text-align: center;
-    /* Align title text with card layout */
-    margin-bottom: 1rem;
-    /* Add space below the title */
-}
-
-.card-text {
-    font-size: 1rem;
-    /* Maintain a readable size for descriptions */
-    color: var(--text-primary);
-    /* Keep the text color */
-    text-align: justify;
-    /* Justify the description text */
-    margin: 0;
-    /* Remove extra margins */
-    line-height: 1.6;
-    /* Improve readability with better line spacing */
-}
-
-.card-body a {
-    text-align: center;
-    text-decoration: none;
-    /* Remove Underline */
-    color: var(--text-primary);
-    font-weight: normal;
-}
-
-.card-body a:hover {
-    color: var(--primary);
-}
-
-.card-body a.btn {
-    text-decoration: none;
-    /* Ensure no underline for buttons */
-    color: #ffffff;
-    /* Force white text for readability */
-}
-
-.card-body a.btn:hover {
-    color: #50352F;
-    /* Set hover color for text contrast */
-}
-
-/*   Reviews Section */
-
-.reviews-section {
-    margin-top: 40px;
-    border-top: 1px solid var(--border);
-    /* Visual separation from the rest of the page */
-    padding-top: 20px;
-}
-
-.review {
-    padding: 15px;
-    border-bottom: 1px solid var(--border);
-    /* Separate individual reviews */
-    margin-bottom: 15px;
-}
-
-.review-author {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: var(--primary);
-    margin-bottom: 5px;
-}
-
-.review-date {
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-}
-
-.review p {
-    font-size: 1rem;
-    color: var(--text-primary);
-}
-
-/* Review Form */
+/* ===========================
+   Form styling
+   =========================== */
 textarea {
     width: 100%;
     border: 1px solid var(--border);
@@ -358,20 +184,170 @@ textarea:focus {
 .btn-submit:hover {
     background-color: var(--accent);
     transform: scale(1.05);
-    /* Slight zoom effect */
 }
 
-/* Responsive adjustments for recipe cards */
-@media screen and (max-width: 768px) {
-    .card {
-        flex: 0 1 calc(50% - 20px);
-        /* 2 cards per row on medium screens */
+/* ===========================
+   Buttons (hover effects)
+   =========================== */
+button,
+.btn {
+    background-color: var(--primary);
+    color: var(--background);
+    border: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+}
+
+/* ===========================
+   Recipe Detail Styles
+   =========================== */
+.top-section {
+    display: flex;
+    align-items: center;
+    /* Align content vertically */
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    flex: 0 0 300px;
+    /* Fixed width for the image */
+    max-width: 300px;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--small-box-shadow);
+}
+
+.details-container {
+    flex: 1;
+    /* Allow details to occupy remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Space between elements */
+}
+
+.details-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.details-container .posted-by {
+    font-size: 1rem;
+    color: gray;
+}
+
+.details-container .description {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+.favourite-button {
+    margin-top: 20px;
+}
+
+.btn-favourite {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary);
+    color: var(--background);
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-favourite:hover {
+    background-color: var(--accent);
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+.btn-favourite:active {
+    transform: scale(0.95);
+}
+
+/* Middle Section */
+.middle-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.ingredients-container,
+.method-container {
+    width: 50%;
+}
+
+.ingredients-container ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.method-container p {
+    text-align: justify;
+}
+
+/* Reviews Section */
+.reviews-section {
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.review {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 15px;
+}
+
+.review-author {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-bottom: 5px;
+}
+
+.review-date {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.review p {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+@media (max-width: 768px) {
+    .top-section {
+        flex-direction: column;
+        align-items: flex-start;
     }
-}
 
-@media screen and (max-width: 480px) {
-    .card {
-        flex: 0 1 calc(100% - 20px);
-        /* 1 card per row on small screens */
+    .image-container,
+    .details-container {
+        width: 100%;
+    }
+
+    .favourite-button {
+        margin-top: 10px;
+        text-align: center;
     }
 }
