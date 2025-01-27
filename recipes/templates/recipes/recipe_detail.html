@@ -1,98 +1,72 @@
 {% extends "base.html" %}
 
-{% block title %}Recipe Detail - {{ recipe.title }}{% endblock %}
-
 {% block content %}
-<div class="container">
-    <!-- Recipe Information -->
-    <div class="recipe-info mt-3 p-1">
-        <!-- Recipe Image -->
-        <div class="recipe-img">
-            <img src="{{ recipe.image.url }}" alt="{{ recipe.image_alt }}" class="recipe-img">
+<div class="container mx-auto py-4">
+    <!-- Top Section -->
+    <div class="flex flex-wrap md:flex-nowrap">
+        <!-- Image -->
+        <div class="w-full md:w-1/3">
+            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="rounded-lg shadow-md w-full">
         </div>
 
-        <!-- Recipe Details -->
-        <div class="recipe-detail">
-            <h1 class="text-center">{{ recipe.title }}</h1>
-            <hr>
-            <p>{{ recipe.description }}</p>
-            <hr>
-            <p class="text-center">Posted by {{ recipe.user }} on {{ recipe.created_at|date:"F j, Y" }}</p>
+        <!-- Title and Description -->
+        <div class="w-full md:w-2/3 pl-4">
+            <h1 class="text-3xl font-bold mb-2">{{ recipe.title }}</h1>
+            <p class="text-gray-600 mb-4">Posted by: {{ recipe.user.username }}</p>
+            <p class="text-lg mb-6">{{ recipe.description }}</p>
 
-            <!-- Edit and Delete Buttons -->
-            {% if request.user == recipe.user %}
-            <div class="text-center">
-                <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-primary w-25">Edit</a>
-                <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-danger w-25">Delete</a>
-            </div>
-            {% endif %}
+            <!-- Favourites Button -->
+            <a href="{% url 'toggle_favourite' recipe.id %}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700">
+                {% if is_favourite %}
+                    Remove from Favourites
+                {% else %}
+                    Add to Favourites
+                {% endif %}
+            </a>
+        </div>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="flex flex-wrap mt-6">
+        <!-- Ingredients -->
+        <div class="w-full md:w-1/3">
+            <h2 class="text-2xl font-semibold mb-2">Ingredients</h2>
+            <ul class="list-disc pl-6">
+                {% for ingredient in recipe.ingredients.splitlines %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Method/Instructions -->
+        <div class="w-full md:w-2/3 pl-4">
+            <h2 class="text-2xl font-semibold mb-2">Method</h2>
+            <p class="text-lg">{{ recipe.instructions }}</p>
         </div>
     </div>
 
-    <!-- Recipe Content: Ingredients and Instructions -->
-    <div class="recipe-container">
-        <div class="ingredients p-3">
-            <h2>Ingredients</h2>
-            <p>{{ recipe.ingredients|safe }}</p>
-        </div>
-        <div class="instructions p-3">
-            <h2>Instructions</h2>
-            <p>{{ recipe.instructions|safe }}</p>
-        </div>
-    </div>
-</div>
-
-<hr>
-
-<!-- Reviews Section -->
-<section id="reviews" class="mt-4">
-    <h2>Reviews</h2>
-    <div>
+    <!-- Reviews Section -->
+    <div class="mt-8">
+        <h2 class="text-2xl font-semibold mb-4">Reviews</h2>
         {% for review in reviews %}
-        <div>
-            <strong>{{ review.user.username }}:</strong>
-            <p>{{ review.comment }}</p>
-            <p>Reviewed on: {{ review.created_at|date:"F j, Y, g:i a" }}</p>
-            {% if request.user == review.user %}
-            <div>
-                <a href="{% url 'edit_review' review.id %}" class="btn btn-sm btn-primary">Edit</a>
-                <a href="{% url 'delete_review' review.id %}" class="btn btn-sm btn-danger">Delete</a>
+            <div class="border-b pb-4 mb-4">
+                <p class="font-bold">{{ review.user.username }}</p>
+                <p>{{ review.content }}</p>
+                <p class="text-sm text-gray-500">{{ review.created_at }}</p>
             </div>
-            {% endif %}
-        </div>
-        <hr>
-        {% empty %}
-        <p>No reviews yet. Be the first to review!</p>
         {% endfor %}
+
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'add_review' recipe.id %}">
+                {% csrf_token %}
+                <textarea name="content" rows="4" class="w-full border rounded-lg p-2 mb-4"></textarea>
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-700">
+                    Add Review
+                </button>
+            </form>
+        {% else %}
+            <p class="text-gray-500">Please <a href="{% url 'account_login' %}" class="text-blue-500">log in</a> to leave a review.</p>
+        {% endif %}
     </div>
-
-    <!-- Review Form -->
-    {% if user.is_authenticated %}
-    <form method="post" action="{% url 'add_review' recipe.id %}">
-        {{ review_form|crispy }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-secondary mt-1">Submit Review</button>
-    </form>
-    {% else %}
-    <p><a href="{% url 'account_login' %}">Log in</a> to leave a review.</p>
-    {% endif %}
-</section>
-
-<hr>
-
-<!-- Favourites Button -->
-<div class="text-center mb-4">
-    {% if is_favourite %}
-    <form method="post" action="{% url 'toggle_favourite' recipe.id %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Remove from Favourites</button>
-    </form>
-    {% else %}
-    <form method="post" action="{% url 'toggle_favourite' recipe.id %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Add to Favourites</button>
-    </form>
-    {% endif %}
 </div>
-
 {% endblock %}
