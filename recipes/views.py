@@ -128,7 +128,7 @@ View for users to delete their own recipes
 
 
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    template_name = "recipes/confirm_delete.html"
+    template_name = "recipes/recipe_confirm_delete.html"
     model = Recipe
     success_url = reverse_lazy("recipes")
 
