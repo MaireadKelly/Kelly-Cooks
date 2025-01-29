@@ -1,0 +1,35 @@
+.ingredients ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Create responsive columns */
+    gap: 15px;
+    /* Adjust spacing between rows and columns */
+    list-style-type: disc;
+    list-style-position: inside;
+    /* Align bullets with text */
+    margin: 0;
+    /* Remove extra margins */
+    padding: 0 20px;
+    /* Add consistent padding */
+    align-items: start;
+    /* Align grid items to the top */
+    width: 100%;
+    /* Ensure full width */
+}
+
+.ingredients ul li {
+    text-align: left;
+    margin-bottom: 3px; /* Reduce vertical spacing between list items */
+    word-wrap: break-word; /* Ensure long words wrap properly */
+    overflow: hidden; /* Hide extra text */
+    display: -webkit-box; /* Use flex-like box for clamping */
+    -webkit-line-clamp: 2; /* Limit text to 2 lines */
+    -webkit-box-orient: vertical;
+    list-style-position: outside;  /* Ensure bullets are consistently aligned */
+    padding-left: 5px;  /* Add space between bullets and text  */
+
+}
+
+.instructions p {
+    line-height: 1.6;
+}

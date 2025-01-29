@@ -296,14 +296,7 @@ button:hover,
     margin-top: 40px;
 }
 
-.ingredients ul {
-    list-style-type: disc;
-    padding-left: 20px;
-}
 
-.instructions p {
-    line-height: 1.6;
-}
 
 /* Reviews Section */
 .reviews-section {
@@ -374,6 +367,15 @@ textarea:focus {
 
     .recipe-container {
         flex-direction: column;
+    }
+
+    .ingredients ul {
+        grid-template-columns: 1fr;
+        /* Single column on smaller screens */
+        gap: 10px;
+        /* Reduce spacing */
+        padding: 0 10px;
+        /* Adjust padding */
     }
 }
 
