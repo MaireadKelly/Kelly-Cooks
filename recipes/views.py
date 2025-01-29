@@ -66,7 +66,7 @@ class RecipeDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
-        context["reviews"] = recipe.reviews.all()
+        context["reviews"] = recipe.reviews.all()[:5]  # Show latest 5 reviews
         if self.request.user.is_authenticated:
             context["is_favourite"] = recipe.favourite_set.filter(
                 user=self.request.user
@@ -152,22 +152,31 @@ Function to add a review (comment) to a recipe
 
 @login_required
 def add_review(request, recipe_id):
+    """
+    View to add a review to a recipe.
+    Only logged-in users can submit reviews.
+    """
     recipe = get_object_or_404(Recipe, id=recipe_id)
+
     if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
-            review = form.save(commit=False)
-            review.recipe = recipe
-            review.user = request.user
-            review.save()
-            messages.success(request, "Your review has been added successfully!")
-            return redirect("recipe_detail", pk=recipe.id)
+            try:
+                review = form.save(commit=False)
+                review.recipe = recipe
+                review.user = request.user
+                review.save()
+                messages.success(request, "Your review has been added successfully!")
+                return redirect("recipe_detail", pk=recipe.id)
+            except Exception as e:
+                messages.error(request, f"An unexpected error occurred: {e}")
         else:
             messages.error(
-                request, "There was an error in your submission. Please try again."
+                request, "There was an error in your form. Please try again."
             )
     else:
         form = ReviewForm()
+
     return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})
 
 
