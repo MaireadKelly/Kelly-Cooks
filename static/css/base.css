@@ -379,6 +379,14 @@ textarea:focus {
     }
 }
 
+@media (max-width: 576px) {
+    .col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+
 @media screen and (max-width: 480px) {
     .card {
         flex: 0 1 calc(100% - 20px);
