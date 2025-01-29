@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div
+
+    <div>
         class="recipe-container">
         <!-- Image Section -->
         <div class="recipe-image">
@@ -17,10 +18,11 @@
                 <!-- Action Buttons -->
                 <div class="recipe-actions">
                     <a href="{% url 'toggle_favourite' recipe.id %}" class="btn btn-primary">
+
                         {% if is_favourite %}
                             Remove from Favourites
                         {% else %}
-                            Add to Favourites
+                            Add to favourites
                         {% endif %}
                     </a>
                     {% if user.is_authenticated and recipe.user == user %}
@@ -42,7 +44,6 @@
                     {% endfor %}
                 </ul>
             </div>
-
             <!-- Instructions Section -->
             <div class="instructions">
                 <h2 class="section-heading">Instructions</h2>
