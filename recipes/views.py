@@ -25,7 +25,9 @@ class AddRecipe(LoginRequiredMixin, CreateView):
     form_class = RecipeForm
     success_url = "/recipes/"
 
-    def form_valid(self, form):  # Associate the logged in user with the new recipe
+    def form_valid(
+        self, form
+    ):  # Associate the logged in user with the new recipe
         form.instance.user = self.request.user
         return super().form_valid(form)
 
@@ -102,6 +104,7 @@ class MyFavourites(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         # Ensure this filters only valid favourites tied to the user
+
         return Favourite.objects.filter(user=self.request.user)
 
 
@@ -118,7 +121,9 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_success_url(self):  # Redirect to the updated recipe's detail view
         return self.object.get_absolute_url()
 
-    def test_func(self):  # Ensure that only the recipe owner can edit the recipe
+    def test_func(
+        self,
+    ):  # Ensure that only the recipe owner can edit the recipe
         return self.request.user == self.get_object().user
 
 
@@ -132,13 +137,17 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Recipe
     success_url = reverse_lazy("recipes")
 
-    def test_func(self):  # Ensure that only the recipe owner can delete the recipe
+    def test_func(
+        self,
+    ):  # Ensure that only the recipe owner can delete the recipe
         return self.request.user == self.get_object().user
 
     def delete(self, request, *args, **kwargs):
         try:
             response = super().delete(request, *args, **kwargs)
-            messages.success(request, "The recipe has been deleted successfully!")
+            messages.success(
+                request, "The recipe has been deleted successfully!"
+            )
             return response
         except Exception as e:
             messages.error(request, f"An error occurred: {e}")
@@ -166,7 +175,9 @@ def add_review(request, recipe_id):
                 review.recipe = recipe
                 review.user = request.user
                 review.save()
-                messages.success(request, "Your review has been added successfully!")
+                messages.success(
+                    request, "Your review has been added successfully!"
+                )
                 return redirect("recipe_detail", pk=recipe.id)
             except Exception as e:
                 messages.error(request, f"An unexpected error occurred: {e}")
@@ -176,8 +187,9 @@ def add_review(request, recipe_id):
             )
     else:
         form = ReviewForm()
-
-    return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})
+    return render(
+        request, "recipes/add_review.html", {"form": form, "recipe": recipe}
+    )
 
 
 @login_required
@@ -187,11 +199,15 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your review has been updated successfully!")
+            messages.success(
+                request, "Your review has been updated successfully!"
+            )
             return redirect("recipe_detail", pk=review.recipe.id)
     else:
         form = ReviewForm(instance=review)
-    return render(request, "recipes/edit_review.html", {"form": form, "review": review})
+    return render(
+        request, "recipes/edit_review.html", {"form": form, "review": review}
+    )
 
 
 @login_required
@@ -201,13 +217,19 @@ def delete_review(request, review_id):
     """
     review = get_object_or_404(Review, id=review_id)
     # Ensure the logged-in user is the author of the review
-    if review.user != request.user:
-        messages.error(request, "You are not authorized to delete this review.")
-        return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
 
+    if review.user != request.user:
+        messages.error(
+            request, "You are not authorized to delete this review."
+        )
+        return HttpResponseRedirect(
+            reverse("recipe_detail", args=[review.recipe.id])
+        )
     review.delete()
     messages.success(request, "Review successfully deleted!")
-    return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
+    return HttpResponseRedirect(
+        reverse("recipe_detail", args=[review.recipe.id])
+    )
 
 
 @login_required

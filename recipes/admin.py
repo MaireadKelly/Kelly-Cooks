@@ -3,6 +3,8 @@ from .models import Recipe, Review
 
 
 # Admin configuration for the Recipe model
+
+
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_display = (
@@ -32,6 +34,8 @@ class RecipeAdmin(admin.ModelAdmin):
 
 
 # Admin configuration for the Review model
+
+
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
