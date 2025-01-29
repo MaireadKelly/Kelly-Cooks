@@ -210,9 +210,9 @@ button:hover,
 /* Recipe cards */
 .card {
     height: 400px;
-    background-color: var(--background);
+    background-color: transparent !important;
     box-shadow: var(--small-box-shadow);
-    border: var(--border);
+    border: 1px solid #ddd;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -370,12 +370,9 @@ textarea:focus {
     }
 
     .ingredients ul {
-        grid-template-columns: 1fr;
-        /* Single column on smaller screens */
-        gap: 10px;
-        /* Reduce spacing */
-        padding: 0 10px;
-        /* Adjust padding */
+        grid-template-columns: 1fr;  /* Single column on smaller screens */
+        gap: 10px;       /* Reduce spacing */
+        padding: 0 10px;   /* Adjust padding */
     }
 }
 
@@ -385,7 +382,6 @@ textarea:focus {
         max-width: 100%;
     }
 }
-
 
 @media screen and (max-width: 480px) {
     .card {
