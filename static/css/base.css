@@ -262,6 +262,13 @@ button:hover,
         flex-direction: column;
     }
 
+    .recipe-description {
+        overflow: hidden; /* Hides text that doesn't fit */
+        text-overflow: ellipsis; /* Adds "..." to indicate truncation */
+        white-space: nowrap; /* Prevents text from wrapping */
+    }
+    
+
     .ingredients ul {
         grid-template-columns: 1fr;
         gap: 10px;

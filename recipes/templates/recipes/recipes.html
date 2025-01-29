@@ -14,7 +14,7 @@
                         <img src="{{ recipe.image.url }}" class="card-img-top" alt="{{ recipe.image_alt }}">
                         <div class="card-body flex-grow-1">
                             <h2 class="card-title">{{ recipe.title }}</h2>
-                            <p class="card-text">{{ recipe.description|truncatechars:100 }}</p>
+                            <p class="card-text">{{ recipe.description|truncatechars:50 }}</p>
                         </div>
                         <div class="d-flex justify-content-center mt-auto mb-3">
                             <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-primary" aria-label="Click to view {{ recipe.title }}">
