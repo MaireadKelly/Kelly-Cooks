@@ -50,7 +50,6 @@ class ReviewForm(forms.ModelForm):
     """
     Form to add a review (comment) for a recipe.
     """
-
     class Meta:
         model = Review
         fields = ["comment"]
@@ -60,11 +59,9 @@ class ReviewForm(forms.ModelForm):
                 attrs={"rows": 4, "placeholder": "Write your review here"}
             ),
         }
-
         labels = {
             "comment": "Your Review",
         }
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()

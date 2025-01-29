@@ -54,7 +54,7 @@
             {% for review in reviews %}
                 <div class="review">
                     <p class="review-author">{{ review.user.username }}</p>
-                    <p>{{ review.content }}</p>
+                    <p>{{ review.comment }}</p>
                     <p class="review-date">{{ review.created_at }}</p>
                 </div>
             {% endfor %}
@@ -62,7 +62,6 @@
             {% if user.is_authenticated %}
                 <form method="post" action="{% url 'add_review' recipe.id %}">
                     {% csrf_token %}
-                    <textarea name="content" rows="4" placeholder="Add your review"></textarea>
                     <button type="submit" class="btn-submit">Add Review</button>
                 </form>
             {% else %}
