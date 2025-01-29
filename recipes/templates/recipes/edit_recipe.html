@@ -11,7 +11,10 @@
         {{ form.media }}
         {{ form|crispy }}
         <div class="text-center">
+            <!-- Save Changes Button -->
             <button class="btn btn-primary mt-2" type="submit">Edit Recipe</button>
+            <!-- Cancel Button -->
+            <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-secondary mt-2 ml-2">Cancel</a>
         </div>
     </form>
 </div>

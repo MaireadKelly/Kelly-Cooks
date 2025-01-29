@@ -24,9 +24,5 @@ urlpatterns = [
     path("review/<int:review_id>/delete/", delete_review, name="delete_review"),
     path("my-recipes/", MyRecipes.as_view(), name="my_recipes"),
     path("favourites/", MyFavourites.as_view(), name="favourites"),
-    path(
-        "recipe/<int:recipe_id>/toggle-favourite/",
-        toggle_favourite,
-        name="toggle_favourite",
-    ),
+    path("recipe/<int:recipe_id>/toggle-favourite/", toggle_favourite, name="toggle_favourite"),
 ]
