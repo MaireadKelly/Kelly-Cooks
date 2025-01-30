@@ -8,7 +8,7 @@
     <h2 class="text-center">Add Review for {{ recipe.title }}</h2>
     <form method="POST">
         {% csrf_token %}
-        {{ form|crispy }}  <!-- Render the form using Crispy Forms -->
+        {{ form.as_p }}  <!-- Render the form using Crispy Forms -->
         <div class="text-center mt-3">
         <button type="submit" class="btn btn-primary">Submit Review</button>
         <a href="{% url 'recipe_detail' pk=recipe.id %}">Back to Recipe</a>

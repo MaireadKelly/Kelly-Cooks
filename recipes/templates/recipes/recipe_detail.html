@@ -52,6 +52,7 @@
 
         <!-- Reviews Section -->
         <h2>Reviews</h2>
+
         <!-- Display the first 5 reviews -->
         <div>
             {% for review in reviews %}
@@ -63,19 +64,17 @@
                 {% empty %}
                 <p>No reviews yet. Be the first to leave a review!</p>
             {% endfor %}
-
-            {% if user.is_authenticated %}
-                <form method="post" action="{% url 'add_review' recipe.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-submit">Add Review</button>
-                </form>
-            {% else %}
-                <p class="login-message">
-                    Please
-                    <a href="{% url 'account_login' %}">log in</a>
-                    to leave a review.
-                </p>
-            {% endif %}
         </div>
+
+        <!-- Add Review Button for Logged-In Users -->
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_review' recipe.id %}" class="btn btn-primary">Add Review</a>
+        {% else %}
+            <p class="login-message">
+                Please
+                <a href="{% url 'account_login' %}">log in</a>
+                to leave a review.
+            </p>
+        {% endif %}
 
     {% endblock %}
