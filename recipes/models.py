@@ -41,7 +41,9 @@ class Review(models.Model):
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="reviews")
+    recipe = models.ForeignKey(
+        Recipe, on_delete=models.CASCADE, related_name="reviews"
+    )
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
