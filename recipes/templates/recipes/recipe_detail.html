@@ -1,80 +1,72 @@
 {% extends "base.html" %}
-
 {% block content %}
-
-    <div>
-        <!-- Image Section -->
-        <div class="recipe-image">
-            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}"></div>
-
-            <!-- Details Section -->
-            <div class="recipe-details">
-                <h1>{{ recipe.title }}</h1>
-                <p class="recipe-author">Posted by:
-                    {{ recipe.user.username }}</p>
-                <p class="recipe-description">{{ recipe.description }}</p>
-
-                <!-- Action Buttons -->
-                <div class="recipe-actions">
-                    <a href="{% url 'toggle_favourite' recipe.id %}" class="btn btn-primary">
-
-                        {% if is_favourite %}
-                            Remove from Favourites
-                        {% else %}
-                            Add to favourites
-                        {% endif %}
-                    </a>
-                    {% if user.is_authenticated and recipe.user == user %}
-                        <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-secondary">Edit</a>
-                        <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-danger">Delete</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <div
-            class="recipe-instructions">
-            <!-- Ingredients Section -->
-            <div class="ingredients">
-                <h2 class="section-heading">Ingredients</h2>
-                <ul>
-                    {% for ingredient in recipe.ingredients.splitlines %}
-                        <li>{{ ingredient }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- Instructions Section -->
-            <div class="instructions">
-                <h2 class="section-heading">Instructions</h2>
-                <p>{{ recipe.instructions }}</p>
-            </div>
-        </div>
-
-        <!-- Reviews Section -->
-        <h2>Reviews</h2>
-
-        <!-- Display the first 5 reviews -->
-        <div>
-            {% for review in reviews %}
-                <div class="review">
-                    <p class="review-author">{{ review.user.username }}</p>
-                    <p>{{ review.comment }}</p>
-                    <p class="review-date">{{ review.created_at }}</p>
-                </div>
-                {% empty %}
-                <p>No reviews yet. Be the first to leave a review!</p>
-            {% endfor %}
-        </div>
-
-        <!-- Add Review Button for Logged-In Users -->
-        {% if user.is_authenticated %}
-            <a href="{% url 'add_review' recipe.id %}" class="btn btn-primary">Add Review</a>
-        {% else %}
-            <p class="login-message">
-                Please
-                <a href="{% url 'account_login' %}">log in</a>
-                to leave a review.
-            </p>
-        {% endif %}
-
-    {% endblock %}
+<div>
+   <!-- Image Section -->
+   <div class="recipe-image">
+      <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+   </div>
+   <!-- Details Section -->
+   <div class="recipe-details">
+      <h1>{{ recipe.title }}</h1>
+      <p class="recipe-author">Posted by:
+         {{ recipe.user.username }}
+      </p>
+      <p class="recipe-description">{{ recipe.description }}</p>
+      <!-- Action Buttons -->
+      <div class="recipe-actions">
+         <a href="{% url 'toggle_favourite' recipe.id %}" class="btn btn-primary">
+         {% if is_favourite %}
+         Remove from Favourites
+         {% else %}
+         Add to favourites
+         {% endif %}
+         </a>
+         {% if user.is_authenticated and recipe.user == user %}
+         <a href="{% url 'edit_recipe' recipe.id %}" class="btn btn-secondary">Edit</a>
+         <a href="{% url 'delete_recipe' recipe.id %}" class="btn btn-danger">Delete</a>
+         {% endif %}
+      </div>
+   </div>
+</div>
+<div
+   class="recipe-instructions">
+   <!-- Ingredients Section -->
+   <div class="ingredients">
+      <h2 class="section-heading">Ingredients</h2>
+      <ul>
+         {% for ingredient in recipe.ingredients.splitlines %}
+         <li>{{ ingredient }}</li>
+         {% endfor %}
+      </ul>
+   </div>
+   <!-- Instructions Section -->
+   <div class="instructions">
+      <h2 class="section-heading">Instructions</h2>
+      <p>{{ recipe.instructions }}</p>
+   </div>
+</div>
+<!-- Reviews Section -->
+<h2>Reviews</h2>
+<!-- Display the first 5 reviews -->
+<div>
+   {% for review in reviews %}
+   <div class="review">
+      <p class="review-author">{{ review.user.username }}</p>
+      <p>{{ review.comment }}</p>
+      <p class="review-date">{{ review.created_at }}</p>
+   </div>
+   {% empty %}
+   <p>No reviews yet. Be the first to leave a review!</p>
+   {% endfor %}
+</div>
+<!-- Add Review Button for Logged-In Users -->
+{% if user.is_authenticated %}
+<a href="{% url 'add_review' recipe.id %}" class="btn btn-primary">Add Review</a>
+{% else %}
+<p class="login-message">
+   Please
+   <a href="{% url 'account_login' %}">log in</a>
+   to leave a review.
+</p>
+{% endif %}
+{% endblock %}
