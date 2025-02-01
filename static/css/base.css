@@ -128,7 +128,7 @@ img.logo {
     font-weight: 500;
 }
 
-/* 🎯 FORM STYLES */
+/* FORM STYLES */
 
 /* Default form styling (For large forms like Add Recipe & Reviews) */
 form {
@@ -138,24 +138,56 @@ form {
 
 /* General form input styling */
 form .form-control {
-    max-width: 400px;
-    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-/* 📌 Smaller Forms for Login, Logout, Register */
+/* List for password requirements */
+form ul {
+    text-align: left;
+    margin-left: 20px;
+    padding-left: 20px;
+    list-style: disc;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Placeholder Styling */
+::placeholder {
+    color: rgba(0, 0, 0, 0.5); /* Slightly lighter placeholder text */
+    font-style: italic; /* Optional: Italicize placeholder text */
+}
+
+/* Smaller Forms for Login, Logout, Register */
 .form-auth {
     max-width: 300px; /* Make these forms narrower */
     margin: 0 auto;
+}
+
+.form-auth .mb-3 {
+    margin-bottom: 20px; /* Adjust spacing between fields */
 }
 
 .form-auth .form-control {
     max-width: 100%;
 }
 
+/* Highlight invalid inputs */
+.form-control.is-invalid {
+    border-color: var(--accent); /* Highlight with accent color */
+    box-shadow: 0 0 4px var(--accent);
+}
+
+/* Button styling for auth forms */
 .form-auth button {
+    width: 50%;
     display: block;
     margin: 1rem auto 0;
 }
+
 
 /* Textarea styling */
 textarea {

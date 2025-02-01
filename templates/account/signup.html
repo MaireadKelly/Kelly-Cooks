@@ -1,49 +1,52 @@
 {% extends "base.html" %}
+
 {% load i18n %}
-{% block title %}
-    {% trans "Sign Up" %}
-{% endblock %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock head_title %}
+
 {% block content %}
-<div class="container text-center">
-    <h1>{% trans "Sign Up" %}</h1>
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
-    </p>
-    <form class="form-auth" method="POST" action="{% url 'account_signup' %}">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div class="mb-3">
-            <label for="id_username" class="form-label">{% trans "Username" %}*</label>
-            {{ form.username }}
-            <small class="form-text text-muted">
-                {% trans "Required. 15 characters or fewer. Letters, digits and @/./+/-/_ only." %}
-            </small>
-        </div>
-        <div class="mb-3">
-            <label for="id_email" class="form-label">{% trans "Email" %}*</label>
-            {{ form.email }}
-            <small class="form-text text-muted">
-                {% trans "Required. 30 characters or fewer." %}
-            </small>
-        </div>
-        <div class="mb-3">
-            <label for="id_password1" class="form-label">{% trans "Password" %}*</label>
-            {{ form.password1 }}
-            <ul class="text-start">
-                <li>{% trans "Your password can’t be too similar to your other personal information." %}</li>
-                <li>{% trans "Your password must contain at least 8 characters." %}</li>
-                <li>{% trans "Your password can’t be a commonly used password." %}</li>
-                <li>{% trans "Your password can’t be entirely numeric." %}</li>
-            </ul>
-        </div>
-        <div class="mb-3">
-            <label for="id_password2" class="form-label">{% trans "Password (again)" %}*</label>
-            {{ form.password2 }}
-            <small class="form-text text-muted">
-                {% trans "Enter the same password as before, for verification." %}
-            </small>
-        </div>
-        <button class="btn btn-primary w-25 mb-2" type="submit">{% trans "Sign Up" %}</button>
-    </form>
-</div>
-{% endblock %}
+<h1>{% trans "Sign Up" %}</h1>
+
+{% if form.errors %}
+<h3 class="text-danger">Error while registering account!</h3>
+<p class="text-danger">Please check the following inputs:</p>
+<ul class="text-danger">
+    {% for field in form %}
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+<form class="form p-2" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_username" class="form-label">{% trans "Username" %}</label>
+        {{ form.username }}
+    </div>
+
+    <div class="mb-3">
+        <label for="id_email" class="form-label">{% trans "Email" %}</label>
+        {{ form.email }}
+    </div>
+
+    <div class="mb-3">
+        <label for="id_password1" class="form-label">{% trans "Password" %}</label>
+        {{ form.password1 }}
+    </div>
+
+    <div class="mb-3">
+        <label for="id_password2" class="form-label">{% trans "Password (again)" %}</label>
+        {{ form.password2 }}
+    </div>
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+
+    <button class="btn-submit" type="submit">{% trans "Sign Up" %}</button>
+</form>
+{% endblock content %}
