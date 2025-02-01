@@ -22,7 +22,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
@@ -88,7 +88,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "templates",
-            BASE_DIR / "templates/allauth",
+            BASE_DIR / "templates/account",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -170,9 +170,8 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 
+
 # Disable email verification for registration
-
-
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # Static files and media

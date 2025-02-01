@@ -15,6 +15,7 @@ from .models import Recipe, Review, Favourite
 from .forms import RecipeForm, ReviewForm
 from django.contrib.messages import get_messages
 
+
 """
 View for users to add a new recipe
 """

@@ -5,7 +5,14 @@ from crispy_forms.layout import Layout, Field, Submit, Button
 from .models import Recipe, Review
 
 
-class RecipeForm(forms.ModelForm):
+class CustomForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.layout.append(Submit('submit', 'Submit'))
+            
+class RecipeForm(CustomForm):
     """
     Form to create or edit a recipe.
     """
