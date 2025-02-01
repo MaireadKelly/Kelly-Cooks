@@ -98,11 +98,24 @@ footer p {
 }
 
 .social-icon:hover {
-    transform: scale(1.2);
+    transform: scale(1.2); /* Scale up on hover */
 }
 
 .social-icon:focus {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent); /* Add focus outline for accessibility */
+}
+
+/* Responsive footer adjustments */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 10px;
+    }
+
+    .social-icon {
+        margin: 8px;
+    }
 }
 
 /* Navbar styling */
@@ -116,7 +129,7 @@ a.nav-link {
 }
 
 a.nav-link:hover {
-    color: var(--accent);
+    color: var(--accent); /* Change color on hover */
 }
 
 img.logo {
@@ -128,68 +141,7 @@ img.logo {
     font-weight: 500;
 }
 
-/* FORM STYLES */
-
-/* Default form styling (For large forms like Add Recipe & Reviews) */
-form {
-    max-width: 500px; /* Default width for large forms */
-    margin: 0 auto;
-}
-
-/* General form input styling */
-form .form-control {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-/* List for password requirements */
-form ul {
-    text-align: left;
-    margin-left: 20px;
-    padding-left: 20px;
-    list-style: disc;
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-
-/* Placeholder Styling */
-::placeholder {
-    color: rgba(0, 0, 0, 0.5); /* Slightly lighter placeholder text */
-    font-style: italic; /* Optional: Italicize placeholder text */
-}
-
-/* Smaller Forms for Login, Logout, Register */
-.form-auth {
-    max-width: 300px; /* Make these forms narrower */
-    margin: 0 auto;
-}
-
-.form-auth .mb-3 {
-    margin-bottom: 20px; /* Adjust spacing between fields */
-}
-
-.form-auth .form-control {
-    max-width: 100%;
-}
-
-/* Highlight invalid inputs */
-.form-control.is-invalid {
-    border-color: var(--accent); /* Highlight with accent color */
-    box-shadow: 0 0 4px var(--accent);
-}
-
-/* Button styling for auth forms */
-.form-auth button {
-    width: 50%;
-    display: block;
-    margin: 1rem auto 0;
-}
-
-
-/* Textarea styling */
+/* Form styling */
 textarea {
     width: 100%;
     border: 1px solid var(--border);
@@ -203,6 +155,16 @@ textarea {
 textarea:focus {
     outline: 2px solid var(--accent);
     box-shadow: 0 0 4px var(--accent);
+}
+
+/* Styling for auth forms (login, signup, logout) */
+.form-auth {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: var(--small-box-shadow);
+    background-color: var(--secondary);
 }
 
 /* Submit button styling */
@@ -219,7 +181,7 @@ textarea:focus {
 
 .btn-submit:hover {
     background-color: var(--accent);
-    transform: scale(1.05);
+    transform: scale(1.05); /* Slight scale on hover */
 }
 
 /* General button styling */
@@ -251,7 +213,7 @@ button:hover,
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
+    background-color: #5a6268; /* Darker gray on hover */
 }
 
 /* Card styling */
@@ -280,7 +242,44 @@ button:hover,
 }
 
 .card img:hover {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Title inside Card - Allows full visibility of the title */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Sour Gummy', sans-serif;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    white-space: normal;
+    overflow: visible;
+}
+
+/* Description inside Card - Truncated for consistency */
+.card-text {
+    font-size: 1rem;
+    color: var(--text-primary);
+    text-align: justify;
+    margin: 0;
+    line-height: 1.6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Card body flex layout for consistent spacing */
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure button stays at the bottom */
+.card-body .btn {
+    margin-top: auto;
+    align-self: center;
 }
 
 /* Responsive Adjustments */

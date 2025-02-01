@@ -128,7 +128,7 @@ img.logo {
     font-weight: 500;
 }
 
-/* 🎯 FORM STYLES */
+/* FORM STYLES */
 
 /* Default form styling (For large forms like Add Recipe & Reviews) */
 form {
@@ -138,24 +138,56 @@ form {
 
 /* General form input styling */
 form .form-control {
-    max-width: 400px;
-    margin: 0 auto;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-/* 📌 Smaller Forms for Login, Logout, Register */
+/* List for password requirements */
+form ul {
+    text-align: left;
+    margin-left: 20px;
+    padding-left: 20px;
+    list-style: disc;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Placeholder Styling */
+::placeholder {
+    color: rgba(0, 0, 0, 0.5); /* Slightly lighter placeholder text */
+    font-style: italic; /* Optional: Italicize placeholder text */
+}
+
+/* Smaller Forms for Login, Logout, Register */
 .form-auth {
     max-width: 300px; /* Make these forms narrower */
     margin: 0 auto;
+}
+
+.form-auth .mb-3 {
+    margin-bottom: 20px; /* Adjust spacing between fields */
 }
 
 .form-auth .form-control {
     max-width: 100%;
 }
 
+/* Highlight invalid inputs */
+.form-control.is-invalid {
+    border-color: var(--accent); /* Highlight with accent color */
+    box-shadow: 0 0 4px var(--accent);
+}
+
+/* Button styling for auth forms */
 .form-auth button {
+    width: 50%;
     display: block;
     margin: 1rem auto 0;
 }
+
 
 /* Textarea styling */
 textarea {
@@ -197,16 +229,21 @@ button,
     color: var(--background);
     border: none;
     padding: 10px 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover,
 .btn:hover {
     background-color: var(--accent);
     color: var(--primary);
+    transform: scale(1.05); /* Matches the scaling effect of .btn-submit */
 }
 
-/* Secondary Button styling */
+/* Secondary button styling */
 .btn-secondary {
     background-color: #6c757d;
     color: white;
@@ -215,12 +252,14 @@ button:hover,
     border-radius: 5px;
     display: inline-block;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-secondary:hover {
     background-color: #5a6268;
+    transform: scale(1.05); /* Add scaling effect for consistency */
 }
+
 
 /* Card styling */
 .card {
