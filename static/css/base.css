@@ -9,11 +9,11 @@
     --main-font: 'Roboto', sans-serif;
 
     /* Colors */
-    --primary: #734060; /* Main theme color */
-    --background: #EEECE9; /* Light background color */
-    --secondary: #f8f9fa; /* Secondary light color */
-    --text-primary: #50352F; /* Primary text color */
-    --accent: #fcb61a; /* Highlight/accent color */
+    --primary: #734060; /* COSMIC - Main theme color */
+    --background: #EEECE9; /* ALABASTER - Light background color */
+    --secondary: #f8f9fa; /* GHOST WHITE - Secondary light color */
+    --text-primary: #50352F; /* BLACK ROSE COLOUR - Primary text color */
+    --accent: #fcb61a; /* VIVID ORANGE - Highlight/accent color */
 
     /* Utilities */
     --small-box-shadow: 1px -1px 7px 0 rgba(0, 0, 0, 0.1);
