@@ -26,14 +26,12 @@ class AddRecipe(LoginRequiredMixin, CreateView):
     form_class = RecipeForm
     success_url = "/recipes/"
 
-    def form_valid(
-        self, form
-    ):  # Associate the logged in user with the new recipe
+    def form_valid(self, form):  # Associate logged in user with the new recipe
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
-""" 
+"""
 View to list all recipes with optional search functionality
 """
 
@@ -42,7 +40,6 @@ class Recipes(ListView):
     template_name = "recipes/recipes.html"
     model = Recipe
     context_object_name = "recipes"
-    paginate_by = 10
 
     def get_queryset(self, **kwargs):  # Filter recipes based on search query
         query = self.request.GET.get("q")
@@ -56,7 +53,7 @@ class Recipes(ListView):
         return self.model.objects.all()
 
 
-""" 
+"""
 View to display a single recipe's details
 """
 
@@ -147,8 +144,7 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         try:
             response = super().delete(request, *args, **kwargs)
             messages.success(
-                request, "The recipe has been deleted successfully!"
-            )
+                request, "The recipe has been deleted successfully!")
             return response
         except Exception as e:
             messages.error(request, f"An error occurred: {e}")
@@ -179,19 +175,17 @@ def add_review(request, recipe_id):
             review.user = request.user
             review.save()
             messages.success(
-                request, "Your review has been added successfully!"
-            )
+                request, "Your review has been added successfully!")
             return redirect("recipe_detail", pk=recipe.id)
         else:
             messages.error(
                 request,
-                "There was an error in your form. Please correct it and try again.",
+                "There was an error in your form. Please try again.",
             )
     else:
         form = ReviewForm()
-    return render(
-        request, "recipes/add_review.html", {"form": form, "recipe": recipe}
-    )
+    return render(request, "recipes/add_review.html",
+                  {"form": form, "recipe": recipe})
 
 
 @login_required
@@ -202,14 +196,12 @@ def edit_review(request, review_id):
         if form.is_valid():
             form.save()
             messages.success(
-                request, "Your review has been updated successfully!"
-            )
+                request, "Your review has been updated successfully!")
             return redirect("recipe_detail", pk=review.recipe.id)
     else:
         form = ReviewForm(instance=review)
-    return render(
-        request, "recipes/edit_review.html", {"form": form, "review": review}
-    )
+    return render(request, "recipes/edit_review.html",
+                  {"form": form, "review": review})
 
 
 @login_required
@@ -222,16 +214,18 @@ def delete_review(request, review_id):
 
     if review.user != request.user:
         messages.error(
-            request, "You are not authorized to delete this review."
-        )
+            request,
+            "You are not authorized to delete this review.")
         return HttpResponseRedirect(
-            reverse("recipe_detail", args=[review.recipe.id])
-        )
+            reverse(
+                "recipe_detail", args=[
+                    review.recipe.id]))
     review.delete()
     messages.success(request, "Review successfully deleted!")
     return HttpResponseRedirect(
-        reverse("recipe_detail", args=[review.recipe.id])
-    )
+        reverse(
+            "recipe_detail", args=[
+                review.recipe.id]))
 
 
 @login_required

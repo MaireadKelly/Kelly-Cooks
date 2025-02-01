@@ -11,6 +11,5 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         all_recipes = Recipe.objects.all()
         context["random_recipes"] = sample(
-            list(all_recipes), min(len(all_recipes), 4)
-        )
+            list(all_recipes), min(len(all_recipes), 4))
         return context
