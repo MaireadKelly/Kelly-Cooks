@@ -14,6 +14,7 @@ from django.urls import reverse, reverse_lazy
 from .models import Recipe, Review, Favourite
 from .forms import RecipeForm, ReviewForm
 from django.contrib.messages import get_messages
+from django.core.paginator import Paginator
 
 """
 View for users to add a new recipe
@@ -40,6 +41,7 @@ class Recipes(ListView):
     template_name = "recipes/recipes.html"
     model = Recipe
     context_object_name = "recipes"
+    paginate_by = 12
 
     def get_queryset(self, **kwargs):  # Filter recipes based on search query
         query = self.request.GET.get("q")

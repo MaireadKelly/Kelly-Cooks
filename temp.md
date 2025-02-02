@@ -58,6 +58,50 @@ Scrum-diddly-umptious provides an easy and engaging way to explore, share, and m
 ## Agile Process
 
 For project management, we used Agile methodologies with a GitHub project board and detailed user stories. This helped us keep track of features, bugs, and enhancements.
+## Agile Development
+
+Our project followed Agile methodologies with a focus on prioritizing tasks as Must Have, Should Have, and Nice to Have. Below is a summary of tasks categorized by their priority and progress.
+
+### Must Have - Core Functionality
+- **User Registration (#15)** - Done
+- **Login and Logout (#12)** - Done
+- **Manage Reviews (#5)** - Done
+- **Manage User Accounts (#6)** - Done
+- **Cooking Instructions (#9)** - Done
+- **User Authentication (#19)** - Done
+- **Browse and Search for Recipes (#11)** - Done
+- **404 Page (#20)** - Done
+- **Add, Edit, and Delete Recipes (#10)** - Done
+
+
+### Should Have - UI Improvements
+- **Manage Site Content (#8)** - Done
+- **Social Media Links (#21)** - Done
+- **Add Cancel Button to Delete Recipe (#17)** - Done
+- **Have Cancel Button on Confirm Logout (#16)** - Done
+
+
+#### Deployment
+- **Deploy the App (#24)** - Done
+- **Deployment Notes (#22)** - In Progress
+
+---
+
+### Nice to Have - Future Enhancements
+- **Add Recipe Review (#18)** - Done
+- **Manage Recipes (#13)** - Done
+- **Manage Categories and Tags (#14)** - Backlog
+- **Manage Notifications and Announcements (#3)** - Backlog
+- **Add Servings (#23)** - Backlog
+- **Monitor Platform Activity (#7)** - Backlog
+- **View and Manage Reports (#4)** - Backlog
+- **Manage Advertisements and Promotions (#1)** - Backlog
+- **User Story Backup and Restore Site Data (#2)** - Backlog
+
+---
+## Agile Development
+
+
 
 ### Project Issues
 

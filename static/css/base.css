@@ -216,6 +216,23 @@ button:hover,
     background-color: #5a6268; /* Darker gray on hover */
 }
 
+/* Custom button for Pagination Styling */
+.custom-btn {
+    background-color: var(--primary);
+    color: var(--background);
+    border: none;
+}
+
+.custom-pagination-link {
+    color: var(--primary) !important;
+}
+
+.custom-pagination-text {
+    font-weight: bold;
+}
+
+
+
 /* Card styling */
 .card {
     height: auto;
