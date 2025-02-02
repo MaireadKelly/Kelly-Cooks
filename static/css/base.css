@@ -217,19 +217,22 @@ button:hover,
 }
 
 /* Custom button for Pagination Styling */
-.custom-btn {
-    background-color: var(--primary);
-    color: var(--background);
-    border: none;
+.custom-pagination-link {
+    font-weight: bold;
+    color: var(--primary) !important;
+    text-decoration: none;
+   
 }
 
-.custom-pagination-link {
-    color: var(--primary) !important;
+.custom-pagination-link:hover {
+    background-color: var(--accent);
+    color: var(--primary);
 }
 
 .custom-pagination-text {
     font-weight: bold;
 }
+
 
 
 
