@@ -199,18 +199,16 @@ def edit_review(request, review_id):
 
 @login_required
 def delete_review(request, review_id):
-    """
-    View to delete a specific review.
-    """
     review = get_object_or_404(Review, id=review_id)
-    # Ensure the logged-in user is the author of the review
 
+    # Ensure only the review author can delete
     if review.user != request.user:
         messages.error(request, "You are not authorized to delete this review.")
-        return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
+        return redirect("recipe_detail", pk=review.recipe.id)
+
     review.delete()
     messages.success(request, "Review successfully deleted!")
-    return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
+    return redirect("recipe_detail", pk=review.recipe.id)
 
 
 @login_required
