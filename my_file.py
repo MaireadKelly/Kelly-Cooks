@@ -1,10 +1,11 @@
 # Set your Cloudinary credentials
 # ==============================
 import json
+
+import cloudinary
 import cloudinary.api
 import cloudinary.uploader
 from cloudinary import CloudinaryImage
-import cloudinary
 from dotenv import load_dotenv
 
 load_dotenv()

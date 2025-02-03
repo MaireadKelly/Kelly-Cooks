@@ -1,8 +1,8 @@
 from cloudinary.models import CloudinaryField
-from django.db import models
 from django.contrib.auth.models import User
-from djrichtextfield.models import RichTextField
+from django.db import models
 from django.urls import reverse
+from djrichtextfield.models import RichTextField
 
 
 class Recipe(models.Model):

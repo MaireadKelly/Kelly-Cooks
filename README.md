@@ -11,14 +11,15 @@ Recipe Sharing App is an online platform designed for food enthusiasts and home 
     * [User Stories](#user-stories)
     * [Wireframes](#wireframes)
     * [Agile Methodology](#agile-methodology)
-2. [Features](#features)
-3. [Technologies Used](#technologies-used)
-4. [Libraries](#libraries-used)
-5. [Testing](#testing)
-6. [Bugs](#bugs)
-7. [Deployment](#deployment)
-8. [Credits](#credits)
-9. [Acknowledgments](#acknowledgments)
+2. [Design](#design)
+3. [Features](#features)
+4. [Technologies Used](#technologies-used)
+5. [Libraries](#libraries-used)
+6. [Testing](#testing)
+7. [Bugs](#bugs)
+8. [Deployment](#deployment)
+9. [Credits](#credits)
+10. [Acknowledgments](#acknowledgments)
 
 ---
 
@@ -30,6 +31,10 @@ Recipe Sharing App is an online platform designed for food enthusiasts and home 
 - As a user, I want a simple navigation menu to find content easily.
 - As a user, I want the navigation menu to be accessible on all devices.
 - As a user, I want to see social media links for community interaction.
+
+![NavBar Desktop View](static/documentation/readme/Nav-Bar-desktop.png)
+![NavBar Mobile View](static/documentation/readme/Nav-Bar-Mobile.png)
+
 
 #### **Core Functionality**
 - As a user, I want to register an account to access features.
@@ -53,6 +58,8 @@ Recipe Sharing App is an online platform designed for food enthusiasts and home 
 - As a user, I want a simple navigation menu to find content easily.
 - As a user, I want the navigation menu to be accessible on all devices.
 - As a user, I want to see social media links for community interaction.
+
+![Footer](static/documentation/readme/footer.png)
 
 #### **Recipe CRUD Operations**
 - As a registered user, I want to submit recipes.
@@ -78,6 +85,8 @@ GitHub milestones were also used to group related user stories together.
 
 
 ---
+
+## **Design**
 
 ## **Features**
 

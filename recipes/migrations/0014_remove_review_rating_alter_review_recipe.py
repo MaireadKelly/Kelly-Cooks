@@ -7,7 +7,8 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("recipes", "0013_remove_recipe_average_rating_remove_recipe_likes_and_more"), ]
+        ("recipes", "0013_remove_recipe_average_rating_remove_recipe_likes_and_more"),
+    ]
 
     operations = [
         migrations.RemoveField(

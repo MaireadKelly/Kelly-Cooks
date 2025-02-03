@@ -1,20 +1,16 @@
-from django.views.generic import (
-    CreateView,
-    ListView,
-    DetailView,
-    DeleteView,
-    UpdateView,
-)
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.shortcuts import redirect, render, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.db.models import Q
-from django.urls import reverse, reverse_lazy
-from .models import Recipe, Review, Favourite
-from .forms import RecipeForm, ReviewForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages import get_messages
 from django.core.paginator import Paginator
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
+
+from .forms import RecipeForm, ReviewForm
+from .models import Favourite, Recipe, Review
 
 """
 View for users to add a new recipe
@@ -145,8 +141,7 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         try:
             response = super().delete(request, *args, **kwargs)
-            messages.success(
-                request, "The recipe has been deleted successfully!")
+            messages.success(request, "The recipe has been deleted successfully!")
             return response
         except Exception as e:
             messages.error(request, f"An error occurred: {e}")
@@ -176,8 +171,7 @@ def add_review(request, recipe_id):
             review.recipe = recipe
             review.user = request.user
             review.save()
-            messages.success(
-                request, "Your review has been added successfully!")
+            messages.success(request, "Your review has been added successfully!")
             return redirect("recipe_detail", pk=recipe.id)
         else:
             messages.error(
@@ -186,8 +180,7 @@ def add_review(request, recipe_id):
             )
     else:
         form = ReviewForm()
-    return render(request, "recipes/add_review.html",
-                  {"form": form, "recipe": recipe})
+    return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})
 
 
 @login_required
@@ -197,13 +190,11 @@ def edit_review(request, review_id):
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
-            messages.success(
-                request, "Your review has been updated successfully!")
+            messages.success(request, "Your review has been updated successfully!")
             return redirect("recipe_detail", pk=review.recipe.id)
     else:
         form = ReviewForm(instance=review)
-    return render(request, "recipes/edit_review.html",
-                  {"form": form, "review": review})
+    return render(request, "recipes/edit_review.html", {"form": form, "review": review})
 
 
 @login_required
@@ -215,19 +206,11 @@ def delete_review(request, review_id):
     # Ensure the logged-in user is the author of the review
 
     if review.user != request.user:
-        messages.error(
-            request,
-            "You are not authorized to delete this review.")
-        return HttpResponseRedirect(
-            reverse(
-                "recipe_detail", args=[
-                    review.recipe.id]))
+        messages.error(request, "You are not authorized to delete this review.")
+        return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
     review.delete()
     messages.success(request, "Review successfully deleted!")
-    return HttpResponseRedirect(
-        reverse(
-            "recipe_detail", args=[
-                review.recipe.id]))
+    return HttpResponseRedirect(reverse("recipe_detail", args=[review.recipe.id]))
 
 
 @login_required

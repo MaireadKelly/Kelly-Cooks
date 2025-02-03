@@ -1,17 +1,8 @@
 from django.urls import path
-from .views import (
-    AddRecipe,
-    Recipes,
-    RecipeDetail,
-    DeleteRecipe,
-    EditRecipe,
-    add_review,
-    edit_review,
-    delete_review,
-    MyRecipes,
-    MyFavourites,
-    toggle_favourite,
-)
+
+from .views import (AddRecipe, DeleteRecipe, EditRecipe, MyFavourites,
+                    MyRecipes, RecipeDetail, Recipes, add_review,
+                    delete_review, edit_review, toggle_favourite)
 
 urlpatterns = [
     path("", Recipes.as_view(), name="recipes"),

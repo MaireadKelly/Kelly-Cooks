@@ -1,18 +1,21 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Review{% endblock %}
+{% block title %}Add Review
+{% endblock %}
 
 {% block content %}
 
-<div class="container">
-    <h2 class="text-center">Add Review for {{ recipe.title }}</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}  <!-- Render the form using Crispy Forms -->
-        <div class="text-center mt-3">
-        <button type="submit" class="btn btn-primary">Submit Review</button>
-        <a href="{% url 'recipe_detail' pk=recipe.id %}">Back to Recipe</a>
-        </div>
-    </form>
-</div>
+    <div class="container">
+        <h2 class="text-center">Add Review for
+            {{ recipe.title }}</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <!-- Render the form using Crispy Forms -->
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+                <a href="{% url 'recipe_detail' pk=recipe.id %}">Back to Recipe</a>
+            </div>
+        </form>
+    </div>
 {% endblock %}

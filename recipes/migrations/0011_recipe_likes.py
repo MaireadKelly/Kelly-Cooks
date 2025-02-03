@@ -16,8 +16,7 @@ class Migration(migrations.Migration):
             model_name="recipe",
             name="likes",
             field=models.ManyToManyField(
-                blank=True,
-                related_name="liked_recipes",
-                to=settings.AUTH_USER_MODEL),
+                blank=True, related_name="liked_recipes", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

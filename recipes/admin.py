@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Recipe, Review
 
+from .models import Recipe, Review
 
 # Admin configuration for the Recipe model
 
