@@ -12,6 +12,7 @@
               crossorigin="anonymous">
         <!-- custom css -->
         <style>
+
         body {
             display: flex;
             flex-direction: column;
@@ -49,9 +50,10 @@
     </head>
     <body>
         <div class="container">
-            <div class="emoji">😕</div>
+            <div class="emoji"></div>
             <h1>Oops! Page Not Found</h1>
             <p>We couldn't find the page you were looking for.</p>
+            <img src="{% static 'images/splat.jpg' }" alt="404 Not Found">
             <a class="btn btn-primary" href="/">Go back to Home</a>
         </div>
     </body>
