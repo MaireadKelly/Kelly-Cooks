@@ -217,4 +217,4 @@ For detailed testing results, refer to the [Testing Documentation](TESTING.md).
 ---
 
 ## **Acknowledgments**
-Special thanks to my Tutor Marko Tot and colleagues for their guidance. For Code Peer Reviewers Cam and Petewho took the time to review my project
+Special thanks to my Tutor Marko Tot and colleagues for their guidance. For Code Peer Reviewer Cam who took the time to review my project.
