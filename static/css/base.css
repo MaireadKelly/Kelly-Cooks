@@ -158,13 +158,23 @@ textarea:focus {
 }
 
 /* Styling for auth forms (login, signup, logout) */
-.form-auth {
-    max-width: 400px;
-    margin: 0 auto;
+.auth-container {
+    max-width: 450px;
+    margin: auto;
     padding: 20px;
     border-radius: 5px;
     box-shadow: var(--small-box-shadow);
     background-color: var(--secondary);
+}
+
+/* Global Form Styling for Consistency */
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    box-shadow: var(--small-box-shadow);
+    border-radius: 10px;
 }
 
 /* Submit button styling */
@@ -221,7 +231,6 @@ button:hover,
     font-weight: bold;
     color: var(--primary) !important;
     text-decoration: none;
-   
 }
 
 .custom-pagination-link:hover {
@@ -232,9 +241,6 @@ button:hover,
 .custom-pagination-text {
     font-weight: bold;
 }
-
-
-
 
 /* Card styling */
 .card {
@@ -263,43 +269,6 @@ button:hover,
 
 .card img:hover {
     transform: scale(1.1); /* Slight zoom on hover */
-}
-
-/* Title inside Card - Allows full visibility of the title */
-.card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    font-family: 'Sour Gummy', sans-serif;
-    color: var(--primary);
-    text-align: center;
-    margin-bottom: 0.5rem;
-    white-space: normal;
-    overflow: visible;
-}
-
-/* Description inside Card - Truncated for consistency */
-.card-text {
-    font-size: 1rem;
-    color: var(--text-primary);
-    text-align: justify;
-    margin: 0;
-    line-height: 1.6;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* Card body flex layout for consistent spacing */
-.card-body {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Ensure button stays at the bottom */
-.card-body .btn {
-    margin-top: auto;
-    align-self: center;
 }
 
 /* Responsive Adjustments */

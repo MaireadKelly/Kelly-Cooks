@@ -81,6 +81,9 @@ In the Djanggo Admin Panel authorised users can perform all CRUD operations on U
 ![Wireframe Recipes](static/documentation/readme/recipes-d-wireframe.png)
 ![Wireframe Add Recipe](static/documentation/readme/add-recipe-d-wireframe.png)
 
+### **ERD Database Diagram**
+![ERD](static/documentation/readme/ERD.png)
+
 
 ### **Agile Methodology**
 This project was developed using Agile methodology which allowed me to iteratively and incrementally build my app, with flexibility to make changes to my design throughout the entire development process.
@@ -110,6 +113,8 @@ Thankfully for this project all of the "Could Have" issues were completed.
 ### **UI Colour Palette**
 
 ![UI Colour Palette](static/documentation/readme/colours.png)
+
+
 
 
 ## **Features**

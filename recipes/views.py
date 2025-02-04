@@ -211,13 +211,14 @@ def delete_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
 
     # Ensure only the review author can delete
-
     if review.user != request.user:
-        messages.error(request, "You are not authorized to delete this review")
-        return redirect("recipe_detail", pk=review.recipe.id)
+        messages.error(request, "You are not authorized to delete this review.")
+        return redirect(reverse("recipe_detail", kwargs={"pk": review.recipe.id}))
+
     review.delete()
     messages.success(request, "Review successfully deleted!")
-    return redirect("recipe_detail", pk=review.recipe.id)
+
+    return redirect(reverse("recipe_detail", kwargs={"pk": review.recipe.id}))
 
 
 @login_required

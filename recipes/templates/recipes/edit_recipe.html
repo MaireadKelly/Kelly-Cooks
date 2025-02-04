@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
-{% block title %}Edit{% endblock %}
+{% block title %}Edit Recipe{% endblock %}
 
 {% block content %}
-
-<div class="container">
-    <form class="p-2 form" method="POST" enctype="multipart/form-data">
-        <h1 class="text-center">Edit Recipe</h1>
-        {% csrf_token %}
-        {{ form.media }}
-        {{ form|crispy }}
-        <div class="text-center">
-            <!-- Save Changes Button -->
-            <button class="btn btn-primary mt-2" type="submit">Edit Recipe</button>
-            <!-- Cancel Button -->
-            <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-secondary mt-2 ml-2">Cancel</a>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 shadow-sm p-4 bg-white rounded">
+            <h1 class="text-center">Edit Recipe</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form|crispy }}
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary w-100" type="submit">Save Changes</button>
+                    <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
-
 {% endblock %}
