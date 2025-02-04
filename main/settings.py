@@ -5,20 +5,25 @@ import dj_database_url
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = False
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 # Application definition
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -104,6 +109,7 @@ AUTHENTICATION_BACKENDS = [
 WSGI_APPLICATION = "main.wsgi.application"
 
 # Database configuration
+
 DATABASES = {
     "default": dj_database_url.parse(
         os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=True
@@ -113,6 +119,7 @@ DATABASES = {
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 
 # Password validation
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": (
@@ -121,13 +128,21 @@ AUTH_PASSWORD_VALIDATORS = [
         ),
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "MinimumLengthValidator"),
+        "NAME": (
+            "django.contrib.auth.password_validation." "MinimumLengthValidator"
+        ),
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "CommonPasswordValidator"),
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "CommonPasswordValidator"
+        ),
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "NumericPasswordValidator"),
+        "NAME": (
+            "django.contrib.auth.password_validation."
+            "NumericPasswordValidator"
+        ),
     },
 ]
 
@@ -137,6 +152,7 @@ USE_I18N = True
 USE_TZ = True
 
 # Account setup
+
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
@@ -145,9 +161,11 @@ LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 
 # Disable email verification for registration
+
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # Static files and media
+
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
