@@ -23,7 +23,7 @@ gunicorn==20.1.0
 itsdangerous==2.2.0
 pathspec==0.12.1
 pillow==10.4.0
-psycopg2==2.9.9
+psycopg2-binary==2.9.10
 python-dotenv==1.0.1
 q==2.7
 sql==2022.4.0

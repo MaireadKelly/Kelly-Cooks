@@ -18,9 +18,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = '8000-maireadkelly-kellycooks-jm9jmczqvqm.ws.codeinstitute-ide.net','kellycookspp4-63d6db43ef5f.herokuapp.com','127.0.0.1'
+
+# os.getenv("ALLOWED_HOSTS", "").split(",")
 
 # Application definition
 
