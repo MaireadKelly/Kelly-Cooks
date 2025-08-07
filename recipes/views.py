@@ -26,11 +26,14 @@ class AddRecipe(LoginRequiredMixin, CreateView):
     template_name = "recipes/add_recipe.html"
     model = Recipe
     form_class = RecipeForm
-    success_url = "/recipes/"
 
     def form_valid(self, form):  # Associate logged in user with the new recipe
         form.instance.user = self.request.user
+        messages.success(self.request, "Your recipe has been added successfully!")
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
 
 
 """
