@@ -20,7 +20,11 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = '8000-maireadkelly-kellycooks-jm9jmczqvqm.ws.codeinstitute-ide.net','kellycookspp4-63d6db43ef5f.herokuapp.com','127.0.0.1'
+ALLOWED_HOSTS = (
+    "8000-maireadkelly-kellycooks-jm9jmczqvqm.ws.codeinstitute-ide.net",
+    "kellycookspp4-63d6db43ef5f.herokuapp.com",
+    "127.0.0.1",
+)
 
 # os.getenv("ALLOWED_HOSTS", "").split(",")
 
@@ -130,21 +134,13 @@ AUTH_PASSWORD_VALIDATORS = [
         ),
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation." "MinimumLengthValidator"
-        ),
+        "NAME": ("django.contrib.auth.password_validation." "MinimumLengthValidator"),
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "CommonPasswordValidator"
-        ),
+        "NAME": ("django.contrib.auth.password_validation." "CommonPasswordValidator"),
     },
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "NumericPasswordValidator"
-        ),
+        "NAME": ("django.contrib.auth.password_validation." "NumericPasswordValidator"),
     },
 ]
 
@@ -159,6 +155,7 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_UNIQUE_EMAIL = True  # (usually set by default)
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 
