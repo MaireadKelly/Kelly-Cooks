@@ -115,16 +115,22 @@ View for users to edit their own recipes
 
 
 class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    View for users to edit their own recipes.
+    """
+
     template_name = "recipes/edit_recipe.html"
     model = Recipe
     form_class = RecipeForm
 
-    def get_success_url(self):  # Redirect to the updated recipe's detail view
+    def form_valid(self, form):
+        messages.success(self.request, "Your recipe has been updated successfully!")
+        return super().form_valid(form)
+
+    def get_success_url(self):
         return self.object.get_absolute_url()
 
-    def test_func(
-        self,
-    ):  # Ensure that only the recipe owner can edit the recipe
+    def test_func(self):
         return self.request.user == self.get_object().user
 
 
@@ -185,9 +191,7 @@ def add_review(request, recipe_id):
             )
     else:
         form = ReviewForm()
-    return render(
-        request, "recipes/add_review.html", {"form": form, "recipe": recipe}
-    )
+    return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})
 
 
 @login_required
@@ -201,9 +205,7 @@ def edit_review(request, review_id):
             return redirect("recipe_detail", pk=review.recipe.id)
     else:
         form = ReviewForm(instance=review)
-    return render(
-        request, "recipes/edit_review.html", {"form": form, "review": review}
-    )
+    return render(request, "recipes/edit_review.html", {"form": form, "review": review})
 
 
 @login_required
