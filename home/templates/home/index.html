@@ -15,9 +15,16 @@
             </p>
             <!-- Show different button based on authentication status -->
             {% if user.is_authenticated %}
-                <a class="btn btn-primary btn-lg" href="{% url 'recipes' %}" role="button">Browse Recipes</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'my_recipes' %}" role="button">
+                    View My Recipes
+                </a>
+                 <a class="btn btn-secondary btn-lg" href="{% url 'recipes' %}" role="button">
+                    Browse All Recipes
+                </a>
             {% else %}
-                <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Sign Up</a>
+                <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">
+                    Sign Up
+                </a>
             {% endif %}
         </div>
     </div>
