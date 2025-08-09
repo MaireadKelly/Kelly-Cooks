@@ -2,25 +2,25 @@
 {% block title %}My Favourites{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="my-4">My Favourite Recipes</h1>
-    {% if favourites %}
-        <div class="row">
-            {% for favourite in favourites %}
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="{{ favourite.recipe.image.url }}" class="card-img-top" alt="{{ favourite.recipe.image_alt }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ favourite.recipe.title }}</h5>
-                        <p class="card-text">{{ favourite.recipe.description|truncatewords:20 }}</p>
-                        <a href="{% url 'recipe_detail' favourite.recipe.id %}" class="btn btn-primary">View Recipe</a>
+    <div class="container">
+        <h1 class="my-4">My Favourite Recipes</h1>
+        {% if favourites %}
+            <div class="row">
+                {% for favourite in favourites %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="{{ favourite.recipe.image.url }}" class="card-img-top" alt="{{ favourite.recipe.image_alt }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ favourite.recipe.title }}</h5>
+                                <p class="card-text">{{ favourite.recipe.description|truncatewords:20 }}</p>
+                                <a href="{% url 'recipe_detail' favourite.recipe.id %}" class="btn btn-primary">View Recipe</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p>You have no favourite recipes yet.</p>
-    {% endif %}
-</div>
+        {% else %}
+            <p>You have no favourite recipes yet.</p>
+        {% endif %}
+    </div>
 {% endblock %}
