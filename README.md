@@ -84,6 +84,104 @@ The ERD below illustrates the models and relationships used in the project.
 - Search functionality.
 - Responsive design for mobile, tablet, and desktop.
 
+
+### User Registration
+
+New users can register an account using the sign-up form. The system prevents invalid inputs and provides clear error messages.
+
+- **Invalid Email Example**  
+  Form validation prevents registration with an invalid email address.  
+  ![Registration error - email](docs/readme/registration-error-email.png)
+
+- **Invalid Password Example**  
+  Password validation ensures strong and matching passwords.  
+  ![Registration error - password](docs/readme/registration-error-password.png)
+
+- **Registration Form**  
+  ![Registration form](docs/readme/registration-form.png)
+
+- **Successful Registration**  
+  Once registered, users are automatically logged in.  
+  ![Registration success](docs/readme/register-success.png)
+
+### Login & Logout
+
+- **Login form** - Users can log in with their username or email and password. 
+![Login form](docs/readme/login-form.png)
+
+- **Login error** – if incorrect credentials are entered, a clear error message is displayed above the form.  
+![Login Error Password](docs/readme/login-error-password.png)
+
+- **Successful login** – users are redirected to the homepage.  
+![Login Form](docs/readme/register-success.png)
+
+- **Logout**  
+  Users can safely log out from their account at any time, with the option to cancel.
+![Confirm Logout](docs/readme/logout.png)
+![Logout success](docs/readme/logout_success.png)
+
+
+
+### Landing Page
+
+The landing page changes depending on whether the user is logged in or logged out.
+
+- **Logged Out View** – users are prompted to sign up to access more features.  
+  ![Landing page logged out](docs/readme/landing-logged-out.png)
+
+- **Logged In View** – authenticated users can browse recipes directly.  
+  ![Landing page logged in](docs/readme/landing-logged-in.png)
+
+
+### Recipe Detail Page
+
+Each recipe has its own detail page where users can view the full instructions, ingredients, and reviews.  
+
+- **Owner View**  
+  When viewing their own recipe, users can edit or delete it.  
+  ![Recipe detail owner](docs/readme/recipe-detail-owner.png)
+
+- **Other User View**  
+  Other users can favourite the recipe or leave a review.  
+  ![Recipe detail user](docs/readme/recipe-detail-user.png)
+
+
+### Add Recipe
+
+Authenticated users can add their own recipes via a simple form. Validation prevents incomplete or invalid submissions.
+
+- **Add Recipe Form**  
+  ![Add recipe form](docs/readme/add-recipe-form.png)
+
+- **Successful Creation**  
+  After submitting, the user is redirected to the new recipe’s detail page with a success message.  
+  ![Add recipe success](docs/readme/add-recipe-success.png)
+
+### Edit Recipe
+
+Recipe owners can update their recipes via the edit form. A success message confirms the changes.
+
+- **Edit Recipe Form**  
+  ![Edit recipe form](docs/readme/edit-recipe-form.png)
+
+- **Successful Update**  
+  After saving, the user is redirected to the recipe’s detail page with a success message.  
+  ![Edit recipe success](docs/readme/edit-recipe-success.png)
+
+
+### Delete Recipe
+
+Only the recipe owner can delete a recipe. A confirmation step prevents accidental deletion.
+
+- **Delete Confirmation**  
+  ![Delete recipe confirmation](docs/readme/delete-recipe-confirm.png)
+
+- **Successful Deletion**  
+  After confirming, the user is redirected to the recipe list with a success message.  
+  ![Delete recipe success](docs/readme/delete-recipe-success.png)
+
+
+
 ### **Future Features**
 - Advanced filtering by cuisine, dietary needs, and cooking time.
 - Rating system for recipes.
