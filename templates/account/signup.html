@@ -3,21 +3,33 @@
 {% block title %}
     {% trans "Signup" %}
 {% endblock %}
+
 {% block content %}
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-5 shadow-sm p-4 bg-white rounded text-center">
-                <h1>{% trans "Sign Up" %}</h1>
-                <p>
+                <h1 class="mb-3">{% trans "Sign Up" %}</h1>
+                <p class="mb-4">
                     {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
                 </p>
-                <form id="signup_form" method="post" action="{% url 'account_signup' %}">
+
+                {# Show global (non-field) errors clearly #}
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger text-start">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <form id="signup_form" method="post" action="{% url 'account_signup' %}" novalidate>
                     {% csrf_token %}
+                    {# Your crispy form handles field rendering + field-level errors #}
                     {{ form|crispy }}
+
                     {% if redirect_field_value %}
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                     {% endif %}
-                    <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+
+                    <button type="submit" class="btn btn-primary w-100">{% trans "Sign Up" %}</button>
                 </form>
             </div>
         </div>

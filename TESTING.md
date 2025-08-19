@@ -83,16 +83,24 @@ Screenshots:
 
 ## **User Story Testing**
 
-| User Story                                                                 | Test Result |
-|----------------------------------------------------------------------------|-------------|
-| As a user, I can register for an account so that I can create and manage my own recipes. | ✅ Pass |
-| As a user, I can log in and log out so that I can access my account securely. | ✅ Pass |
-| As a user, I can add a recipe so that I can share it with others. | ✅ Pass |
-| As a user, I can edit my recipe so that I can update or correct it. | ✅ Pass |
-| As a user, I can delete my recipe so that I can remove it if necessary. | ✅ Pass |
-| As a user, I can browse recipes so that I can find cooking inspiration. | ✅ Pass |
-| As a user, I can review recipes so that I can share my feedback. | ✅ Pass |
-| As a user, I can mark recipes as favourites so that I can easily find them later. | ✅ Pass |
+> This table is also summarised in the README.md, but here it includes **MoSCoW priorities** for clarity. Full testing evidence and screenshots are provided below.
+
+| MoSCoW Priority | User Story                                                                 | Test Result |
+|-----------------|-----------------------------------------------------------------------------|-------------|
+| **Must Have**   | As a user, I can register for an account so that I can create and manage my own recipes. | ✅ Pass |
+| **Must Have**   | As a user, I can log in and log out so that I can access my account securely. | ✅ Pass |
+| **Must Have**   | As a user, I can add a recipe so that I can share it with others. | ✅ Pass |
+| **Must Have**   | As a user, I can edit my recipe so that I can update or correct it. | ✅ Pass |
+| **Must Have**   | As a user, I can delete my recipe so that I can remove it if necessary. | ✅ Pass |
+| **Must Have**   | As a user, I can browse recipes so that I can find cooking inspiration. | ✅ Pass |
+| **Must Have**   | As a user, I can review recipes so that I can share my feedback. | ✅ Pass |
+| **Must Have**   | As a user, I can mark recipes as favourites so that I can easily find them later. | ✅ Pass |
+| **Should Have** | As a user, I can search for recipes so that I can quickly find a recipe by keyword. | ✅ Pass |
+| **Should Have** | As a user, I can view my own recipes so that I can manage them in one place. | ✅ Pass |
+| **Should Have** | As a user, I can remove a recipe from my favourites list. | ✅ Pass |
+| **Could Have**  | As a user, I can filter recipes by category so that I can find recipes by type. | Not Implemented |
+| **Could Have**  | As a user, I can upload a profile picture to personalise my account. | Not Implemented |
+| **Could Have**  | As a user, I can share recipes on social media. | Not Implemented |
 
 ---
 
