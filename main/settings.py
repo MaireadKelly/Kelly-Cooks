@@ -5,26 +5,26 @@ import dj_database_url
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-DEBUG = True
 
-ALLOWED_HOSTS = (
-    "8000-maireadkelly-kellycooks-jm9jmczqvqm.ws.codeinstitute-ide.net",
+ALLOWED_HOSTS = [
     "kellycookspp4-63d6db43ef5f.herokuapp.com",
+    ".herokuapp.com",
     "127.0.0.1",
-)
+    "localhost",
+]
+# (Remove the old single-string assignment)
+
 
 # os.getenv("ALLOWED_HOSTS", "").split(",")
 
@@ -122,7 +122,14 @@ DATABASES = {
     )
 }
 
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+CSRF_TRUSTED_ORIGINS = [
+    "https://kellycookspp4-63d6db43ef5f.herokuapp.com",
+    "https://*.herokuapp.com",
+    "https://*.codeinstitute-ide.net",
+    "http://127.0.0.1:8000",  # for local dev
+    "http://localhost:8000",
+]
+
 
 # Password validation
 

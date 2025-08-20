@@ -1,225 +1,251 @@
-# Recipe Sharing App
+# Kelly Cooks
 
-![Mockup Screenshots](static/documentation/readme/responsive.png)
+Kelly Cooks is a recipe sharing web application where users can browse, share, edit, and review recipes.  
+It provides an easy-to-use interface for both casual home cooks and food enthusiasts to connect and inspire each other.
 
-Recipe Sharing App is an online platform designed for food enthusiasts and home cooks to share their favorite recipes. Users can browse through publicly available recipes, submit their own, and interact with the community by saving or commenting on recipes.
-
-[Live Application](https://kellycookspp4-63d6db43ef5f.herokuapp.com/)
-
-## Table of Contents:
-1. [User Experience (UX)](#user-experience-ux)
-    * [User Stories](#user-stories)
-    * [Wireframes](#wireframes)
-    * [Agile Methodology](#agile-methodology)
-2. [Design](#design)
-3. [Features](#features)
-4. [Technologies Used](#technologies-used)
-5. [Libraries](#libraries-used)
-6. [Testing](#testing)
-7. [Bugs](#bugs)
-8. [Deployment](#deployment)
-9. [Credits](#credits)
-10. [Acknowledgments](#acknowledgments)
+![Kelly Cooks Home Page](docs/readme/ui-home.png)
 
 ---
 
-## **User Experience (UX)**
-On the home page the main section gives a brief description of the site and the clickable button changes between "Browse Recipes" or "Sign Up", based on whether the user is logged in or not so as to entice non registered visitors to sign up.
+## **UX**
 
-![Main Signed in](static/documentation/readme/signed-in.png)
-![Main Not SIgned In](static/documentation/readme/not-signed-in.png)
-### **User Stories**
-
-
-#### **Navigation**
-- As a user, I want a simple navigation menu to find content easily.
-- As a user, I want the navigation menu to be accessible on all devices.
-- As a user, I want to see social media links for community interaction.
-
-#### **Core Functionality**
-- As a user, I want to register an account to access features.
-- As a user, I want to log in and out of my account securely.
-- As a user, I want to browse and search for recipes easily.
-- As a user, I want to add new recipes to share with others.
-- As a user, I want to edit and delete my recipes when needed.
-- As a user, I want clear cooking instructions for recipes.
-- As a user, I want to review recipes.
-- As an admin, I want to manage user accounts and reviews.
-
-![Browse](static/documentation/readme/full-recipes.png)
-
-
-#### **UI Improvements**
-- As a user, I want a cancel button for delete and logout confirmations.
-- As a user, I want social media links to connect with the community.
-- As a user, I want a 404 error page for incorrect URLs.
-
-![404 Error](static/documentation/readme/404.png)
-
-#### **Navigation**
-- As a user, I want a simple navigation menu to find content easily.
-- As a user, I want the navigation menu to be accessible on all devices.
-- As a user, I want to see social media links for community interaction.
-
-#### **Recipe CRUD Operations**
-- As a registered user, I want to submit recipes.
-- As a user, I want to edit or update my submitted recipes.
-- As a user, I want to delete my own recipes.
-
-### **Admin Panel Functionality**
-In the Djanggo Admin Panel authorised users can perform all CRUD operations on Users, Recipes and Reviews to keep the site a safe and friendly place for all.
-
-![Admin Panel](static/documentation/readme/admin.png)
-![Admin Delete](static/documentation/readme/admin-delete-user1.png)
-![Admin Confirm Delete](static/documentation/readme/admin-delete-user2.png)
-![Admin Delete Success](static/documentation/readme/admin-delete-user3.png)
-![Admoin Edit Review](static/documentation/readme/admin-edit-review.png)
-
-### **Wireframes**
-![Wireframe Home](static/documentation/readme/home-d-wireframe.png)
-![Wireframe Signup](static/documentation/readme/signup-d-wireframe.png)
-![Wireframe Recipes](static/documentation/readme/recipes-d-wireframe.png)
-![Wireframe Add Recipe](static/documentation/readme/add-recipe-d-wireframe.png)
-
-### **ERD Database Diagram**
-![ERD](static/documentation/readme/ERD.png)
-
-
-### **Agile Methodology**
-This project was developed using Agile methodology which allowed me to iteratively and incrementally build my app, with flexibility to make changes to my design throughout the entire development process.
-
-GitHub Issues and Projects were used to manage the development process. Each part of the app is divided into Epics_ which are broken down into User Stories with Tasks. An Epic represents a large body of work, such as a feature. The board view of the Project feature was used to display and manage my progress in the form of a 'kanban board'. The user stories were added to the 'Todo' column to be prioritised for development, moved to the 'In Progress' column to indicate development of the feature had begun and finally moved to the 'Done' column when the feature had been implemented and the acceptance criteria had been met.
-
-![Kanban Board](static/documentation/readme/kanban-view-1.png)
-
-User stories were prioritised using the MoSCoW prioritisation technique. Each user story was given one of the following labels:
-
-- Must have - to indicate the user story is guaranteed to be delivered.
-- Should have - to indicate the user story would add significant value but is not vital.
-- Could have - to indicate the user story would have a small impact if left out.
-- Won't have - to indicate the user story is not a priority in the current iteration.
-
-GitHub milestones were also used to group related user stories together.
-Thankfully for this project all of the "Could Have" issues were completed.
-
-![Must Have](static/documentation/readme/kanban-must-have.png)
-![Should Have](static/documentation/readme/kanban-should-have.png)
-![Won't Have](static/documentation/readme/kanban-view-5.png)
+### **Project Goals**
+- Provide a platform for users to share their own recipes.
+- Allow users to browse recipes by others and leave reviews.
+- Include user authentication for adding/editing/deleting recipes and reviews.
+- Make the interface clean, intuitive, and mobile-friendly.
 
 ---
 
-## **Design**
+### **Target Audience**
+- People who love cooking and want to share recipes.
+- Those looking for cooking inspiration.
+- Users who want to interact with a community through recipe reviews and favourites.
 
-### **UI Colour Palette**
+---
 
-![UI Colour Palette](static/documentation/readme/colours.png)
+## **Agile Development**
 
+This project followed an Agile methodology, using a [GitHub Projects Kanban Board](https://github.com/users/MaireadKelly/projects/5/views/1) to manage development tasks and track progress.  
+The board was divided into columns for **To Do**, **In Progress**, and **Done**, with user stories moved through the workflow as they were implemented and tested.
 
+### **MoSCoW Prioritisation**
+User stories were categorised into **Must Have**, **Should Have**, and **Could Have** based on importance and time constraints.
 
+#### **Must Have**
+- As a user, I can register for an account so that I can create and manage my own recipes.
+- As a user, I can log in and log out so that I can access my account securely.
+- As a user, I can add a recipe so that I can share it with others.
+- As a user, I can edit my recipe so that I can update or correct it.
+- As a user, I can delete my recipe so that I can remove it if necessary.
+- As a user, I can browse recipes so that I can find cooking inspiration.
+- As a user, I can review recipes so that I can share my feedback.
+- As a user, I can mark recipes as favourites so that I can easily find them later.
+
+#### **Should Have**
+- As a user, I can search for recipes so that I can quickly find a recipe by keyword.
+- As a user, I can view my own recipes so that I can manage them in one place.
+- As a user, I can remove a recipe from my favourites list.
+
+#### **Could Have**
+- As a user, I can filter recipes by category so that I can find recipes by type.
+- As a user, I can upload a profile picture to personalise my account.
+- As a user, I can share recipes on social media.
+
+---
+
+## **Wireframes**
+Wireframes were created to plan the layout and functionality of the application.
+
+- **Home Page**  
+  ![Home Page Wireframe](docs/readme/wireframe-home.png)
+- **Recipe List**  
+  ![Recipe List Wireframe](docs/readme/wireframe-recipe-list.png)
+- **Recipe Detail**  
+  ![Recipe Detail Wireframe](docs/readme/wireframe-recipe-detail.png)
+
+---
+
+## **Entity Relationship Diagram**
+The ERD below illustrates the models and relationships used in the project.
+
+![Entity Relationship Diagram](docs/readme/erd-diagram.png)
+
+---
 
 ## **Features**
 
-### **Navigation Bar**
-- Provides quick access to Home, Recipe List, Submit Recipe, and User Profile.
-- Responsive on all screen sizes.
+### **Implemented Features**
+- User registration and login/logout functionality.
+- Add, edit, and delete own recipes.
+- Browse all recipes.
+- Leave reviews on recipes.
+- Mark recipes as favourites.
+- Search functionality.
+- Responsive design for mobile, tablet, and desktop.
 
-![NavBar Desktop View](static/documentation/readme/Nav-Bar-desktop.png)
-![NavBar Mobile View](static/documentation/readme/Nav-Bar-Mobile.png)
-![Footer](static/documentation/readme/footer.png)
 
-### **Recipe Submission**
-- Users can submit new recipes using a structured form.
-- Recipes include images, ingredients, and step-by-step instructions.
+### User Registration
 
-![Add Recipe](static/documentation/readme/add-recipe.png)
+New users can register an account using the sign-up form. The system prevents invalid inputs and provides clear error messages.
 
-### **Recipe Viewing & Management**
-- Recipes can be saved in "My Recipe Book."
-- Users can edit or delete their recipes.
+- **Invalid Email Example**  
+  Form validation prevents registration with an invalid email address.  
+  ![Registration error - email](docs/readme/registration-error-email.png)
 
-![Edit Recipe](static/documentation/readme/edit-recipe.png)
-![Delete Recipe](static/documentation/readme/delete-recipe.png)
+- **Invalid Password Example**  
+  Password validation ensures strong and matching passwords.  
+  ![Registration error - password](docs/readme/registration-error-password.png)
 
-### **Review Recipes**
+- **Registration Form**  
+  ![Registration form](docs/readme/registration-form.png)
 
-![Add Review](static/documentation/readme/add-review.png)
-![Edit Review](static/documentation/readme/edit-review.png)
+- **Successful Registration**  
+  Once registered, users are automatically logged in.  
+  ![Registration success](docs/readme/register-success.png)
 
-### **Favourites**
-- Users can add and remove recipes from their favourites so they can find them easily through their "My Recipes" link.
-- Users can search for recipes by searching titles and ingredients
+### Login & Logout
 
-![Favourites Menu](static/documentation/readme/nav-my-recipes.png)
-![Add to Favourites](static/documentation/readme/add-to-favourite.png)
-![Favourite Recipes](static/documentation/readme/favourites-view.png)
-![Search](static/documentation/readme/search.png)
+- **Login form** - Users can log in with their username or email and password. 
+![Login form](docs/readme/login-form.png)
 
-### **User Authentication**
-- Secure user login and registration.
+- **Login error** – if incorrect credentials are entered, a clear error message is displayed above the form.  
+![Login Error Password](docs/readme/login-error-password.png)
 
-![User Register](static/documentation/readme/sign-in.png)
-![User Signin](static/documentation/readme/sign-up.png)
-![User Signout](static/documentation/readme/sign-out.png)
+- **Successful login** – users are redirected to the homepage.  
+![Login Form](docs/readme/register-success.png)
+
+- **Logout**  
+  Users can safely log out from their account at any time, with the option to cancel.
+![Confirm Logout](docs/readme/logout.png)
+![Logout success](docs/readme/logout_success.png)
+
+
+
+### Landing Page
+
+The landing page changes depending on whether the user is logged in or logged out.
+
+- **Logged Out View** – users are prompted to sign up to access more features.  
+  ![Landing page logged out](docs/readme/landing-logged-out.png)
+
+- **Logged In View** – authenticated users can browse recipes directly.  
+  ![Landing page logged in](docs/readme/landing-logged-in.png)
+
+
+### Recipe Detail Page
+
+Each recipe has its own detail page where users can view the full instructions, ingredients, and reviews.  
+
+- **Owner View**  
+  When viewing their own recipe, users can edit or delete it.  
+  ![Recipe detail owner](docs/readme/recipe-detail-owner.png)
+
+- **Other User View**  
+  Other users can favourite the recipe or leave a review.  
+  ![Recipe detail user](docs/readme/recipe-detail-user.png)
+
+
+### Add Recipe
+
+Authenticated users can add their own recipes via a simple form. Validation prevents incomplete or invalid submissions.
+
+- **Add Recipe Form**  
+  ![Add recipe form](docs/readme/add-recipe-form.png)
+
+- **Successful Creation**  
+  After submitting, the user is redirected to the new recipe’s detail page with a success message.  
+  ![Add recipe success](docs/readme/add-recipe-success.png)
+
+### Edit Recipe
+
+Recipe owners can update their recipes via the edit form. A success message confirms the changes.
+
+- **Edit Recipe Form**  
+  ![Edit recipe form](docs/readme/edit-recipe-form.png)
+
+- **Successful Update**  
+  After saving, the user is redirected to the recipe’s detail page with a success message.  
+  ![Edit recipe success](docs/readme/edit-recipe-success.png)
+
+
+### Delete Recipe
+
+Only the recipe owner can delete a recipe. A confirmation step prevents accidental deletion.
+
+- **Delete Confirmation**  
+  ![Delete recipe confirmation](docs/readme/delete-recipe-confirm.png)
+
+- **Successful Deletion**  
+  After confirming, the user is redirected to the recipe list.  
+  ![Delete recipe success](docs/readme/delete-recipe-success.png)
+
+
+
+### **Future Features**
+- Advanced filtering by cuisine, dietary needs, and cooking time.
+- Rating system for recipes.
+- Social sharing options.
 
 ---
 
 ## **Technologies Used**
-- **Backend:** Django (Python)
-- **Database:** PostgreSQL
-- **Frontend:** HTML, CSS, Bootstrap
-- **Hosting:** Heroku
-- **Storage:** Cloudinary for image uploads
-
----
-
-## **Libraries Used**
-- Django
-- Gunicorn
-- Cloudinary
-- dotenv
-- PostgreSQL
+- **HTML5**, **CSS3**, **JavaScript**
+- **Python 3**, **Django** (with Class-Based and Function-Based Views)
+- **PostgreSQL** for database
+- **Bootstrap 5** for front-end styling
+- **GitHub** for version control and project management
+- **Heroku** for deployment
+- **Crispy Forms** for form rendering
+- **djrichtextfield** for rich text editing in recipes
+- **Cloudinary** for media storage
 
 ---
 
 ## **Testing**
-- **Manual Testing:** Validated all user stories through structured tests.
-- **Google Lighthouse Performance:** Performance scores captured for mobile and desktop.
-- **Browser Compatibility:** Verified across Chrome, Firefox, Edge.
-- **Code Validation:** W3C Code Validator and PEP8 formatting were used.  CI Python Linter
 
-For detailed testing results, refer to the [Testing Documentation](TESTING.md).
+A summary of testing is included here, with full details available in [TESTING.md](TESTING.md).
+
+### **User Story Testing**
+The table below shows the testing outcome for each user story:
+
+| User Story                                                                 | Test Result |
+|----------------------------------------------------------------------------|-------------|
+| As a user, I can register for an account so that I can create and manage my own recipes. | ✅ Pass |
+| As a user, I can log in and log out so that I can access my account securely. | ✅ Pass |
+| As a user, I can add a recipe so that I can share it with others. | ✅ Pass |
+| As a user, I can edit my recipe so that I can update or correct it. | ✅ Pass |
+| As a user, I can delete my recipe so that I can remove it if necessary. | ✅ Pass |
+| As a user, I can browse recipes so that I can find cooking inspiration. | ✅ Pass |
+| As a user, I can review recipes so that I can share my feedback. | ✅ Pass |
+| As a user, I can mark recipes as favourites so that I can easily find them later. | ✅ Pass |
+| As a user, I can search for recipes so that I can quickly find a recipe by keyword. | ✅ Pass |
+| As a user, I can view my own recipes so that I can manage them in one place. | ✅ Pass |
+| As a user, I can remove a recipe from my favourites list. | ✅ Pass |
+| As a user, I can filter recipes by category so that I can find recipes by type. | Not Implemented |
+| As a user, I can upload a profile picture to personalise my account. | Not Implemented |
+| As a user, I can share recipes on social media. | Not Implemented |
 
 ---
 
-## **Bugs**
-| Bug | Fix |
-|------|------|
-| Image upload failure | Adjusted Cloudinary API settings |
-| Navigation not working on mobile | Updated Bootstrap layout |
+### **HTML Validation**
+All key pages were validated using the W3C Markup Validation Service, and passed with no errors.  
+Full validation results and screenshots can be found in the [Testing Documentation](TESTING.md#html-validation).
 
 ---
 
 ## **Deployment**
-### **Steps to Deploy on Heroku**
-1. Create a repository on GitHub.
-2. Set up Heroku and link to the repository.
-3. Configure environment variables:
-   - `DATABASE_URL`
-   - `SECRET_KEY`
-   - `CLOUDINARY_URL`
-   - `PORT=8000`
-4. Deploy manually through Heroku's interface.
+The site was deployed to Heroku using the following steps:
+1. Create a new Heroku app.
+2. Connect the Heroku app to the GitHub repository.
+3. Set environment variables in Heroku config vars.
+4. Push final code to GitHub, triggering a Heroku build and deployment.
 
 ---
 
 ## **Credits**
-- Most recipes including images were sourced from https://www.bbcgoodfood.com/
-- Icons sourced from FontAwesome.
-- Fonts from Google Fonts
-- Visily was used for Wireframe creation
-- ChatGPT for help with error resolution and general code queries
+- Recipe data: user-generated.
+- Favicon: [favicon.io](https://favicon.io)
+- Layout inspiration: Various cooking and recipe-sharing websites.
 
 ---
-
-## **Acknowledgments**
-Special thanks to my Tutor Marko Tot and colleagues for their guidance. For Code Peer Reviewer Cam who took the time to review my project.
