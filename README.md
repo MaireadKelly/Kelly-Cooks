@@ -2,7 +2,7 @@
 
 Kelly Cooks is a recipe‑sharing web application where users can browse, share, edit, review, and favourite recipes. It provides an easy‑to‑use, mobile‑friendly interface for home cooks and food enthusiasts to connect and inspire each other.
 
-![Kelly Cooks Home Page](docs/readme/ui-home.png)
+![Kelly Cooks Home Page](docs/readme/responsive.png)
 
 ---
 
@@ -18,8 +18,11 @@ Kelly Cooks is a recipe‑sharing web application where users can browse, share,
   - [Implemented Features](#implemented-features)
   - [Login & Logout](#login--logout)
   - [Landing Page](#landing-page)
+  - [Navigation & Layout](#navigation--layout)
   - [Recipe Detail Page](#recipe-detail-page)
   - [Add / Edit / Delete Recipe](#add--edit--delete-recipe)
+  - [Reviews](#reviews)
+  - [Favourites & My Recipes](#favourites--my-recipes)
   - [Future Features](#future-features)
 - [Technologies Used](#technologies-used)
 - [Security & SEO](#security--seo)
@@ -47,6 +50,9 @@ Kelly Cooks is a recipe‑sharing web application where users can browse, share,
 ## Agile Development
 
 Development was managed using a GitHub Projects Kanban Board with columns for **To Do**, **In Progress**, and **Done**. User stories moved through the workflow as they were implemented and tested.
+
+**Kanban Board:** https://github.com/users/MaireadKelly/projects/5/views/1
+
 
 ### MoSCoW Prioritisation
 **Must Have**
@@ -111,7 +117,7 @@ New users can register an account using the sign‑up form. The system prevents 
 
 - **Successful Registration**  
   Users are logged in automatically after a successful signup.  
-  ![Registration success](docs/readme/register-success.png)
+  ![Registration success](docs/readme/login-success.png)
 
 ### Login & Logout
 - **Login form**  
@@ -135,11 +141,22 @@ New users can register an account using the sign‑up form. The system prevents 
 - **Logged In View** – authenticated users can browse recipes directly.  
   ![Landing page logged in](docs/readme/landing-logged-in.png)
 
+
+### Navigation & Layout
+Responsive header and footer provide quick access to key areas.
+- **Desktop nav**  
+  ![Desktop navigation](docs/readme/nav-desktop.png)
+- **Mobile nav**  
+  ![Mobile navigation](docs/readme/nav-mobile.png)
+
+
+
 ### Recipe Detail Page
 - **Owner View** – edit/delete buttons visible to the owner.  
   ![Recipe detail owner](docs/readme/recipe-detail-owner.png)
 - **Other User View** – favourite and review actions available.  
   ![Recipe detail user](docs/readme/recipe-detail-user.png)
+
 
 ### Add / Edit / Delete Recipe
 - **Add Recipe Form**  
@@ -155,6 +172,21 @@ New users can register an account using the sign‑up form. The system prevents 
   ![Delete recipe confirmation](docs/readme/delete-recipe-confirm.png)
 - **Successful Deletion**  
   ![Delete recipe success](docs/readme/delete-recipe-success.png)
+
+### Reviews
+Users can leave feedback on recipes.
+- **Add review**  
+  ![Add review](docs/readme/add-review.png)
+
+
+### Favourites & My Recipes
+- **Toggle favourite** on a recipe detail.  
+  ![Favourite toggle](docs/readme/favourite-toggle.png)
+- **Favourites page** listing saved recipes.  
+  ![Favourites list](docs/readme/favourites-list.png)
+- **My Recipes** – the user’s own content in one place.  
+  ![My Recipes](docs/readme/my-recipes.png)
+
 
 ### Future Features
 - Advanced filtering by cuisine, dietary needs, and cooking time.
@@ -184,6 +216,9 @@ New users can register an account using the sign‑up form. The system prevents 
 ## Testing
 A summary of user‑story outcomes appears below. Full details live in [TESTING.md](TESTING.md).
 
+**Known bug:** After deleting a recipe, the success message does not always display (functionality works). Logged in TESTING.md.
+
+
 | User Story (selected) | Result |
 |---|---|
 | Register, Login/Logout | ✅ Pass |
@@ -196,6 +231,15 @@ A summary of user‑story outcomes appears below. Full details live in [TESTING.
 | Category Filter / Profile Photo / Social Sharing | Not Implemented |
 
 ---
+
+### Run Locally
+1. Clone the repo and create a virtualenv.
+2. `pip install -r requirements.txt`
+3. Create a `.env` (or set env vars): `SECRET_KEY`, `DEBUG=True`, `CLOUDINARY_URL` (optional), `ALLOWED_HOSTS=localhost,127.0.0.1`
+4. `python manage.py migrate`
+5. `python manage.py createsuperuser` (optional)
+6. `python manage.py runserver`
+
 
 ## Deployment
 The site was deployed to **Heroku**:
