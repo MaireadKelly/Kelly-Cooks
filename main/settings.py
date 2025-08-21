@@ -3,6 +3,7 @@ from pathlib import Path
 
 import dj_database_url
 from dotenv import load_dotenv
+import cloudinary
 
 # Load environment variables from .env file
 load_dotenv()
@@ -23,10 +24,6 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
 ]
-# (Remove the old single-string assignment)
-
-
-# os.getenv("ALLOWED_HOSTS", "").split(",")
 
 # Application definition
 
@@ -175,10 +172,24 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+cloudinary.config(secure=True)
 CLOUDINARY_SECURE = True
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Security settings for production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # Heroku proxy
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
