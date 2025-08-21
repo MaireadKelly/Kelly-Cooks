@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages import get_messages
-from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
@@ -16,6 +15,7 @@ from django.views.generic import (
 
 from .forms import RecipeForm, ReviewForm
 from .models import Favourite, Recipe, Review
+
 
 """
 View for users to add a new recipe
@@ -83,7 +83,7 @@ class RecipeDetail(DetailView):
 
 
 """
-View to see logged in Users Own recipes
+View to see logged in users' own recipes
 """
 
 
@@ -97,7 +97,7 @@ class MyRecipes(LoginRequiredMixin, ListView):
 
 
 """
-View to see logged in Users Favourites
+View to see logged in users' favourites
 """
 
 
@@ -107,8 +107,6 @@ class MyFavourites(LoginRequiredMixin, ListView):
     context_object_name = "favourites"
 
     def get_queryset(self):
-        # Ensure this filters only valid favourites tied to the user
-
         return Favourite.objects.filter(user=self.request.user)
 
 
@@ -118,10 +116,6 @@ View for users to edit their own recipes
 
 
 class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    """
-    View for users to edit their own recipes.
-    """
-
     template_name = "recipes/edit_recipe.html"
     model = Recipe
     form_class = RecipeForm
@@ -136,6 +130,15 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def test_func(self):
         return self.request.user == self.get_object().user
 
+    def handle_no_permission(self):
+        if self.request.user.is_authenticated:
+            obj = self.get_object()
+            messages.error(
+                self.request, "You don’t have permission to edit this recipe."
+            )
+            return redirect("recipe_detail", pk=obj.pk)
+        return super().handle_no_permission()
+
 
 """
 View for users to delete their own recipes
@@ -143,40 +146,61 @@ View for users to delete their own recipes
 
 
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    template_name = "recipes/recipe_confirm_delete.html"
     model = Recipe
-    success_url = reverse_lazy("recipes")
+    template_name = "recipes/recipe_confirm_delete.html"
+    success_url = reverse_lazy("recipes")  # make sure this URL name exists
 
-    def test_func(
-        self,
-    ):  # Ensure that only the recipe owner can delete the recipe
-        return self.request.user == self.get_object().user
+    # Only the owner may delete
+    def test_func(self):
+        obj = self.get_object()
+        return obj.user_id == self.request.user.id
 
+    # If user fails the ownership check, be graceful (no 403 / debug page)
+    def handle_no_permission(self):
+        if self.request.user.is_authenticated:
+            try:
+                obj = self.get_object()
+                messages.error(
+                    self.request, "You don’t have permission to delete this recipe."
+                )
+                return redirect("recipe_detail", pk=obj.pk)
+            except Exception:
+                # If object lookup itself fails, fall back safely
+                messages.error(self.request, "You don’t have permission to do that.")
+                return redirect("recipes")
+        return super().handle_no_permission()
+
+    # Perform delete with safe messaging
     def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        title = obj.title  # capture before delete
         try:
             response = super().delete(request, *args, **kwargs)
-            messages.success(request, "Recipe has been deleted successfully!")
-            return response
-        except Exception as e:
-            messages.error(request, f"An error occurred: {e}")
+            messages.success(request, f"‘{title}’ was deleted successfully.")
+            return response  # redirects to success_url
+        except Exception:
+            # Don’t expose internal errors in production
+            messages.error(request, "Sorry, we couldn’t delete that recipe right now.")
             return redirect("recipes")
 
 
 """
-Function to add a review (comment) to a recipe
+Functions for reviews & favourites (normalized to pk)
 """
 
 
 @login_required
-def add_review(request, recipe_id):
+def add_review(request, pk):
     """
-    View to add a review to a recipe.
+    Add a review to a recipe (recipe pk).
     Only logged-in users can submit reviews.
     """
+    # Clear any previous messages
     storage = get_messages(request)
     for _ in storage:
-        pass  # Clear any previous messages
-    recipe = get_object_or_404(Recipe, id=recipe_id)
+        pass
+
+    recipe = get_object_or_404(Recipe, pk=pk)
 
     if request.method == "POST":
         form = ReviewForm(request.POST)
@@ -186,11 +210,10 @@ def add_review(request, recipe_id):
             review.user = request.user
             review.save()
             messages.success(request, "Review has been added successfully!")
-            return redirect("recipe_detail", pk=recipe.id)
+            return redirect("recipe_detail", pk=recipe.pk)
         else:
             messages.error(
-                request,
-                "There was an error in your form. Please try again.",
+                request, "There was an error in your form. Please try again."
             )
     else:
         form = ReviewForm()
@@ -198,37 +221,44 @@ def add_review(request, recipe_id):
 
 
 @login_required
-def edit_review(request, review_id):
-    review = get_object_or_404(Review, id=review_id, user=request.user)
+def edit_review(request, pk):
+    """
+    Edit a review (review pk).
+    """
+    review = get_object_or_404(Review, pk=pk, user=request.user)
     if request.method == "POST":
         form = ReviewForm(request.POST, instance=review)
         if form.is_valid():
             form.save()
             messages.success(request, "Review has been updated successfully!")
-            return redirect("recipe_detail", pk=review.recipe.id)
+            return redirect("recipe_detail", pk=review.recipe.pk)
     else:
         form = ReviewForm(instance=review)
     return render(request, "recipes/edit_review.html", {"form": form, "review": review})
 
 
 @login_required
-def delete_review(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-
+def delete_review(request, pk):
+    """
+    Delete a review (review pk).
+    """
+    review = get_object_or_404(Review, pk=pk)
     # Ensure only the review author can delete
     if review.user != request.user:
         messages.error(request, "You are not authorized to delete this review.")
-        return redirect(reverse("recipe_detail", kwargs={"pk": review.recipe.id}))
+        return redirect("recipe_detail", pk=review.recipe.pk)
 
     review.delete()
     messages.success(request, "Review successfully deleted!")
-
-    return redirect(reverse("recipe_detail", kwargs={"pk": review.recipe.id}))
+    return redirect("recipe_detail", pk=review.recipe.pk)
 
 
 @login_required
-def toggle_favourite(request, recipe_id):
-    recipe = get_object_or_404(Recipe, id=recipe_id)
+def toggle_favourite(request, pk):
+    """
+    Toggle favourite for the given recipe (recipe pk).
+    """
+    recipe = get_object_or_404(Recipe, pk=pk)
     favourite, created = Favourite.objects.get_or_create(
         user=request.user, recipe=recipe
     )
@@ -237,7 +267,7 @@ def toggle_favourite(request, recipe_id):
         messages.success(request, "Recipe removed from favourites.")
     else:
         messages.success(request, "Recipe added to favourites.")
-    return redirect("recipe_detail", pk=recipe.id)
+    return redirect("recipe_detail", pk=recipe.pk)
 
 
 def custom_404_view(request, exception):

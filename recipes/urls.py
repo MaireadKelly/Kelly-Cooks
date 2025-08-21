@@ -15,19 +15,22 @@ from .views import (
 )
 
 urlpatterns = [
+    # list & detail
     path("", Recipes.as_view(), name="recipes"),
-    path("add/", AddRecipe.as_view(), name="add_recipe"),
     path("<int:pk>/", RecipeDetail.as_view(), name="recipe_detail"),
+    # CRUD
+    path("add/", AddRecipe.as_view(), name="add_recipe"),
     path("edit/<int:pk>/", EditRecipe.as_view(), name="edit_recipe"),
     path("delete/<int:pk>/", DeleteRecipe.as_view(), name="delete_recipe"),
-    path("<int:recipe_id>/review/", add_review, name="add_review"),
-    path("review/<int:review_id>/edit/", edit_review, name="edit_review"),
-    path("review/<int:review_id>/delete/", delete_review, name="delete_review"),
+    # user lists
     path("my-recipes/", MyRecipes.as_view(), name="my_recipes"),
     path("favourites/", MyFavourites.as_view(), name="favourites"),
-    path(
-        "recipe/<int:recipe_id>/toggle-favourite/",
-        toggle_favourite,
-        name="toggle_favourite",
-    ),
+    # favourites (recipe pk)
+    path("<int:pk>/toggle-favourite/", toggle_favourite, name="toggle_favourite"),
+    # reviews
+    # add review to recipe (recipe pk)
+    path("<int:pk>/review/", add_review, name="add_review"),
+    # edit/delete a review (review pk)
+    path("review/<int:pk>/edit/", edit_review, name="edit_review"),
+    path("review/<int:pk>/delete/", delete_review, name="delete_review"),
 ]

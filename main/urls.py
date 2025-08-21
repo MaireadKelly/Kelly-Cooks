@@ -23,8 +23,7 @@ from recipes.views import custom_404_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),  # Allauth URLs
-    # Rich Textfield URLs
-    path("djrichtextfield/", include("djrichtextfield.urls")),
+    path("djrichtextfield/", include("djrichtextfield.urls")),  # Rich Textfield URLs
     path("", include("home.urls")),  # Home app
     path("recipes/", include("recipes.urls")),  # Recipes app
 ]
