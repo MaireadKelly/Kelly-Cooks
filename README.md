@@ -1,8 +1,8 @@
 # Kelly Cooks
 
-Kelly Cooks is a recipe‑sharing web application where users can browse, share, edit, review, and favourite recipes. It provides an easy‑to‑use, mobile‑friendly interface for home cooks and food enthusiasts to connect and inspire each other.
+Kelly Cooks is a recipe-sharing web application where users can browse, share, edit, review, and favourite recipes. It provides an easy-to-use, mobile-friendly interface for home cooks and food enthusiasts to connect and inspire each other.
 
-![Kelly Cooks Home Page](docs/readme/responsive.png)
+![Kelly Cooks – Responsive preview](docs/readme/responsive.png)
 
 ---
 
@@ -13,9 +13,10 @@ Kelly Cooks is a recipe‑sharing web application where users can browse, share,
 - [Agile Development](#agile-development)
   - [MoSCoW Prioritisation](#moscow-prioritisation)
 - [Wireframes](#wireframes)
-- [Entity Relationship Diagram](#entity-relationship-diagram)
+- [Data Model](#data-model)
 - [Features](#features)
   - [Implemented Features](#implemented-features)
+  - [User Registration](#user-registration)
   - [Login & Logout](#login--logout)
   - [Landing Page](#landing-page)
   - [Navigation & Layout](#navigation--layout)
@@ -24,10 +25,12 @@ Kelly Cooks is a recipe‑sharing web application where users can browse, share,
   - [Reviews](#reviews)
   - [Favourites & My Recipes](#favourites--my-recipes)
   - [Future Features](#future-features)
+- [Defensive Design & Permissions](#defensive-design--permissions)
 - [Technologies Used](#technologies-used)
 - [Security & SEO](#security--seo)
 - [Testing](#testing)
 - [Deployment](#deployment)
+- [Running Locally](#running-locally)
 - [Credits](#credits)
 
 ---
@@ -38,7 +41,7 @@ Kelly Cooks is a recipe‑sharing web application where users can browse, share,
 - Provide a platform for users to share their own recipes.
 - Allow users to browse recipes by others and leave reviews.
 - Include user authentication for adding/editing/deleting recipes and reviews.
-- Keep the interface clean, intuitive, and mobile‑friendly.
+- Keep the interface clean, intuitive, and mobile-friendly.
 
 ### Target Audience
 - People who love cooking and want to share recipes.
@@ -53,8 +56,8 @@ Development was managed using a GitHub Projects Kanban Board with columns for **
 
 **Kanban Board:** https://github.com/users/MaireadKelly/projects/5/views/1
 
-
 ### MoSCoW Prioritisation
+
 **Must Have**
 - As a user, I can register for an account so that I can create and manage my own recipes.
 - As a user, I can log in and log out so that I can access my account securely.
@@ -87,7 +90,20 @@ Development was managed using a GitHub Projects Kanban Board with columns for **
 
 ---
 
-## Entity Relationship Diagram
+## Data Model
+
+The application uses a simple, clear schema:
+
+- **User** (Django `auth.User`)
+- **Recipe** – belongs to a User; fields include `title`, `description`, `ingredients`, `instructions`, `image`.
+- **Review** – belongs to a Recipe and a User; stores `comment` and timestamps.
+- **Favourite** – a pair `(user, recipe)` to mark recipes as favourites.
+
+**Relationships**
+- User `1-n` Recipe  
+- Recipe `1-n` Review  
+- User `n-m` Recipe via Favourite (implemented as a model with unique `(user, recipe)`)
+
 ![Entity Relationship Diagram](docs/readme/erd-diagram.png)
 
 ---
@@ -104,7 +120,7 @@ Development was managed using a GitHub Projects Kanban Board with columns for **
 - Responsive design for mobile, tablet, and desktop.
 
 ### User Registration
-New users can register an account using the sign‑up form. The system prevents invalid inputs and provides clear error messages.
+New users can register an account using the sign-up form. The system prevents invalid inputs and provides clear error messages.
 
 - **Invalid Email Example**  
   ![Registration error - email](docs/readme/registration-error-email.png)
@@ -117,30 +133,28 @@ New users can register an account using the sign‑up form. The system prevents 
 
 - **Successful Registration**  
   Users are logged in automatically after a successful signup.  
-  ![Registration success](docs/readme/login-success.png)
+  ![Registration success](docs/readme/register-success.png)
 
 ### Login & Logout
 - **Login form**  
   ![Login form](docs/readme/login-form.png)
 
-- **Login error** – A clear error message is displayed above the form for invalid credentials.  
-  ![Login Error Password](docs/readme/login-error-password.png)
+- **Login error** – a clear error message is displayed above the form for invalid credentials.  
+  ![Login error](docs/readme/login-error-password.png)
 
 - **Successful login**  
   Redirects to the homepage with a confirmation message.  
-  ![Login Success](docs/readme/register-success.png)
+  ![Login success](docs/readme/login-success.png)
 
 - **Logout**  
   Confirm logout flow with success feedback.  
-  ![Confirm Logout](docs/readme/logout.png)  
-  
+  ![Confirm Logout](docs/readme/logout.png)
 
 ### Landing Page
-- **Logged Out View** – prompts sign‑up/login for full access.  
+- **Logged Out View** – prompts sign-up/login for full access.  
   ![Landing page logged out](docs/readme/landing-logged-out.png)
 - **Logged In View** – authenticated users can browse recipes directly.  
   ![Landing page logged in](docs/readme/landing-logged-in.png)
-
 
 ### Navigation & Layout
 Responsive header and footer provide quick access to key areas.
@@ -149,14 +163,11 @@ Responsive header and footer provide quick access to key areas.
 - **Mobile nav**  
   ![Mobile navigation](docs/readme/nav-mobile.png)
 
-
-
 ### Recipe Detail Page
 - **Owner View** – edit/delete buttons visible to the owner.  
   ![Recipe detail owner](docs/readme/recipe-detail-owner.png)
 - **Other User View** – favourite and review actions available.  
   ![Recipe detail user](docs/readme/recipe-detail-user.png)
-
 
 ### Add / Edit / Delete Recipe
 - **Add Recipe Form**  
@@ -178,7 +189,6 @@ Users can leave feedback on recipes.
 - **Add review**  
   ![Add review](docs/readme/add-review.png)
 
-
 ### Favourites & My Recipes
 - **Toggle favourite** on a recipe detail.  
   ![Favourite toggle](docs/readme/favourite-toggle.png)
@@ -187,7 +197,6 @@ Users can leave feedback on recipes.
 - **My Recipes** – the user’s own content in one place.  
   ![My Recipes](docs/readme/my-recipes.png)
 
-
 ### Future Features
 - Advanced filtering by cuisine, dietary needs, and cooking time.
 - Profile pictures.
@@ -195,13 +204,27 @@ Users can leave feedback on recipes.
 
 ---
 
+## Defensive Design & Permissions
+
+- **Auth-gated actions**: Adding recipes, posting/editing/deleting reviews, and toggling favourites require login.
+- **Ownership checks**: Only the **recipe owner** can edit or delete a recipe. Non-owners are redirected back to the recipe detail with a clear error message.
+- **Review ownership**: Only the **review author** can edit/delete their review.
+- **Safe delete**: Deleting a recipe shows a confirmation screen; on success, the app redirects to the recipe list with a success message.
+- **UX niceties**:
+  - Landing page hides the **Sign-Up** CTA for authenticated users.
+  - All success/error states use Bootstrap alerts so the user always sees the outcome.
+
+---
+
 ## Technologies Used
-- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5
-- **Backend:** Python 3, Django (CBVs/FBVs)
-- **Database:** PostgreSQL (prod) / SQLite (dev)
-- **Media:** Cloudinary
-- **Other:** Crispy Forms, djrichtextfield
-- **DevOps:** Git/GitHub, Heroku for deployment
+
+**Frontend**: HTML5, CSS3, Bootstrap 5  
+**Backend**: Python 3, Django  
+**Auth**: django-allauth  
+**Forms**: django-crispy-forms  
+**Storage**: Cloudinary (images), `cloudinary_storage`  
+**Static files**: WhiteNoise (compressed manifest)  
+**Deployment**: Heroku + Gunicorn  
 
 ---
 
@@ -209,48 +232,66 @@ Users can leave feedback on recipes.
 - CSRF protection on forms; authenticated routes gated.
 - Ownership checks on edit/delete actions.
 - `DEBUG=False` in production; secrets in environment config.
+- **HTTPS enforced** for Cloudinary assets.
 - Descriptive titles and meta descriptions; alt text on imagery.
 
 ---
 
 ## Testing
-A summary of user‑story outcomes appears below. Full details live in [TESTING.md](TESTING.md).
 
-**Known bug:** After deleting a recipe, the success message does not always display (functionality works). Logged in TESTING.md.
+- **HTML**: All key pages pass W3C HTML validation.  
+- **CSS**: Passes Jigsaw CSS validation.  
+- **Python**: PEP8 compliance with minor line-length notes.  
+- **Lighthouse**: Performance and Accessibility are strong; Best Practices improved after enforcing HTTPS for Cloudinary assets.
 
+➡ Full evidence and screenshots are in **[TESTING.md](TESTING.md)** (HTML/CSS/Python/Lighthouse, CRUD checks, and known issues).
 
-| User Story (selected) | Result |
-|---|---|
-| Register, Login/Logout | ✅ Pass |
-| Add/Edit/Delete Recipe | ✅ Pass |
-| Browse & Review Recipes | ✅ Pass |
-| Favourites | ✅ Pass |
-| Search | ✅ Pass |
-| View My Recipes | ✅ Pass |
-| Remove Favourite | ✅ Pass |
-| Category Filter / Profile Photo / Social Sharing | Not Implemented |
+**Known bug (minor)**: After deleting a recipe, the success message may not always display; the action completes successfully. Logged in TESTING.md.
 
 ---
-
-### Run Locally
-1. Clone the repo and create a virtualenv.
-2. `pip install -r requirements.txt`
-3. Create a `.env` (or set env vars): `SECRET_KEY`, `DEBUG=True`, `CLOUDINARY_URL` (optional), `ALLOWED_HOSTS=localhost,127.0.0.1`
-4. `python manage.py migrate`
-5. `python manage.py createsuperuser` (optional)
-6. `python manage.py runserver`
-
 
 ## Deployment
-The site was deployed to **Heroku**:
-1. Create a Heroku app and connect GitHub repo.
-2. Add config vars (DB, Cloudinary, Secret Key, Allowed Hosts; set `DEBUG=False`).
-3. Push to `main` to trigger build and release.
-4. Run migrations and create a superuser.
 
-(For Render, configure a Web Service, Postgres, and equivalent env vars.)
+Deployed to Heroku:
+1. Create a new Heroku app.
+2. Connect the app to this GitHub repo.
+3. Set **Config Vars** (see below).
+4. Push to `main` to trigger a build & deploy.
 
 ---
+
+## Running Locally
+
+```bash
+git clone <repo-url>
+cd Kelly-Cooks
+python -m venv .venv
+# Windows:
+# .venv\Scripts\activate
+# macOS/Linux:
+# source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # or create .env as below
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+---
+
+.env keys (sample)
+
+SECRET_KEY=...
+
+DEBUG=True (local only)
+
+DATABASE_URL=... (if using Postgres locally; otherwise SQLite is fine)
+
+CLOUDINARY_URL=cloudinary://<key>:<secret>@<cloud_name>
+
+ALLOWED_HOSTS=localhost,127.0.0.1
+
+---
+
 
 ## Credits
 - Recipe data: user‑generated.
