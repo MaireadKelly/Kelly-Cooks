@@ -1,3 +1,4 @@
+# main/settings.py
 from pathlib import Path
 import os
 
@@ -5,12 +6,11 @@ import dj_database_url
 from dotenv import load_dotenv
 import cloudinary
 
-load_dotenv()
-
 # -----------------------------------------------------
 # Core
 # -----------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")  # explicit .env path
 
 # Read DEBUG from env: True locally, False on Heroku
 DEBUG = os.getenv("DEBUG", "False").strip().lower() == "true"
@@ -18,38 +18,32 @@ DEBUG = os.getenv("DEBUG", "False").strip().lower() == "true"
 # Secret key from env
 SECRET_KEY = os.getenv("SECRET_KEY", "change-me-in-env")
 
-# Hosts
-ALLOWED_HOSTS = [
-    "kellycookspp4-63d6db43ef5f.herokuapp.com",
-    "localhost",
-    "127.0.0.1",
-]
-# Allow lvh.me for local dev (resolves to 127.0.0.1)
+# -----------------------------------------------------
+# Hosts / CSRF
+# -----------------------------------------------------
+# Production host(s)
+ALLOWED_HOSTS = ["kellycookspp4-63d6db43ef5f.herokuapp.com"]
+
+# Minimal dev hosts
 if DEBUG:
-    ALLOWED_HOSTS += ["lvh.me", ".lvh.me"]
+    ALLOWED_HOSTS += ["localhost", "127.0.0.1", "lvh.me", ".lvh.me"]
 
 # CSRF trusted origins (Django 5 requires scheme + host [+ port])
 CSRF_TRUSTED_ORIGINS = [
+    # production
     "https://kellycookspp4-63d6db43ef5f.herokuapp.com",
     "https://*.herokuapp.com",
     "https://*.codeinstitute-ide.net",
-    "http://127.0.0.1:8000",
-    "http://localhost:8000",
 ]
 if DEBUG:
+    # Option B: plain HTTP dev on a fresh port; we’ll use lvh.me:8002
     CSRF_TRUSTED_ORIGINS += [
-        "http://127.0.0.1:8001",
-        "http://localhost:8001",
-        "http://lvh.me:8000",
-        "http://lvh.me:8001",
+        "http://lvh.me:8002",
     ]
 
-# Optional env override for extra hosts without code changes
-_env_hosts = os.getenv("ALLOWED_HOSTS")
-if _env_hosts:
-    ALLOWED_HOSTS += [h.strip() for h in _env_hosts.split(",") if h.strip()]
-
+# -----------------------------------------------------
 # Locale
+# -----------------------------------------------------
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "Europe/Dublin"
 USE_I18N = True
@@ -79,7 +73,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "django_resized",
     "djrichtextfield",
-    # APPS
+    # Apps
     "home",
     "recipes",
 ]
@@ -186,17 +180,11 @@ else:
 # -----------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 # -----------------------------------------------------
@@ -209,10 +197,28 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # WhiteNoise compressed/hashed static files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Cloudinary media storage (HTTPS enforced)
+# Cloudinary media storage (robust: URL first, fallback to explicit vars)
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-cloudinary.config(secure=True)
-CLOUDINARY_SECURE = True
+
+CLOUDINARY_URL_VAL = os.getenv("CLOUDINARY_URL", "").strip().strip('"').strip("'")
+CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_CLOUD_NAME")
+CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
+CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
+
+# Try URL first
+if CLOUDINARY_URL_VAL:
+    cloudinary.config(cloudinary_url=CLOUDINARY_URL_VAL, secure=True)
+
+# If URL didn’t set cloud_name, try explicit fields
+if not cloudinary.config().cloud_name and all(
+    [CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET]
+):
+    cloudinary.config(
+        cloud_name=CLOUDINARY_CLOUD_NAME,
+        api_key=CLOUDINARY_API_KEY,
+        api_secret=CLOUDINARY_API_SECRET,
+        secure=True,
+    )
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
