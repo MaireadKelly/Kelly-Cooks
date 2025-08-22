@@ -1,33 +1,67 @@
-import os
 from pathlib import Path
+import os
 
 import dj_database_url
 from dotenv import load_dotenv
 import cloudinary
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# -----------------------------------------------------
+# Core
+# -----------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+# Read DEBUG from env: True locally, False on Heroku
+DEBUG = os.getenv("DEBUG", "False").strip().lower() == "true"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# Secret key from env
+SECRET_KEY = os.getenv("SECRET_KEY", "change-me-in-env")
 
-
+# Hosts
 ALLOWED_HOSTS = [
     "kellycookspp4-63d6db43ef5f.herokuapp.com",
-    ".herokuapp.com",
-    "127.0.0.1",
     "localhost",
+    "127.0.0.1",
 ]
+# Allow lvh.me for local dev (resolves to 127.0.0.1)
+if DEBUG:
+    ALLOWED_HOSTS += ["lvh.me", ".lvh.me"]
 
-# Application definition
+# CSRF trusted origins (Django 5 requires scheme + host [+ port])
+CSRF_TRUSTED_ORIGINS = [
+    "https://kellycookspp4-63d6db43ef5f.herokuapp.com",
+    "https://*.herokuapp.com",
+    "https://*.codeinstitute-ide.net",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+]
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS += [
+        "http://127.0.0.1:8001",
+        "http://localhost:8001",
+        "http://lvh.me:8000",
+        "http://lvh.me:8001",
+    ]
 
+# Optional env override for extra hosts without code changes
+_env_hosts = os.getenv("ALLOWED_HOSTS")
+if _env_hosts:
+    ALLOWED_HOSTS += [h.strip() for h in _env_hosts.split(",") if h.strip()]
+
+# Locale
+LANGUAGE_CODE = "en-us"
+TIME_ZONE = "Europe/Dublin"
+USE_I18N = True
+USE_TZ = True
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# -----------------------------------------------------
+# Applications
+# -----------------------------------------------------
 INSTALLED_APPS = [
+    # Django
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -35,23 +69,24 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
-    "django_resized",
+    # Third-party
+    "cloudinary",
+    "cloudinary_storage",
+    "crispy_forms",
+    "crispy_bootstrap5",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "django_resized",
+    "djrichtextfield",
     # APPS
     "home",
     "recipes",
-    # OTHER
-    "crispy_forms",
-    "crispy_bootstrap5",
-    "cloudinary",
-    "cloudinary_storage",
-    "djrichtextfield",
 ]
 
 SITE_ID = 1
 
+# djrichtextfield toolbar (keep minimal)
 DJRICHTEXTFIELD_CONFIG = {
     "settings": {
         "toolbar": [
@@ -64,9 +99,31 @@ DJRICHTEXTFIELD_CONFIG = {
     }
 }
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+# Allauth basics
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = "none"  # adjust if you enable emails
+LOGIN_URL = "/accounts/login/"
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+
+# -----------------------------------------------------
+# Middleware
+# -----------------------------------------------------
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # serve static in prod
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -76,11 +133,9 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-
-ROOT_URLCONF = "main.urls"
-
+# -----------------------------------------------------
+# Templates
+# -----------------------------------------------------
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -92,7 +147,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
-                "django.template.context_processors.request",
+                "django.template.context_processors.request",  # allauth needs this
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -104,92 +159,75 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
-]
-
+ROOT_URLCONF = "main.urls"
 WSGI_APPLICATION = "main.wsgi.application"
 
-# Database configuration
+# -----------------------------------------------------
+# Database (Heroku Postgres via DATABASE_URL, else local sqlite)
+# -----------------------------------------------------
+if os.getenv("DATABASE_URL"):
+    DATABASES = {
+        "default": dj_database_url.parse(
+            os.getenv("DATABASE_URL"),
+            conn_max_age=600,
+            ssl_require=not DEBUG,
+        )
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
-DATABASES = {
-    "default": dj_database_url.parse(
-        os.getenv("DATABASE_URL"), conn_max_age=600, ssl_require=True
-    )
-}
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://kellycookspp4-63d6db43ef5f.herokuapp.com",
-    "https://*.herokuapp.com",
-    "https://*.codeinstitute-ide.net",
-    "http://127.0.0.1:8000",  # for local dev
-    "http://localhost:8000",
-]
-
-
+# -----------------------------------------------------
 # Password validation
-
+# -----------------------------------------------------
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": (
-            "django.contrib.auth.password_validation."
-            "UserAttributeSimilarityValidator"
-        ),
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "MinimumLengthValidator"),
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "CommonPasswordValidator"),
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME": ("django.contrib.auth.password_validation." "NumericPasswordValidator"),
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
-LANGUAGE_CODE = "en-us"
-TIME_ZONE = "UTC"
-USE_I18N = True
-USE_TZ = True
-
-# Account setup
-
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_USERNAME_MIN_LENGTH = 4
-ACCOUNT_UNIQUE_EMAIL = True  # (usually set by default)
-LOGIN_URL = "/accounts/login/"
-LOGIN_REDIRECT_URL = "/"
-
-# Disable email verification for registration
-
-ACCOUNT_EMAIL_VERIFICATION = "none"
-
-# Static files and media
-
+# -----------------------------------------------------
+# Static & Media
+# -----------------------------------------------------
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# WhiteNoise compressed/hashed static files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-
+# Cloudinary media storage (HTTPS enforced)
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 cloudinary.config(secure=True)
 CLOUDINARY_SECURE = True
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-# Security settings for production
+# -----------------------------------------------------
+# Security – production only
+# -----------------------------------------------------
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # Heroku proxy
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+    # Optional hardening
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"

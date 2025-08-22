@@ -133,8 +133,7 @@ New users can register an account using the sign-up form. The system prevents in
 
 - **Successful Registration**  
   Users are logged in automatically after a successful signup.  
-  ![Registration success](docs/readme/register-success.png)
-
+  
 ### Login & Logout
 - **Login form**  
   ![Login form](docs/readme/login-form.png)
@@ -294,6 +293,41 @@ ALLOWED_HOSTS=localhost,127.0.0.1
 
 
 ## Credits
-- Recipe data: user‑generated.
-- Favicon: [favicon.io](https://favicon.io)
-- Layout inspiration: various recipe websites.
+
+### Content & Data
+- **Recipe inspiration**: Some recipes and ideas were inspired by [BBC Good Food](https://www.bbcgoodfood.com/). All text was adapted and rewritten for this project; any resemblance is credited to the original source of inspiration.
+- **User-generated content**: Recipes, titles, and reviews created during testing are user-generated for the purposes of this educational project.
+
+### Design & Media
+- **Mockups / marketing images**: Created in [Canva](https://www.canva.com/).
+- **Icons**: [Font Awesome](https://fontawesome.com/) (CDN) — used for UI icons where applicable.
+- **Images hosting / transforms**: [Cloudinary](https://cloudinary.com/) via `cloudinary_storage`.
+
+### Frameworks & Libraries
+- **Django** — core web framework.
+- **django-allauth** — authentication & account management.
+- **django-crispy-forms** — improved form rendering.
+- **Bootstrap 5** — layout & components (CSS + bundle JS).
+- **WhiteNoise** — static files (compressed manifest).
+- **Gunicorn** — WSGI server for production.
+- **Heroku** — deployment hosting.
+- *(If used)* **dj-rich-textfield** — rich text editor.  
+  > If you didn’t end up using this in templates, you can remove it here and from `requirements.txt`.
+
+### Project Scaffolding
+- **Starter template**: Code Institute’s Full Template (repo generated from CI’s base template). :contentReference[oaicite:1]{index=1}
+
+### Tools & Validation
+- **W3C HTML** validator — markup validation.
+- **W3C Jigsaw** CSS validator — CSS validation.
+- **PEP8** validator — Python style checks.
+- **Lighthouse** — performance, accessibility & best-practices audit.
+
+### Acknowledgements
+- **Mentor/Reviewers** — for guidance and feedback.
+- **ChatGPT (OpenAI)** — used to assist with debugging, refactoring, Lighthouse improvements (HTTPS/mixed-content), and documentation polish during development.
+
+### Licensing & Attribution Notes
+- This project is for **educational purposes**. Where third-party resources (e.g., BBC Good Food recipes) informed content, they are acknowledged above.  
+- Icons and fonts are used under the terms of their respective licenses. Ensure any new assets added respect their original licenses.
+
