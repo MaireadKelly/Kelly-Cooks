@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages import get_messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -29,7 +29,7 @@ class AddRecipe(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):  # Associate logged in user with the new recipe
         form.instance.user = self.request.user
-        messages.success(self.request, "Your recipe has been added successfully!")
+        messages.success(self.request, "Recipe added successfully!")
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -121,7 +121,7 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = RecipeForm
 
     def form_valid(self, form):
-        messages.success(self.request, "Your recipe has been updated successfully!")
+        messages.success(self.request, "Recipe updated successfully!")
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -161,12 +161,15 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             try:
                 obj = self.get_object()
                 messages.error(
-                    self.request, "You don’t have permission to delete this recipe."
+                    self.request,
+                    "You don’t have permission to delete this recipe.",
                 )
                 return redirect("recipe_detail", pk=obj.pk)
             except Exception:
                 # If object lookup itself fails, fall back safely
-                messages.error(self.request, "You don’t have permission to do that.")
+                messages.error(
+                    self.request, "You don’t have permission to do that."
+                )
                 return redirect("recipes")
         return super().handle_no_permission()
 
@@ -180,7 +183,9 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return response  # redirects to success_url
         except Exception:
             # Don’t expose internal errors in production
-            messages.error(request, "Sorry, we couldn’t delete that recipe right now.")
+            messages.error(
+                request, "Sorry, we couldn’t delete that recipe right now."
+            )
             return redirect("recipes")
 
 
@@ -217,7 +222,9 @@ def add_review(request, pk):
             )
     else:
         form = ReviewForm()
-    return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})
+    return render(
+        request, "recipes/add_review.html", {"form": form, "recipe": recipe}
+    )
 
 
 @login_required
@@ -234,7 +241,9 @@ def edit_review(request, pk):
             return redirect("recipe_detail", pk=review.recipe.pk)
     else:
         form = ReviewForm(instance=review)
-    return render(request, "recipes/edit_review.html", {"form": form, "review": review})
+    return render(
+        request, "recipes/edit_review.html", {"form": form, "review": review}
+    )
 
 
 @login_required
@@ -245,7 +254,9 @@ def delete_review(request, pk):
     review = get_object_or_404(Review, pk=pk)
     # Ensure only the review author can delete
     if review.user != request.user:
-        messages.error(request, "You are not authorized to delete this review.")
+        messages.error(
+            request, "You are not authorized to delete this review."
+        )
         return redirect("recipe_detail", pk=review.recipe.pk)
 
     review.delete()

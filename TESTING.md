@@ -22,16 +22,18 @@ The following table summarises results:
 | Add Review                       | `/recipes/<id>/review/`     | ✅ Pass |
 
 ### **Screenshots**
-Screenshots of validation results are stored in:
-- `docs/validation/landing-page-validation.png`
-- `docs/validation/recipe-list-validation.png`
-- `docs/validation/recipe-detail-validation.png`
-- `docs/validation/add-recipe-validation.png`
-- `docs/validation/edit-recipe-validation.png`
-- `docs/validation/delete-recipe-validation.png`
-- `docs/validation/my-recipes-validation.png`
-- `docs/validation/favourites-validation.png`
-- `docs/validation/add-review-validation.png`
+### W3C HTML Validation (Screenshots)
+
+![Landing page – W3C HTML validation](docs/validation/landing-page-validation.png)
+![Recipe list – W3C HTML validation](docs/validation/recipe-list-validation.png)
+![Recipe detail – W3C HTML validation](docs/validation/recipe-detail-validation.png)
+![Add recipe – W3C HTML validation](docs/validation/add-recipe-validation.png)
+![Edit recipe – W3C HTML validation](docs/validation/edit-recipe-validation.png)
+![Delete recipe – W3C HTML validation](docs/validation/delete-recipe-validation.png)
+![My recipes – W3C HTML validation](docs/validation/my-recipes-validation.png)
+![Favourites – W3C HTML validation](docs/validation/favourites-validation.png)
+![Add review – W3C HTML validation](docs/validation/review-validation.png)
+
 
 ---
 
@@ -40,16 +42,36 @@ Screenshots of validation results are stored in:
 CSS was validated using the [W3C Jigsaw CSS Validation Service](https://jigsaw.w3.org/css-validator/).  
 Result: ✅ Pass with no errors.
 
-Screenshot: `docs/validation/css-validation.png`
+![base.css - Validation](docs/validation/css-validation.png)
 
 ---
 
-## **Python Validation**
+## **Python (PEP8) Validation**
 
-Python code was checked with [PEP8 online validator](http://pep8online.com/).  
-All files passed with no significant errors. Minor line length warnings remain in some files but are within acceptable limits.
+All first-party Python files were tested using the Code Institute PEP8 linter  
+(https://pep8ci.herokuapp.com/). Auto-generated files (migrations, `__pycache__`, `.venv/`, `.vscode/`) were excluded.
 
-Screenshot: `docs/validation/python-validation.png`
+**Files tested**
+- `manage.py`
+- `main/` → `__init__.py`, `settings.py`, `urls.py`, `wsgi.py`, `asgi.py`
+- `home/` → `__init__.py`, `apps.py`, `admin.py`, `models.py`, `views.py`, `urls.py`, `tests.py`
+- `recipes/` → `__init__.py`, `apps.py`, `admin.py`, `forms.py`, `models.py`, `views.py`, `urls.py`, `tests.py`
+
+**Results**
+- ✅ All files passed PEP8 validation with no significant errors.
+
+### PEP8 Validation — Evidence
+
+> Each image links to the full-size version.
+
+| `manage.py` | `main/` |
+|---|---|
+| [![PEP8 – manage.py](docs/validation/python-validation-manage.png)](docs/validation/python-validation-manage.png) | [![PEP8 – main app](docs/validation/python-validation-main.png)](docs/validation/python-validation-main.png) |
+
+| `home/` | `recipes/` |
+|---|---|
+| [![PEP8 – home app](docs/validation/python-validation-home.png)](docs/validation/python-validation-home.png) | [![PEP8 – recipes app](docs/validation/python-validation-recipes.png)](docs/validation/python-validation-recipes.png) |
+
 
 ---
 

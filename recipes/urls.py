@@ -26,7 +26,9 @@ urlpatterns = [
     path("my-recipes/", MyRecipes.as_view(), name="my_recipes"),
     path("favourites/", MyFavourites.as_view(), name="favourites"),
     # favourites (recipe pk)
-    path("<int:pk>/toggle-favourite/", toggle_favourite, name="toggle_favourite"),
+    path(
+        "<int:pk>/toggle-favourite/", toggle_favourite, name="toggle_favourite"
+        ),
     # reviews
     # add review to recipe (recipe pk)
     path("<int:pk>/review/", add_review, name="add_review"),
