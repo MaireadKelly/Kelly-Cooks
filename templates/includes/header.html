@@ -31,12 +31,12 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if url_name == 'recipes' %}active{% endif %}"
-                               href="{% url 'recipes' %}"
+                               href="{% url 'recipes:recipes' %}"
                                style="font-family: 'Lato', sans-serif">Recipes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if url_name == 'add_recipe' %}active{% endif %}"
-                               href="{% url 'add_recipe' %}"
+                               href="{% url 'recipes:add_recipe' %}"
                                style="font-family: 'Lato', sans-serif">New</a>
                         </li>
                     </ul>
@@ -44,7 +44,7 @@
                     <form class="d-flex mb-2 mb-lg-0 me-lg-2"
                           role="search"
                           method="GET"
-                          action="{% url 'recipes' %}">
+                          action="{% url 'recipes:recipes' %}">
                         <input class="form-control me-2"
                                name="q"
                                type="search"
@@ -67,11 +67,11 @@
                                 <ul class="dropdown-menu" aria-labelledby="recipesDropdown">
                                     <li>
                                         <a class="dropdown-item {% if url_name == 'my_recipes' %}active{% endif %}"
-                                           href="{% url 'my_recipes' %}">My Recipes</a>
+                                           href="{% url 'recipes:my_recipes' %}">My Recipes</a>
                                     </li>
                                     <li>
                                         <a class="dropdown-item {% if url_name == 'favourites' %}active{% endif %}"
-                                           href="{% url 'favourites' %}">My Favourites</a>
+                                           href="{% url 'recipes:favourites' %}">My Favourites</a>
                                     </li>
                                 </ul>
                             </li>

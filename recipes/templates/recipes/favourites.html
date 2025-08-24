@@ -2,25 +2,48 @@
 {% block title %}My Favourites{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="my-4">My Favourite Recipes</h1>
-        {% if favourites %}
-            <div class="row">
-                {% for favourite in favourites %}
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="{{ favourite.recipe.image.url }}" class="card-img-top" alt="{{ favourite.recipe.image_alt }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ favourite.recipe.title }}</h5>
-                                <p class="card-text">{{ favourite.recipe.description|truncatewords:20 }}</p>
-                                <a href="{% url 'recipe_detail' favourite.recipe.id %}" class="btn btn-primary">View Recipe</a>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+<div class="container">
+  <h1 class="my-4">My Favourite Recipes</h1>
+
+  {% if favourites %}
+    <div class="row">
+      {% for favourite in favourites %}
+        {% with recipe=favourite.recipe %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            {% if recipe.image %}
+              <img src="{{ recipe.image.url }}" class="card-img-top"
+                   alt="{{ recipe.image_alt|default:recipe.title }}">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <p class="card-text">{{ recipe.description|default_if_none:""|truncatewords:20 }}</p>
+
+              <div class="mt-auto d-flex gap-2">
+                <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="btn btn-primary">
+                  View Recipe
+                </a>
+
+                {# Remove from favourites (toggle off) #}
+                <form method="post" action="{% url 'recipes:favourite_toggle' recipe.id %}" class="d-inline">
+                  {% csrf_token %}
+                  {# redirect back here after toggle #}
+                  <input type="hidden" name="next" value="{% url 'recipes:favourites' %}">
+                  <button type="submit" class="btn btn-outline-danger">
+                    <i class="fas fa-heart-broken"></i>
+                    Remove
+                  </button>
+                </form>
+              </div>
             </div>
-        {% else %}
-            <p>You have no favourite recipes yet.</p>
-        {% endif %}
+          </div>
+        </div>
+        {% endwith %}
+      {% endfor %}
     </div>
+  {% else %}
+    <p>You have no favourite recipes yet.</p>
+  {% endif %}
+</div>
 {% endblock %}
+
