@@ -185,3 +185,4 @@ if __name__ == "__main__":
         start_migration()
     else:
         sys.exit("Migration cancelled by the user")
+

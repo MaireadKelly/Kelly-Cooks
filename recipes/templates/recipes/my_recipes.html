@@ -14,7 +14,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ recipe.title }}</h5>
                                 <p class="card-text">{{ recipe.description|truncatewords:20 }}</p>
-                                <a href="{% url 'recipe_detail' recipe.id %}" class="btn btn-primary">View Recipe</a>
+                                <a href="{% url 'recipes:recipe_detail' recipe.id %}" class="btn btn-primary">View Recipe</a>
                             </div>
                         </div>
                     </div>
@@ -25,3 +25,4 @@
         {% endif %}
     </div>
 {% endblock %}
+

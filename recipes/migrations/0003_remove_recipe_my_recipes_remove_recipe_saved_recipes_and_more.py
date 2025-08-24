@@ -70,3 +70,4 @@ class Migration(migrations.Migration):
             field=ckeditor.fields.RichTextField(max_length=10000),
         ),
     ]
+

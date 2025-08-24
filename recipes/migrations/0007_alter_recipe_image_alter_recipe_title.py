@@ -24,3 +24,4 @@ class Migration(migrations.Migration):
             field=models.CharField(max_length=255),
         ),
     ]
+

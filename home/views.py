@@ -16,3 +16,4 @@ class IndexView(TemplateView):
             list(all_recipes), min(len(all_recipes), 4)
         )
         return context
+

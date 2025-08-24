@@ -13,10 +13,11 @@
                     {{ form|crispy }}
                     <div class="text-center mt-3">
                         <button class="btn btn-primary w-100" type="submit">Save Changes</button>
-                        <a href="{% url 'recipe_detail' object.pk %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+                        <a href="{% url 'recipes:recipe_detail' object.pk %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
+

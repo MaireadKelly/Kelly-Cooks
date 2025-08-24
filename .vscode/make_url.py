@@ -12,3 +12,4 @@ api_key = re.findall(r"['](.*?)[']",content[16])[0]
 api_secret = re.findall(r"['](.*?)[']",content[17])[0]
 
 print(f"cloudinary://{api_key}:{api_secret}@{cloud_name}")
+

@@ -246,3 +246,4 @@ if not DEBUG:
     # Optional hardening
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+

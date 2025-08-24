@@ -50,3 +50,4 @@ class ReviewAdmin(admin.ModelAdmin):
         "user__username",
         "recipe__title",
     )  # Search functionality
+

@@ -12,10 +12,11 @@
                     {{ form|crispy }}
                     <div class="text-center mt-3">
                         <button type="submit" class="btn btn-primary w-100">Submit Review</button>
-                        <a href="{% url 'recipe_detail' pk=recipe.id %}" class="btn btn-secondary w-100 mt-2">Back</a>
+                        <a href="{% url 'recipes:recipe_detail' pk=recipe.id %}" class="btn btn-secondary w-100 mt-2">Back</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
+

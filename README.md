@@ -119,27 +119,32 @@ The application uses a simple, clear schema:
 - Search functionality.
 - Responsive design for mobile, tablet, and desktop.
 
-### User Registration
-New users can register an account using the sign-up form. The system prevents invalid inputs and provides clear error messages.
+#### User Registration
 
-- **Invalid Email Example**  
-  ![Registration error - email](docs/readme/registration-error-email.png)
+> Each image links to the full-size version.
 
-- **Invalid Password Example**  
-  ![Registration error - password](docs/readme/registration-error-password.png)
+***Registration Form**  
+[![Registration form](docs/readme/registration-form.png)](docs/readme/registration-form.png)
 
-- **Registration Form**  
-  ![Registration form](docs/readme/registration-form.png)
+**Validation Errors**
+| Invalid Email | Invalid Password |
+|---|---|
+| [![Registration error – email](docs/readme/registration-error-email.png)](docs/readme/registration-error-email.png) | [![Registration error – password](docs/readme/registration-error-password.png)](docs/readme/registration-error-password.png) |
 
-- **Successful Registration**  
-  Users are logged in automatically after a successful signup.  
+**Successful Registration**  
+[![Registration success](docs/readme/registration-success.png)](docs/readme/registration-success.png)  
+After a successful signup, users are logged in automatically and redirected to the logged-in user’s home page.
+
   
 ### Login & Logout
-- **Login form**  
-  ![Login form](docs/readme/login-form.png)
+**Login**
 
-- **Login error** – a clear error message is displayed above the form for invalid credentials.  
-  ![Login error](docs/readme/login-error-password.png)
+> Each image links to the full-size version.
+
+| Login Form | Login Error (invalid credentials) |
+|---|---|
+| [![Login form](docs/readme/login-form.png)](docs/readme/login-form.png) | [![Login error – message above form](docs/readme/login-error-password.png)](docs/readme/login-error-password.png) |
+
 
 - **Successful login**  
   Redirects to the homepage with a confirmation message.  
@@ -148,7 +153,6 @@ New users can register an account using the sign-up form. The system prevents in
 - **Logout**  
   Confirm logout flow with success feedback.  
   ![Confirm Logout](docs/readme/logout.png)
-
 ### Landing Page
 - **Logged Out View** – prompts sign-up/login for full access.  
   ![Landing page logged out](docs/readme/landing-logged-out.png)
@@ -178,10 +182,10 @@ Responsive header and footer provide quick access to key areas.
   ![Edit recipe form](docs/readme/edit-recipe-form.png)
 - **Successful Update**  
   ![Edit recipe success](docs/readme/edit-recipe-success.png)
-- **Delete Confirmation**  
-  ![Delete recipe confirmation](docs/readme/delete-recipe-confirm.png)
-- **Successful Deletion**  
-  ![Delete recipe success](docs/readme/delete-recipe-success.png)
+- **Delete Confirmation**  On successfull delete the 
+  user is returned to the reciceps page
+  ![Delete recipe confirmation](docs/readme/recipe-confirm-delete.png)
+
 
 ### Reviews
 Users can leave feedback on recipes.

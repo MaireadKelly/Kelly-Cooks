@@ -27,3 +27,4 @@ auto_crop_url, _ = cloudinary_url(
     "shoes", width=500, height=500, crop="auto", gravity="auto"
 )
 print(auto_crop_url)
+

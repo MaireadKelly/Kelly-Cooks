@@ -58,3 +58,4 @@ class Migration(migrations.Migration):
             field=djrichtextfield.models.RichTextField(max_length=10000),
         ),
     ]
+
