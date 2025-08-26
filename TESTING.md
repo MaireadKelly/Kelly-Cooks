@@ -21,7 +21,6 @@ The following table summarises results:
 | Favourites                       | `/recipes/favourites/`      | ✅ Pass |
 | Add Review                       | `/recipes/<id>/review/`     | ✅ Pass |
 
-### **Screenshots**
 ### W3C HTML Validation (Screenshots)
 
 ![Landing page – W3C HTML validation](docs/validation/landing-page-validation.png)
@@ -32,7 +31,7 @@ The following table summarises results:
 ![Delete recipe – W3C HTML validation](docs/validation/delete-recipe-validation.png)
 ![My recipes – W3C HTML validation](docs/validation/my-recipes-validation.png)
 ![Favourites – W3C HTML validation](docs/validation/favourites-validation.png)
-![Add review – W3C HTML validation](docs/validation/review-validation.png)
+![Add review – W3C HTML validation](docs/validation/add-review-validation.png)
 
 
 ---
@@ -116,6 +115,19 @@ Screenshots:
 | Login failure | Submit wrong password | Error message above the form | ✅ |
 | Logout | Click Logout | Session cleared, success message | ✅ |
 
+### **Authentication & Access Control (extra)**
+| Scenario | Steps | Expected | Result |
+|---|---|---|---|
+| Unauthenticated: Add/Edit/Delete | Logged out → visit `/recipes/add/`, `/recipes/edit/<id>/`, `/recipes/delete/<id>/` | Redirects to Login with `?next=...` | ✅ |
+| Custom 404 page | Visit a non-existent URL, e.g. `/recipes/9999999/` (if not present) | Branded 404 template is shown (no debug info) | ✅ |
+
+### Custom 404 Page — Evidence
+
+The application serves a branded 404 page with no debug information.
+
+![Custom 404 page](docs/testing/404-page.png)
+
+
 ### **CRUD – Recipes**
 | Scenario | Steps | Expected | Result |
 |---|---|---|---|
@@ -144,8 +156,6 @@ Screenshots:
 | Toggle favourite off | Detail → “Remove from favourites” | Success message; item removed from favourites | ✅ |
 | My Recipes | Visit `/recipes/my-recipes/` | Only the user’s recipes are listed | ✅ |
 | Anonymous user clicks "Add to favourites" | Visit /recipes/<id>/ while logged out → click Add to favourites | Redirects to Login with ?next=…; after login returns to the recipe | ✅ |
-| GET on favourite endpoint is blocked      | Open /recipes/<id>/favourite/ in the URL bar (GET)               | 405 Method Not Allowed                                             | ✅ |
-
 
 ---
 
@@ -175,7 +185,6 @@ Screenshots:
 ## **Bugs & Fixes**
 
 - **Edit Recipe “Cancel” loop** – Cancel now returns to **detail** (was looping back to edit).  
-- **Delete Recipe debug page** – Non-owners are redirected with an error message (no 403/debug); owners see success + redirect.  
 - **Favourites clarity** – Toggling favourites shows a success message; items appear/remove in **My Favourites**.  
 - **Static files paths** – Corrected in `base.html` to load favicon and CSS correctly.  
 - **Mixed content (Lighthouse)** – Enforced HTTPS for Cloudinary (`cloudinary.config(secure=True)`, `CLOUDINARY_SECURE=True`).
