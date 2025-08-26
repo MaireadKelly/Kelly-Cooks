@@ -274,32 +274,27 @@ Deployed to Heroku:
 
 ## Running Locally
 
-```bash
+~~~bash
 git clone <repo-url>
 cd Kelly-Cooks
 python -m venv .venv
 # Windows:
-# .venv\Scripts\activate
+#   .venv\Scripts\activate
 # macOS/Linux:
-# source .venv/bin/activate
+#   source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env   # or create .env as below
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
-```
-### .env keys (sample)
-```bash
-SECRET_KEY=...
+~~~
 
-DEBUG=True (local only)
-
-DATABASE_URL=... (if using Postgres locally; otherwise SQLite is fine)
-
-CLOUDINARY_URL=cloudinary://<key>:<secret>@<cloud_name>
-
-ALLOWED_HOSTS=localhost,127.0.0.1
-```
+**.env keys (sample)**
+- `SECRET_KEY=...`
+- `DEBUG=True` *(local only)*
+- `DATABASE_URL=...` *(if using Postgres locally; otherwise SQLite is fine)*
+- `CLOUDINARY_URL=cloudinary://<key>:<secret>@<cloud_name>`
+- `ALLOWED_HOSTS=localhost,127.0.0.1`
 
 ## Credits
 
