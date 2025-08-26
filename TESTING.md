@@ -143,6 +143,9 @@ Screenshots:
 | Toggle favourite on | Detail → “Add to favourites” | Success message; item appears in `/recipes/favourites/` | ✅ |
 | Toggle favourite off | Detail → “Remove from favourites” | Success message; item removed from favourites | ✅ |
 | My Recipes | Visit `/recipes/my-recipes/` | Only the user’s recipes are listed | ✅ |
+| Anonymous user clicks "Add to favourites" | Visit /recipes/<id>/ while logged out → click Add to favourites | Redirects to Login with ?next=…; after login returns to the recipe | ✅ |
+| GET on favourite endpoint is blocked      | Open /recipes/<id>/favourite/ in the URL bar (GET)               | 405 Method Not Allowed                                             | ✅ |
+
 
 ---
 

@@ -159,7 +159,7 @@ View for users to delete their own recipes
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Recipe
     template_name = "recipes/recipe_confirm_delete.html"
-    success_url = reverse_lazy("recipes:recipes")  # ensure this URL name exists
+    success_url = reverse_lazy("recipes:recipes")
 
     # Only the owner may delete
     def test_func(self):
@@ -295,7 +295,9 @@ def toggle_favourite(request, pk):
 
     # Optional: redirect back to a provided 'next' URL if it's safe
     next_url = request.POST.get("next")
-    if next_url and url_has_allowed_host_and_scheme(next_url, {request.get_host()}):
+    if next_url and url_has_allowed_host_and_scheme(
+        next_url, {request.get_host()}
+    ):
         return redirect(next_url)
 
     return redirect("recipes:recipe_detail", pk=recipe.pk)

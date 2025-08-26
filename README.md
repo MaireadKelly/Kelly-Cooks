@@ -123,7 +123,7 @@ The application uses a simple, clear schema:
 
 > Each image links to the full-size version.
 
-***Registration Form**  
+**Registration Form**  
 [![Registration form](docs/readme/registration-form.png)](docs/readme/registration-form.png)
 
 **Validation Errors**
@@ -182,8 +182,8 @@ Responsive header and footer provide quick access to key areas.
   ![Edit recipe form](docs/readme/edit-recipe-form.png)
 - **Successful Update**  
   ![Edit recipe success](docs/readme/edit-recipe-success.png)
-- **Delete Confirmation**  On successfull delete the 
-  user is returned to the reciceps page
+- **Delete Confirmation**  On successful delete the user 
+  is returned to the recipes page.
   ![Delete recipe confirmation](docs/readme/recipe-confirm-delete.png)
 
 
@@ -193,12 +193,26 @@ Users can leave feedback on recipes.
   ![Add review](docs/readme/add-review.png)
 
 ### Favourites & My Recipes
-- **Toggle favourite** on a recipe detail.  
-  ![Favourite toggle](docs/readme/favourite-toggle.png)
-- **Favourites page** listing saved recipes.  
-  ![Favourites list](docs/readme/favourites-list.png)
-- **My Recipes** – the user’s own content in one place.  
-  ![My Recipes](docs/readme/my-recipes.png)
+
+> Each image links to the full-size version.
+
+**Toggle on (recipe detail)**
+| Before (OFF) | After (ON with success message) |
+|---|---|
+| [![Favourite OFF](docs/readme/favourite-toggle-off.png)](docs/readme/favourite-toggle-off.png) | [![Favourite ON](docs/readme/favourite-toggle-on.png)](docs/readme/favourite-toggle-on.png) |
+
+**Favourites list (now includes recipe)**
+[![Favourites list – added](docs/readme/favourites-list-added.png)](docs/readme/favourites-list-added.png)
+
+> Optional evidence  
+> **Toggle off (recipe detail)**  
+> [![Favourite removed](docs/readme/favourite-toggle-removed.png)](docs/readme/favourite-toggle-removed.png)  
+> **Favourites list (removed)**  
+> [![Favourites list – removed](docs/readme/favourites-list-removed.png)](docs/readme/favourites-list-removed.png)
+
+**My Recipes**
+[![My Recipes](docs/readme/my-recipes.png)](docs/readme/my-recipes.png)
+
 
 ### Future Features
 - Advanced filtering by cuisine, dietary needs, and cooking time.
@@ -279,6 +293,7 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 
+
 ---
 
 .env keys (sample)
@@ -299,7 +314,8 @@ ALLOWED_HOSTS=localhost,127.0.0.1
 ## Credits
 
 ### Content & Data
-- **Recipe inspiration**: Some recipes and ideas were inspired by [BBC Good Food](https://www.bbcgoodfood.com/). All text was adapted and rewritten for this project; any resemblance is credited to the original source of inspiration.
+- **Recipe inspiration**: Some recipes and ideas were inspired by [BBC Good Food](https://www.bbcgoodfood.com/). 
+
 - **User-generated content**: Recipes, titles, and reviews created during testing are user-generated for the purposes of this educational project.
 
 ### Design & Media

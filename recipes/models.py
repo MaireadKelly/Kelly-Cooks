@@ -55,13 +55,17 @@ class Review(models.Model):
 
 
 class Favourite(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["user", "recipe"], name="unique_user_recipe_favourite")
+            models.UniqueConstraint(
+                fields=["user", "recipe"], name="unique_user_recipe_favourite"
+            )
         ]
 
     def __str__(self):

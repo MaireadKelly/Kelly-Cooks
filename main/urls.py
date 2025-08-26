@@ -29,4 +29,3 @@ urlpatterns = [
 ]
 
 handler404 = "recipes.views.custom_404_view"
-
