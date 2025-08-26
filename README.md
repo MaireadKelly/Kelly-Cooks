@@ -182,8 +182,7 @@ Responsive header and footer provide quick access to key areas.
   ![Edit recipe form](docs/readme/edit-recipe-form.png)
 - **Successful Update**  
   ![Edit recipe success](docs/readme/edit-recipe-success.png)
-- **Delete Confirmation**  On successful delete the user 
-  is returned to the recipes page.
+- **Delete Confirmation** — On successful delete the user is returned to the recipes page.  
   ![Delete recipe confirmation](docs/readme/recipe-confirm-delete.png)
 
 
@@ -204,9 +203,7 @@ Users can leave feedback on recipes.
 **Favourites list (now includes recipe)**
 [![Favourites list – added](docs/readme/favourites-list-added.png)](docs/readme/favourites-list-added.png)
 
-> Optional evidence  
-> **Toggle off (recipe detail)**  
-> [![Favourite removed](docs/readme/favourite-toggle-removed.png)](docs/readme/favourite-toggle-removed.png)  
+ 
 > **Favourites list (removed)**  
 > [![Favourites list – removed](docs/readme/favourites-list-removed.png)](docs/readme/favourites-list-removed.png)
 
@@ -258,12 +255,10 @@ Users can leave feedback on recipes.
 
 - **HTML**: All key pages pass W3C HTML validation.  
 - **CSS**: Passes Jigsaw CSS validation.  
-- **Python**: PEP8 compliance with minor line-length notes.  
+- **Python**: PEP8 compliance.  
 - **Lighthouse**: Performance and Accessibility are strong; Best Practices improved after enforcing HTTPS for Cloudinary assets.
 
 ➡ Full evidence and screenshots are in **[TESTING.md](TESTING.md)** (HTML/CSS/Python/Lighthouse, CRUD checks, and known issues).
-
-**Known bug (minor)**: After deleting a recipe, the success message may not always display; the action completes successfully. Logged in TESTING.md.
 
 ---
 
@@ -292,12 +287,9 @@ cp .env.example .env   # or create .env as below
 python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
-
-
----
-
-.env keys (sample)
-
+```
+### .env keys (sample)
+```bash
 SECRET_KEY=...
 
 DEBUG=True (local only)
@@ -307,9 +299,7 @@ DATABASE_URL=... (if using Postgres locally; otherwise SQLite is fine)
 CLOUDINARY_URL=cloudinary://<key>:<secret>@<cloud_name>
 
 ALLOWED_HOSTS=localhost,127.0.0.1
-
----
-
+```
 
 ## Credits
 
@@ -331,11 +321,10 @@ ALLOWED_HOSTS=localhost,127.0.0.1
 - **WhiteNoise** — static files (compressed manifest).
 - **Gunicorn** — WSGI server for production.
 - **Heroku** — deployment hosting.
-- *(If used)* **dj-rich-textfield** — rich text editor.  
-  > If you didn’t end up using this in templates, you can remove it here and from `requirements.txt`.
+- **djrichtextfield** — rich text editor.  
 
 ### Project Scaffolding
-- **Starter template**: Code Institute’s Full Template (repo generated from CI’s base template). :contentReference[oaicite:1]{index=1}
+- **Starter template**: Code Institute’s Full Template (repo generated from CI’s base template).
 
 ### Tools & Validation
 - **W3C HTML** validator — markup validation.
