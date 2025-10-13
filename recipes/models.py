@@ -33,7 +33,7 @@ class Recipe(models.Model):
         """
         Returns the URL for the detail view of a recipe instance.
         """
-        return reverse("recipe_detail", kwargs={"pk": self.pk})
+        return reverse("recipes:recipe_detail", kwargs={"pk": self.pk})
 
 
 class Review(models.Model):

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages import get_messages
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.decorators.http import require_POST
 from django.views.generic import (
@@ -29,14 +29,14 @@ class AddRecipe(LoginRequiredMixin, CreateView):
     model = Recipe
     form_class = RecipeForm
 
-    def form_valid(self, form):  # Associate logged-in user with the new recipe
+    def form_valid(self, form):
         form.instance.user = self.request.user
+        form.save()
         messages.success(self.request, "Recipe added successfully!")
-        return super().form_valid(form)
+        return redirect("recipes:recipe_detail", pk=form.instance.pk)
 
     def get_success_url(self):
-        return self.object.get_absolute_url()
-
+        return reverse("recipes:recipe_detail", kwargs={"pk": self.object.pk})
 
 """
 View to list all recipes with optional search functionality
