@@ -159,47 +159,31 @@ View for users to delete their own recipes
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Recipe
     template_name = "recipes/recipe_confirm_delete.html"
-    success_url = reverse_lazy("recipes:recipes")
+    success_url = reverse_lazy("recipes:recipes")  # <- confirm this URL name exists
 
     # Only the owner may delete
     def test_func(self):
         obj = self.get_object()
         return obj.user_id == self.request.user.id
 
-    # If user fails the ownership check, be graceful (no 403 / debug page)
+    # Be graceful on permission failure
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             try:
                 obj = self.get_object()
-                messages.error(
-                    self.request,
-                    "You don’t have permission to delete this recipe.",
-                )
+                messages.error(self.request, "You don’t have permission to delete this recipe.")
                 return redirect("recipes:recipe_detail", pk=obj.pk)
             except Exception:
-                # If object lookup itself fails, fall back safely
-                messages.error(
-                    self.request, "You don’t have permission to do that."
-                )
+                messages.error(self.request, "You don’t have permission to do that.")
                 return redirect("recipes:recipes")
         return super().handle_no_permission()
 
-    # Perform delete with safe messaging
-    def delete(self, request, *args, **kwargs):
-        obj = self.get_object()
-        title = obj.title  # capture before delete
-        try:
-            response = super().delete(request, *args, **kwargs)
-            messages.success(request, f"‘{title}’ was deleted successfully.")
-            return response  # redirects to success_url
-        except Exception:
-            # Don’t expose internal errors in production
-            messages.error(
-                request, "Sorry, we couldn’t delete that recipe right now."
-            )
-            return redirect("recipes:recipes")
-
-
+    # Add the success message as part of the POST handling (most reliable)
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        title = self.object.title
+        messages.success(request, f'"{title}" was deleted successfully.')
+        return self.delete(request, *args, **kwargs)
 """
 Functions for reviews & favourites (normalized to pk)
 """

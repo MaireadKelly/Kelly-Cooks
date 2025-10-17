@@ -185,6 +185,12 @@ Responsive header and footer provide quick access to key areas.
 - **Delete Confirmation** — On successful delete the user is returned to the recipes page.  
   ![Delete recipe confirmation](docs/readme/recipe-confirm-delete.png)
 
+### Edit and Delete Permissions
+
+- The **Edit** and **Delete** buttons only appear for the recipe owner (or an admin user).  
+- This prevents other users from accessing update or delete routes directly.  
+- This conditional rendering is intentional and follows Django best practice for secure CRUD design.
+
 
 ### Reviews
 Users can leave feedback on recipes.
@@ -262,15 +268,65 @@ Users can leave feedback on recipes.
 
 ---
 
+### Resubmission Improvements
+
+After the assessor feedback, the following issues were resolved:
+
+- ✅ **CRUD functionality:** All create, edit, and delete operations now complete without server errors.
+- ✅ **Delete confirmation:** Functional page added with success message and redirect to recipe list.
+- ✅ **User feedback:** Django messages added for all CRUD, favourites, and review actions.
+- ✅ **Namespacing:** All routes now use the correct `recipes:` namespace.
+- ✅ **Broken links:** Replaced all `href="#"` placeholders and removed commented-out code.
+- ✅ **Header dropdown:** Now W3C-compliant and validator friendly with `onclick="return false;"`.
+- ✅ **Testing:** All CRUD actions re-tested and documented with new screenshots below.
+
+### Updated Evidence Screenshots
+
+| Action | Screenshot |
+|--------|-------------|
+| Add Recipe | ![Add recipe success](docs/readme/add-recipe-success-2.png) |
+| Edit Recipe | ![Edit recipe success](docs/readme/edit-recipe-success-2.png) |
+| Delete Confirmation | ![Delete confirm](docs/readme/delete-recipe-confirm-2.png) |
+| Delete Success | ![Delete success](docs/readme/delete-recipe-success.png) |
+|
+| Add Review | ![Add review success](docs/readme/review-add-success.png) |
+| Edit Review | ![Edit review success](docs/readme/review-edit-success.png) |
+| Delete Review | ![Delete review success](docs/readme/review-delete-success.png)
+| Favourite Added | ![Favourite on](docs/readme/favourite-on.png) |
+| Favourite Removed | ![Favourite off](docs/readme/favourite-off.png) |
+| My Recipes Dropdown | ![Dropdown menu](docs/readme/header-dropdown.png) |
+| My Favourites Dropdown | ![Dropdown menu](docs/readme/favourites-dropdown.png) |
+
+All changes were re-validated and re-deployed to Heroku.  
+The deployed version now performs identically to the development version.
+
+
 ## Deployment
 
-Deployed to Heroku:
-1. Create a new Heroku app.
-2. Connect the app to this GitHub repo.
-3. Set **Config Vars** (see below).
-4. Push to `main` to trigger a build & deploy.
+The project was deployed using **Heroku** following these steps:
 
----
+1. In the Heroku Dashboard, click **New → Create new app** and choose a unique name.
+2. In **Settings → Config Vars**, add the following keys:
+   - `DATABASE_URL` – Postgres connection string  
+   - `CLOUDINARY_URL` – from Cloudinary dashboard  
+   - `SECRET_KEY` – secure random key  
+   - `DISABLE_COLLECTSTATIC=1` (only for initial build if needed)
+   - `ALLOWED_HOSTS` – app’s Heroku domain
+3. In the **Deploy** tab:
+   - Choose **GitHub → Connect to GitHub**.
+   - Search for your repository and connect it.
+   - Enable **Automatic Deploys** from the `main` branch.
+4. Once deployed, run `python manage.py createsuperuser` on Heroku (via the console) to access the admin.
+5. Visit the live link:  
+   **https://kelly-cooks.herokuapp.com/** (or your app’s domain)
+
+### Additional Deployment Notes
+- The live app mirrors the development branch (no missing functionality).
+- All environment variables are hidden; `DEBUG=False` for security.
+- Static and media files are hosted via **Cloudinary** and **WhiteNoise**.
+- The database is provided by **Heroku Postgres**.
+- Code validated before final deploy; all CRUD and feedback functionality retested.
+
 
 ## Running Locally
 
