@@ -270,35 +270,34 @@ Users can leave feedback on recipes.
 
 ### Resubmission Improvements
 
-After the assessor feedback, the following issues were resolved:
+Following assessor feedback, the following issues were resolved and retested:
 
-- ✅ **CRUD functionality:** All create, edit, and delete operations now complete without server errors.
-- ✅ **Delete confirmation:** Functional page added with success message and redirect to recipe list.
-- ✅ **User feedback:** Django messages added for all CRUD, favourites, and review actions.
-- ✅ **Namespacing:** All routes now use the correct `recipes:` namespace.
-- ✅ **Broken links:** Replaced all `href="#"` placeholders and removed commented-out code.
-- ✅ **Header dropdown:** Now W3C-compliant and validator friendly with `onclick="return false;"`.
-- ✅ **Testing:** All CRUD actions re-tested and documented with new screenshots below.
+- ✅ **CRUD operations:** All create, edit, and delete functionality now completes successfully with appropriate user messages.  
+- ✅ **Delete confirmation:** Added a proper confirmation page with a success message and redirect to the recipe list.  
+- ✅ **Feedback messages:** All CRUD, favourites, and review actions now use Django messages for success/error feedback.  
+- ✅ **Namespacing:** All URLs now use the correct `recipes:` namespace, preventing reverse-match errors.  
+- ✅ **Broken links:** All placeholder `href="#"` values were replaced with working links.  
+- ✅ **Header dropdown:** Now fully W3C-compliant and validator friendly.  
+- ✅ **Testing:** Full CRUD and navigation retested; screenshots captured below.  
+- ✅ **Minor documentation fixes:** Updated README to reflect current behaviour (users can currently review a recipe more than once).
 
 ### Updated Evidence Screenshots
 
 | Action | Screenshot |
 |--------|-------------|
-| Add Recipe | ![Add recipe success](docs/readme/add-recipe-success-2.png) |
-| Edit Recipe | ![Edit recipe success](docs/readme/edit-recipe-success-2.png) |
-| Delete Confirmation | ![Delete confirm](docs/readme/delete-recipe-confirm-2.png) |
+| Add Recipe | ![Add recipe success](docs/readme/add-recipe-success.png) |
+| Edit Recipe | ![Edit recipe success](docs/readme/edit-recipe-success.png) |
+| Delete Confirmation | ![Delete confirm](docs/readme/delete-recipe-confirm.png) |
 | Delete Success | ![Delete success](docs/readme/delete-recipe-success.png) |
-|
 | Add Review | ![Add review success](docs/readme/review-add-success.png) |
 | Edit Review | ![Edit review success](docs/readme/review-edit-success.png) |
-| Delete Review | ![Delete review success](docs/readme/review-delete-success.png)
+| Delete Review | ![Delete review success](docs/readme/review-delete-success.png) |
 | Favourite Added | ![Favourite on](docs/readme/favourite-on.png) |
 | Favourite Removed | ![Favourite off](docs/readme/favourite-off.png) |
 | My Recipes Dropdown | ![Dropdown menu](docs/readme/header-dropdown.png) |
-| My Favourites Dropdown | ![Dropdown menu](docs/readme/favourites-dropdown.png) |
 
-All changes were re-validated and re-deployed to Heroku.  
-The deployed version now performs identically to the development version.
+All improvements were validated and re-deployed to Heroku.  
+The live version behaves identically to the local development build.
 
 
 ## Deployment

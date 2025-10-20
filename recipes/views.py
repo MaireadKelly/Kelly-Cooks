@@ -22,8 +22,6 @@ from .models import Favourite, Recipe, Review
 """
 View for users to add a new recipe
 """
-
-
 class AddRecipe(LoginRequiredMixin, CreateView):
     template_name = "recipes/add_recipe.html"
     model = Recipe
@@ -38,18 +36,17 @@ class AddRecipe(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse("recipes:recipe_detail", kwargs={"pk": self.object.pk})
 
+
 """
 View to list all recipes with optional search functionality
 """
-
-
 class Recipes(ListView):
     template_name = "recipes/recipes.html"
     model = Recipe
     context_object_name = "recipes"
     paginate_by = 12
 
-    def get_queryset(self, **kwargs):  # Filter recipes based on search query
+    def get_queryset(self, **kwargs):
         query = self.request.GET.get("q")
         qs = self.model.objects.all()
         if query:
@@ -65,8 +62,6 @@ class Recipes(ListView):
 """
 View to display a single recipe's details
 """
-
-
 class RecipeDetail(DetailView):
     template_name = "recipes/recipe_detail.html"
     model = Recipe
@@ -74,8 +69,7 @@ class RecipeDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        recipe = self.object  # already fetched by DetailView
-        # Show latest 5 reviews (by created_at if available)
+        recipe = self.object
         try:
             context["reviews"] = recipe.reviews.order_by("-created_at")[:5]
         except Exception:
@@ -92,8 +86,6 @@ class RecipeDetail(DetailView):
 """
 View to see logged-in users' own recipes
 """
-
-
 class MyRecipes(LoginRequiredMixin, ListView):
     template_name = "recipes/my_recipes.html"
     model = Recipe
@@ -106,8 +98,6 @@ class MyRecipes(LoginRequiredMixin, ListView):
 """
 View to see logged-in users' favourites
 """
-
-
 class MyFavourites(LoginRequiredMixin, ListView):
     template_name = "recipes/favourites.html"
     model = Favourite
@@ -122,10 +112,8 @@ class MyFavourites(LoginRequiredMixin, ListView):
 
 
 """
-View for users to edit their own recipes
+View for users to edit their own recipes (admins can edit any)
 """
-
-
 class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = "recipes/edit_recipe.html"
     model = Recipe
@@ -139,34 +127,33 @@ class EditRecipe(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.object.get_absolute_url()
 
     def test_func(self):
-        return self.request.user == self.get_object().user
+        obj = self.get_object()
+        user = self.request.user
+        # owner OR superuser can edit
+        return user.is_authenticated and (obj.user_id == user.id or user.is_superuser)
 
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             obj = self.get_object()
-            messages.error(
-                self.request, "You don’t have permission to edit this recipe."
-            )
+            messages.error(self.request, "You don’t have permission to edit this recipe.")
             return redirect("recipes:recipe_detail", pk=obj.pk)
         return super().handle_no_permission()
 
 
 """
-View for users to delete their own recipes
+View for users to delete their own recipes (admins can delete any)
 """
-
-
 class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Recipe
     template_name = "recipes/recipe_confirm_delete.html"
-    success_url = reverse_lazy("recipes:recipes")  # <- confirm this URL name exists
+    success_url = reverse_lazy("recipes:recipes")
 
-    # Only the owner may delete
     def test_func(self):
         obj = self.get_object()
-        return obj.user_id == self.request.user.id
+        user = self.request.user
+        # owner OR superuser can delete
+        return user.is_authenticated and (obj.user_id == user.id or user.is_superuser)
 
-    # Be graceful on permission failure
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             try:
@@ -178,23 +165,19 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
                 return redirect("recipes:recipes")
         return super().handle_no_permission()
 
-    # Add the success message as part of the POST handling (most reliable)
+    # Queue message BEFORE calling super().delete (most reliable)
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         title = self.object.title
         messages.success(request, f'"{title}" was deleted successfully.')
         return self.delete(request, *args, **kwargs)
+
+
 """
 Functions for reviews & favourites (normalized to pk)
 """
-
-
 @login_required
 def add_review(request, pk):
-    """
-    Add a review to a recipe (recipe pk).
-    Only logged-in users can submit reviews.
-    """
     # Clear any previous messages
     storage = get_messages(request)
     for _ in storage:
@@ -212,21 +195,14 @@ def add_review(request, pk):
             messages.success(request, "Review has been added successfully!")
             return redirect("recipes:recipe_detail", pk=recipe.pk)
         else:
-            messages.error(
-                request, "There was an error in your form. Please try again."
-            )
+            messages.error(request, "There was an error in your form. Please try again.")
     else:
         form = ReviewForm()
-    return render(
-        request, "recipes/add_review.html", {"form": form, "recipe": recipe}
-    )
+    return render(request, "recipes/add_review.html", {"form": form, "recipe": recipe})
 
 
 @login_required
 def edit_review(request, pk):
-    """
-    Edit a review (review pk).
-    """
     review = get_object_or_404(Review, pk=pk, user=request.user)
     if request.method == "POST":
         form = ReviewForm(request.POST, instance=review)
@@ -236,22 +212,14 @@ def edit_review(request, pk):
             return redirect("recipes:recipe_detail", pk=review.recipe.pk)
     else:
         form = ReviewForm(instance=review)
-    return render(
-        request, "recipes/edit_review.html", {"form": form, "review": review}
-    )
+    return render(request, "recipes/edit_review.html", {"form": form, "review": review})
 
 
 @login_required
 def delete_review(request, pk):
-    """
-    Delete a review (review pk).
-    """
     review = get_object_or_404(Review, pk=pk)
-    # Ensure only the review author can delete
-    if review.user != request.user:
-        messages.error(
-            request, "You are not authorized to delete this review."
-        )
+    if review.user != request.user and not request.user.is_superuser:
+        messages.error(request, "You are not authorized to delete this review.")
         return redirect("recipes:recipe_detail", pk=review.recipe.pk)
 
     review.delete()
@@ -262,14 +230,8 @@ def delete_review(request, pk):
 @login_required
 @require_POST
 def toggle_favourite(request, pk):
-    """
-    Toggle favourite for the given recipe (recipe pk).
-    POST only; supports an optional 'next' redirect target.
-    """
     recipe = get_object_or_404(Recipe, pk=pk)
-    favourite, created = Favourite.objects.get_or_create(
-        user=request.user, recipe=recipe
-    )
+    favourite, created = Favourite.objects.get_or_create(user=request.user, recipe=recipe)
 
     if created:
         messages.success(request, "Recipe added to favourites.")
@@ -277,11 +239,9 @@ def toggle_favourite(request, pk):
         favourite.delete()
         messages.success(request, "Recipe removed from favourites.")
 
-    # Optional: redirect back to a provided 'next' URL if it's safe
+    # Optional safe redirect-back
     next_url = request.POST.get("next")
-    if next_url and url_has_allowed_host_and_scheme(
-        next_url, {request.get_host()}
-    ):
+    if next_url and url_has_allowed_host_and_scheme(next_url, {request.get_host()}):
         return redirect(next_url)
 
     return redirect("recipes:recipe_detail", pk=recipe.pk)
