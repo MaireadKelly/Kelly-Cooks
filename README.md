@@ -29,6 +29,7 @@ Kelly Cooks is a recipe-sharing web application where users can browse, share, e
 - [Technologies Used](#technologies-used)
 - [Security & SEO](#security--seo)
 - [Testing](#testing)
+- [Resubmission Improvements](#resubmission-improvements)
 - [Deployment](#deployment)
 - [Running Locally](#running-locally)
 - [Credits](#credits)
