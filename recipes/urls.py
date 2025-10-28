@@ -27,9 +27,9 @@ urlpatterns = [
     path("<int:pk>/favourite/", toggle_favourite, name="favourite_toggle"),
     path(
         "<int:pk>/review/", add_review, name="add_review"
-    ),  
+    ),
     path(
         "review/<int:pk>/edit/", edit_review, name="edit_review"
-    ),  
+    ),
     path("review/<int:pk>/delete/", delete_review, name="delete_review"),
 ]

@@ -79,4 +79,3 @@ class ReviewForm(forms.ModelForm):
                 onclick="window.history.back()",
             ),
         )
-

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load cloudinary %}
+{% load cdn %}
 
 {% block title %}{{ recipe.title }}{% endblock %}
 
@@ -8,7 +10,12 @@
   <div class="row g-4">
     <div class="col-12 col-lg-6">
       {% if recipe.image %}
-        <img src="{{ recipe.image.url }}" class="img-fluid rounded" alt="{{ recipe.title }}">
+        <img
+          src="{{ recipe.image.url|cl_transform:'f_auto,q_auto,c_fill,g_auto,w_960,h_720' }}"
+          class="img-fluid rounded"
+          width="960" height="720"
+          alt="{{ recipe.title }}"
+          decoding="async">
       {% endif %}
     </div>
 
@@ -37,15 +44,10 @@
           </a>
         {% endif %}
 
-        {# Show Edit/Delete to owner OR superuser #}
-        {% if user.is_authenticated and recipe.user == user %}
-          <a href="{% url 'recipes:edit_recipe' recipe.pk %}" class="btn btn-secondary">Edit</a>
-          <a href="{% url 'recipes:delete_recipe' recipe.pk %}" class="btn btn-danger">Delete</a>
-        {% elif user.is_authenticated and user.is_superuser %}
+        {% if user.is_authenticated and recipe.user == user or user.is_superuser %}
           <a href="{% url 'recipes:edit_recipe' recipe.pk %}" class="btn btn-secondary">Edit</a>
           <a href="{% url 'recipes:delete_recipe' recipe.pk %}" class="btn btn-danger">Delete</a>
         {% endif %}
-
       </div>
     </div>
   </div>
