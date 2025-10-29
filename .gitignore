@@ -13,3 +13,6 @@ env.py
 
 .env
 db.json
+
+db.sqlite3
+*.sqlite3
