@@ -88,19 +88,43 @@ Performance and accessibility were tested using Google Chrome DevTools Lighthous
 
 ---
 
-## **Browser Compatibility**
+## 🧭 Browser and Device Testing
 
-The site was tested on the latest versions of:
-- Google Chrome  
-- Mozilla Firefox  
-- Microsoft Edge  
-- Safari (Mac/iOS)  
+All testing was performed on the deployed version of the site to ensure full functionality, responsiveness, and consistent styling across browsers and devices. The goal was to confirm that all key elements — including navigation, forms, responsive layouts, images, and Cloudinary optimizations — worked as expected.
 
-Screenshots:
-- `docs/testing/browser-chrome.png`
-- `docs/testing/browser-firefox.png`
-- `docs/testing/browser-edge.png`
-- `docs/testing/browser-safari.png`
+Testing was completed using a combination of real devices and Chrome DevTools responsive simulation.
+
+| Browser | Device Type | Test Focus | Result | Screenshot |
+|----------|--------------|-------------|----------|-------------|
+| Chrome | Desktop | Verified header, hero banner, recipe cards, and footer render correctly. | ✅ Pass | `docs/testing/chrome-desktop.png` |
+| Firefox | Desktop | Verified typography, layout alignment, and search functionality. | ✅ Pass | `docs/testing/firefox-desktop.png` |
+| Edge | Desktop | Confirmed links, dropdown menus, and footer icons display correctly. | ✅ Pass | `docs/testing/edge-desktop.png` |
+| Chrome (Mobile View) | Android Simulator | Checked responsive navbar toggle, recipe grid, and image scaling. | ✅ Pass | `docs/testing/chrome-mobile.png` |
+| Safari (Mobile) | iPhone | Checked touch targets, buttons, and responsive layout on smaller screens. | ✅ Pass | `docs/testing/safari-mobile.png` |
+
+### Summary
+The site performed consistently across all browsers and device types. The responsive design using Bootstrap 5 ensured smooth adaptation to varying screen sizes, while the optimized Cloudinary image transformations significantly improved mobile performance and loading times.  
+No visual layout issues, functionality errors, or navigation problems were detected. All pages remained fully responsive, accessible, and visually consistent throughout testing.
+
+### Screenshot Evidence
+
+Below are the final cross-browser and device screenshots taken from the deployed site.  
+Each demonstrates consistent layout, responsive behavior, and fully functional interface elements across multiple platforms.
+
+| Screenshot | Description |
+|-------------|-------------|
+| `docs/testing/chrome-desktop.png` | **Chrome (Desktop):** Displays the complete homepage layout, including header, hero banner, recipe cards, and footer with social media icons. Demonstrates that all major elements render cleanly and proportionally. |
+| `docs/testing/firefox-desktop.png` | **Firefox (Desktop):** Shows the main Recipes listing page. Confirms correct grid alignment, image display, and consistent spacing between recipe cards. |
+| `docs/testing/edge-desktop.png` | **Edge (Desktop):** Highlights the footer section and dropdown navigation to verify link styling, icon rendering, and hover/focus interactions. |
+| `docs/testing/chrome-mobile.png` | **Chrome (Mobile View):** Captured in DevTools responsive mode. Demonstrates correct navbar collapse into a hamburger icon, readable hero text, and vertically stacked recipe cards. |
+| `docs/testing/safari-mobile.png` | **Safari (Mobile):** Displays a single recipe detail view on iPhone, confirming that buttons, text, and image scaling remain clear and accessible on smaller screens. |
+
+All pages retained consistent color schemes, typography, and spacing. Buttons and form inputs remained fully clickable/tappable on all tested browsers and devices.
+
+### Summary
+Cross-browser testing confirmed that the site performs and renders consistently in Chrome, Firefox, Edge, and Safari, across both desktop and mobile environments.  
+The responsive Bootstrap layout and Cloudinary image optimizations ensured fast loading and proper scaling on all viewports.  
+No styling anomalies, overlapping content, or functionality issues were identified during testing.
 
 ---
 
