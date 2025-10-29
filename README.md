@@ -318,7 +318,7 @@ The project was deployed using **Heroku** following these steps:
    - Enable **Automatic Deploys** from the `main` branch.
 4. Once deployed, run `python manage.py createsuperuser` on Heroku (via the console) to access the admin.
 5. Visit the live link:  
-   **https://kelly-cooks.herokuapp.com/** (or your app’s domain)
+   **https://kellycookspp4-63d6db43ef5f.herokuapp.com/** (or your app’s domain)
 
 ### Additional Deployment Notes
 - The live app mirrors the development branch (no missing functionality).
