@@ -1,3 +1,5 @@
+<a id="top"></a>
+
 # Kelly Cooks
 
 Kelly Cooks is a recipe-sharing web application where users can browse, share, edit, review, and favourite recipes. It provides an easy-to-use, mobile-friendly interface for home cooks and food enthusiasts to connect and inspire each other.
@@ -5,7 +7,7 @@ Kelly Cooks is a recipe-sharing web application where users can browse, share, e
 ![Kelly Cooks – Responsive preview](docs/readme/responsive.png)
 
 ---
-
+<a id="index"></a>
 ## Table of Contents
 - [UX](#ux)
   - [Project Goals](#project-goals)
@@ -49,6 +51,9 @@ Kelly Cooks is a recipe-sharing web application where users can browse, share, e
 - Users looking for cooking inspiration.
 - Anyone who wants to interact with a community through recipe reviews and favourites.
 
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
+
 ---
 
 ## Agile Development
@@ -79,6 +84,9 @@ Development was managed using a GitHub Projects Kanban Board with columns for **
 - As a user, I can upload a profile picture to personalise my account.
 - As a user, I can share recipes on social media.
 
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
+
+
 ---
 
 ## Wireframes
@@ -88,6 +96,9 @@ Development was managed using a GitHub Projects Kanban Board with columns for **
   ![Recipe List Wireframe](docs/readme/wireframe-recipe-list.png)
 - **Recipe Detail**  
   ![Recipe Detail Wireframe](docs/readme/wireframe-recipe-detail.png)
+
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
 ---
 
@@ -106,6 +117,8 @@ The application uses a simple, clear schema:
 - User `n-m` Recipe via Favourite (implemented as a model with unique `(user, recipe)`)
 
 ![Entity Relationship Diagram](docs/readme/erd-diagram.png)
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
 ---
 
@@ -223,6 +236,9 @@ Users can leave feedback on recipes.
 - Profile pictures.
 - Social sharing.
 
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
+
 ---
 
 ## Defensive Design & Permissions
@@ -234,6 +250,8 @@ Users can leave feedback on recipes.
 - **UX niceties**:
   - Landing page hides the **Sign-Up** CTA for authenticated users.
   - All success/error states use Bootstrap alerts so the user always sees the outcome.
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
 ---
 
@@ -266,6 +284,8 @@ Users can leave feedback on recipes.
 - **Lighthouse**: Performance and Accessibility are strong; Best Practices improved after enforcing HTTPS for Cloudinary assets.
 
 ➡ Full evidence and screenshots are in **[TESTING.md](TESTING.md)** (HTML/CSS/Python/Lighthouse, CRUD checks, and known issues).
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
 ---
 
@@ -300,6 +320,7 @@ Following assessor feedback, the following issues were resolved and retested:
 All improvements were validated and re-deployed to Heroku.  
 The live version behaves identically to the local development build.
 
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
 ## Deployment
 
@@ -351,6 +372,10 @@ python manage.py runserver
 - `DATABASE_URL=...` *(if using Postgres locally; otherwise SQLite is fine)*
 - `CLOUDINARY_URL=cloudinary://<key>:<secret>@<cloud_name>`
 - `ALLOWED_HOSTS=localhost,127.0.0.1`
+
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
+
+
 
 ## Credits
 
