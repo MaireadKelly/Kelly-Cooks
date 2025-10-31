@@ -28,4 +28,3 @@ print(
     config.api_key,
     "\n",
 )
-

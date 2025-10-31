@@ -4,7 +4,7 @@
 
 Kelly Cooks is a recipe-sharing web application where users can browse, share, edit, review, and favourite recipes. It provides an easy-to-use, mobile-friendly interface for home cooks and food enthusiasts to connect and inspire each other.
 
-![Kelly Cooks – Responsive preview](docs/readme/responsive.png)
+[<img src="docs/readme/responsive.png" alt="Responsive preview of Kelly Cooks" width="600px">](docs/readme/responsive.png)
 
 ---
 <a id="index"></a>
@@ -22,12 +22,14 @@ Kelly Cooks is a recipe-sharing web application where users can browse, share, e
   - [Login & Logout](#login--logout)
   - [Landing Page](#landing-page)
   - [Navigation & Layout](#navigation--layout)
+  - [Site Map & Navigation](#site-map--navigation)
   - [Recipe Detail Page](#recipe-detail-page)
   - [Add / Edit / Delete Recipe](#add--edit--delete-recipe)
   - [Reviews](#reviews)
   - [Favourites & My Recipes](#favourites--my-recipes)
   - [Future Features](#future-features)
 - [Defensive Design & Permissions](#defensive-design--permissions)
+- [Accessibility](#accessibility)
 - [Technologies Used](#technologies-used)
 - [Security & SEO](#security--seo)
 - [Testing](#testing)
@@ -89,14 +91,16 @@ Development was managed using a GitHub Projects Kanban Board with columns for **
 
 ---
 
-## Wireframes
-- **Home Page**  
+## Wireframes- **Home Page**  
   ![Home Page Wireframe](docs/readme/wireframe-home.png)
 - **Recipe List**  
   ![Recipe List Wireframe](docs/readme/wireframe-recipe-list.png)
 - **Recipe Detail**  
   ![Recipe Detail Wireframe](docs/readme/wireframe-recipe-detail.png)
 
+
+
+*Wireframes were created in [Canva](https://www.canva.com/) and refined during development for mobile-first layout testing.*
 
 <p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
@@ -180,6 +184,27 @@ Responsive header and footer provide quick access to key areas.
 - **Mobile nav**  
   ![Mobile navigation](docs/readme/nav-mobile.png)
 
+
+
+### Site Map & Navigation
+
+| Path | Access | Description |
+|------|---------|-------------|
+| `/` | All users | Homepage showing recent recipes |
+| `/accounts/signup/` | Anonymous | Register an account |
+| `/accounts/login/` | Anonymous | Log in |
+| `/recipes/` | All users | View all recipes |
+| `/recipes/<id>/` | All users | Recipe detail page |
+| `/recipes/add/` | Authenticated | Add a new recipe |
+| `/recipes/edit/<id>/` | Owner/Admin | Edit an existing recipe |
+| `/recipes/delete/<id>/` | Owner/Admin | Delete recipe |
+| `/recipes/my-recipes/` | Authenticated | View user’s own recipes |
+| `/recipes/favourites/` | Authenticated | View favourites |
+
+> *Evidence Note:* Navigation paths validated via manual link testing and responsive design review (see TESTING.md → Browser & Device Testing).
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
+
+
 ### Recipe Detail Page
 - **Owner View** – edit/delete buttons visible to the owner.  
   ![Recipe detail owner](docs/readme/recipe-detail-owner.png)
@@ -255,6 +280,23 @@ Users can leave feedback on recipes.
 
 ---
 
+
+## Accessibility
+
+Accessibility was considered throughout development:
+
+- Semantic HTML structure (`header`, `nav`, `main`, `footer`).
+- Descriptive `alt` text on all key images.
+- Form labels and ARIA roles for screen readers.
+- Keyboard navigability with visible focus indicators.
+- Sufficient colour contrast via Bootstrap 5 defaults.
+
+Accessibility outcomes and evidence are detailed in [TESTING.md](TESTING.md#accessibility-checks).
+
+> *Evidence Note:* Accessibility testing results, including Lighthouse Accessibility score and manual keyboard checks, are documented in TESTING.md.
+<p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
+
+
 ## Technologies Used
 
 **Frontend**: HTML5, CSS3, Bootstrap 5  
@@ -274,6 +316,15 @@ Users can leave feedback on recipes.
 - **HTTPS enforced** for Cloudinary assets.
 - Descriptive titles and meta descriptions; alt text on imagery.
 
+
+
+**Example meta tag:**
+```html
+<title>Kelly Cooks – Share & Discover Recipes</title>
+<meta name="description" content="Browse, share, and review home-cooked recipes. Save favourites and manage your own collection.">
+```
+
+
 ---
 
 ## Testing
@@ -283,7 +334,7 @@ Users can leave feedback on recipes.
 - **Python**: PEP8 compliance.  
 - **Lighthouse**: Performance and Accessibility are strong; Best Practices improved after enforcing HTTPS for Cloudinary assets.
 
-➡ Full evidence and screenshots are in **[TESTING.md](TESTING.md)** (HTML/CSS/Python/Lighthouse, CRUD checks, and known issues).
+➡ Full evidence and screenshots are in **[TESTING.md](TESTING.md)** (HTML/CSS/Python/Lighthouse, CRUD checks, accessibility, SEO validation, and known issues).
 
 <p align="right"><a href="#top">⬆ Back to top</a> · <a href="#index">🧭 Back to index</a></p>
 
